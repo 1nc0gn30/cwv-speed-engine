@@ -1,0 +1,16 @@
+{
+  "mcp": {
+    "servers": {
+      "cwv-speed-engine": {
+        "command": "python3",
+        "args": [
+          "-m",
+          "cwv_speed_engine.mcp_server"
+        ],
+        "env": {
+          "PYTHONPATH": "src"
+        }
+      }
+    }
+  }
+}

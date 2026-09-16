@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline | Google Speed Studio</title>
+  <meta name="theme-color" content="#1a73e8">
+  <style>
+    :root {
+      --g-blue: #1a73e8;
+      --g-blue-hover: #1557b0;
+      --g-surface: #ffffff;
+      --g-text-primary: #202124;
+      --g-text-secondary: #5f6368;
+      --g-outline: #dadce0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Google Sans", sans-serif;
+      background: #f8f9fa;
+      color: var(--g-text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .offline-card {
+      background: var(--g-surface);
+      border-radius: 24px;
+      padding: 48px 36px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(60, 64, 67, 0.08);
+      border: 1px solid var(--g-outline);
+    }
+    .offline-icon-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #e8f0fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .offline-icon {
+      width: 40px;
+      height: 40px;
+      fill: var(--g-blue);
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 0 10px;
+    }
+    p {
+      color: var(--g-text-secondary);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 28px;
+    }
+    .btn-retry {
+      background: var(--g-blue);
+      color: #ffffff;
+      border: none;
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-retry:hover {
+      background: var(--g-blue-hover);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-card">
+    <div class="offline-icon-circle">
+      <svg class="offline-icon" viewBox="0 0 24 24">
+        <path d="M23.64 7c-.45-.34-4.93-3.79-11.64-3.79-6.72 0-11.19 3.45-11.64 3.78L12 21.5 23.64 7zM3.55 7.62C5.9 5.86 8.92 5 12 5c3.08 0 6.1.86 8.45 2.62L12 18.06 3.55 7.62z"/>
+        <path d="M1 1l22 22 1.41-1.41L2.41-.41z"/>
+      </svg>
+    </div>
+    <h1>You're currently offline</h1>
+    <p>Please check your network connection. Cached resources remain available locally for instant re-access.</p>
+    <button class="btn-retry" onclick="window.location.reload()">Check Connection</button>
+  </div>
+</body>
+</html>

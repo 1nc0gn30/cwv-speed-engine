@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Google Speed Studio Production PWA",
+  "short_name": "SpeedStudio",
+  "description": "Production Progressive Web App optimized for 100/100 Core Web Vitals and offline persistence.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1a73e8",
+  "background_color": "#ffffff",
+  "categories": ["utilities", "productivity", "developer"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Audit Page",
+      "url": "/?tab=auditor",
+      "description": "Run Core Web Vitals audit"
+    },
+    {
+      "name": "Transform HTML",
+      "url": "/?tab=transformer",
+      "description": "Automated HTML Speed Optimization"
+    }
+  ]
+}

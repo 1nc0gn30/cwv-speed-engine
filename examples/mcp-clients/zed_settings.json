@@ -1,0 +1,17 @@
+{
+  "context_servers": [
+    {
+      "id": "cwv-speed-engine",
+      "command": {
+        "path": "python3",
+        "args": [
+          "-m",
+          "cwv_speed_engine.mcp_server"
+        ],
+        "env": {
+          "PYTHONPATH": "src"
+        }
+      }
+    }
+  ]
+}

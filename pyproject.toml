@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cwv-speed-engine"
+version = "1.0.0"
+description = "High-performance Core Web Vitals audit engine, optimizer, and MCP server with zero runtime dependencies."
+readme = "README.md"
+authors = [
+    { name = "CWV Speed Engine Team" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.8"
+keywords = [
+    "core-web-vitals",
+    "cwv",
+    "performance",
+    "lcp",
+    "cls",
+    "inp",
+    "fcp",
+    "ttfb",
+    "tbt",
+    "mcp",
+    "mcp-server",
+    "speed",
+    "optimizer",
+    "seo",
+    "pwa"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing"
+]
+
+[project.scripts]
+cwv-engine = "cwv_speed_engine.cli:main"
+speed-engine = "cwv_speed_engine.cli:main"
+cwv-mcp = "cwv_speed_engine.mcp_server:main"
+
+[project.urls]
+Homepage = "https://github.com/cwv-speed-engine/cwv-speed-engine"
+Repository = "https://github.com/cwv-speed-engine/cwv-speed-engine"
+Issues = "https://github.com/cwv-speed-engine/cwv-speed-engine/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --strict-markers"

@@ -1,0 +1,76 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  image?: string;
+  heroImagePreload?: string;
+  themeColor?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  image = '/og-image.jpg',
+  heroImagePreload,
+  themeColor = '#1a73e8',
+} = Astro.props;
+---
+
+<!-- 1. Essential Meta & Viewport -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="theme-color" content={themeColor} />
+
+<!-- 2. Font Preconnects & High-Priority CDN Warming -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+<!-- 3. Optional LCP Hero Image Preload -->
+{
+  heroImagePreload && (
+    <link
+      rel="preload"
+      as="image"
+      href={heroImagePreload}
+      fetchpriority="high"
+    />
+  )
+}
+
+<!-- 4. PWA Web Manifest & Favicons -->
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+
+<!-- 5. OpenGraph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+
+<!-- 6. Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<!-- 7. Critical CSS Reset to eliminate CLS and reflows -->
+<style is:inline>
+  img, svg, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-contain {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px;
+  }
+</style>

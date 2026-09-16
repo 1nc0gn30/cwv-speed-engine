@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Speed Studio | Core Web Vitals Optimization Engine</title>
+  <meta name="description" content="Production Core Web Vitals speed engine, HTML transformer, PWA generator, and AI Agent MCP Hub with Google Material 3 Design.">
+  <meta name="theme-color" content="#1a73e8">
+  <style>
+    /* Google Material 3 Theme Variables */
+    :root {
+      --g-blue: #1a73e8;
+      --g-blue-hover: #1557b0;
+      --g-blue-light: #e8f0fe;
+      --g-green: #1e8e3e;
+      --g-green-light: #e6f4ea;
+      --g-yellow: #f9ab00;
+      --g-yellow-dark: #b06000;
+      --g-yellow-light: #fef7e0;
+      --g-red: #d93025;
+      --g-red-light: #fce8e6;
+      --g-purple: #9334e6;
+      --g-purple-light: #f3e8fd;
+      --g-bg: #f8f9fa;
+      --g-surface: #ffffff;
+      --g-surface-variant: #f1f3f4;
+      --g-outline: #dadce0;
+      --g-outline-variant: #e8eaed;
+      --g-text-primary: #202124;
+      --g-text-secondary: #5f6368;
+      --g-text-tertiary: #80868b;
+      --g-shadow-sm: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --g-shadow-md: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+      --g-shadow-lg: 0 8px 24px rgba(60,64,67,0.18);
+      --g-radius-sm: 8px;
+      --g-radius-md: 12px;
+      --g-radius-lg: 20px;
+      --g-radius-full: 9999px;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Google Sans", Inter, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--g-bg);
+      color: var(--g-text-primary);
+      line-height: 1.5;
+      font-size: 14px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    header.google-header {
+      background: var(--g-surface);
+      border-bottom: 1px solid var(--g-outline);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,0.06);
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .google-dots {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-blue { background: #4285F4; }
+    .dot-red { background: #EA4335; }
+    .dot-yellow { background: #FBBC05; }
+    .dot-green { background: #34A853; }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      background: var(--g-blue-light);
+      color: var(--g-blue);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--g-radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .server-status-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--g-radius-full);
+      background: var(--g-green-light);
+      color: var(--g-green);
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(30, 142, 62, 0.2);
+    }
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--g-green);
+      box-shadow: 0 0 0 2px rgba(30, 142, 62, 0.3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    /* Hero Score Summary Banner */
+    .hero-summary {
+      background: var(--g-surface);
+      border-bottom: 1px solid var(--g-outline);
+      padding: 24px 32px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .gauge-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--g-bg);
+      border-radius: var(--g-radius-lg);
+      padding: 16px;
+      border: 1px solid var(--g-outline-variant);
+    }
+
+    .gauge-svg-container {
+      position: relative;
+      width: 140px;
+      height: 140px;
+    }
+    .gauge-svg {
+      transform: rotate(-90deg);
+      width: 140px;
+      height: 140px;
+    }
+    .gauge-bg-circle {
+      fill: none;
+      stroke: var(--g-outline-variant);
+      stroke-width: 12;
+    }
+    .gauge-value-circle {
+      fill: none;
+      stroke: var(--g-green);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 377;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.4s ease;
+    }
+    .gauge-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .gauge-number {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--g-text-primary);
+    }
+    .gauge-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--g-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .gauge-badge {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: var(--g-radius-full);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--g-green-light);
+      color: var(--g-green);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--g-surface);
+      border: 1px solid var(--g-outline-variant);
+      border-radius: var(--g-radius-md);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--g-shadow-sm);
+      border-color: var(--g-outline);
+    }
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .metric-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--g-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .metric-rating-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--g-green);
+    }
+    .metric-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .metric-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--g-text-primary);
+    }
+    .metric-unit {
+      font-size: 12px;
+      color: var(--g-text-secondary);
+      font-weight: 500;
+    }
+    .metric-target {
+      font-size: 11px;
+      color: var(--g-text-tertiary);
+    }
+
+    /* Main Navigation Tabs */
+    .tab-bar-container {
+      background: var(--g-surface);
+      border-bottom: 1px solid var(--g-outline);
+      padding: 0 32px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+    .tab-item {
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--g-text-secondary);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s, border-color 0.2s;
+      user-select: none;
+    }
+    .tab-item:hover {
+      color: var(--g-blue);
+      background: var(--g-bg);
+    }
+    .tab-item.active {
+      color: var(--g-blue);
+      border-bottom-color: var(--g-blue);
+      font-weight: 600;
+    }
+
+    /* Tab Content Panels */
+    main.studio-content {
+      flex: 1;
+      padding: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Card & Grid Layouts */
+    .section-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 960px) {
+      .hero-summary { grid-template-columns: 1fr; }
+      .section-grid-2 { grid-template-columns: 1fr; }
+      main.studio-content { padding: 16px; }
+    }
+
+    .studio-card {
+      background: var(--g-surface);
+      border: 1px solid var(--g-outline);
+      border-radius: var(--g-radius-md);
+      padding: 24px;
+      box-shadow: 0 1px 2px rgba(60,64,67,0.05);
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--g-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--g-text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label.form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--g-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    input[type="text"], input[type="url"], input[type="color"], select, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--g-text-primary);
+      background: var(--g-surface);
+      border: 1px solid var(--g-outline);
+      border-radius: var(--g-radius-sm);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
+      border-color: var(--g-blue);
+      box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+    }
+    textarea.code-editor {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      min-height: 220px;
+      line-height: 1.45;
+      resize: vertical;
+      background: #fafafa;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--g-radius-full);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      user-select: none;
+      text-decoration: none;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-primary {
+      background: var(--g-blue);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: var(--g-blue-hover);
+      box-shadow: var(--g-shadow-sm);
+    }
+    .btn-secondary {
+      background: var(--g-surface-variant);
+      color: var(--g-text-primary);
+      border: 1px solid var(--g-outline);
+    }
+    .btn-secondary:hover {
+      background: var(--g-outline-variant);
+    }
+    .btn-success {
+      background: var(--g-green);
+      color: #ffffff;
+    }
+    .btn-success:hover {
+      background: #137333;
+    }
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 12px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Toggle Switches */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--g-outline-variant);
+    }
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+    .toggle-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--g-text-primary);
+    }
+    .toggle-info p {
+      font-size: 12px;
+      color: var(--g-text-secondary);
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #bdc1c6;
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--g-blue);
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Diagnostic Issues List */
+    .diagnostic-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px;
+      border-radius: var(--g-radius-md);
+      border: 1px solid var(--g-outline-variant);
+      margin-bottom: 10px;
+      background: var(--g-surface);
+      align-items: flex-start;
+    }
+    .diag-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--g-radius-full);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-critical { background: var(--g-red-light); color: var(--g-red); }
+    .badge-warning { background: var(--g-yellow-light); color: var(--g-yellow-dark); }
+    .badge-info { background: var(--g-blue-light); color: var(--g-blue); }
+    .badge-pass { background: var(--g-green-light); color: var(--g-green); }
+
+    .diag-body { flex: 1; }
+    .diag-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .diag-desc { font-size: 12px; color: var(--g-text-secondary); margin-bottom: 6px; }
+    .diag-rec { font-size: 12px; background: var(--g-surface-variant); padding: 6px 10px; border-radius: var(--g-radius-sm); font-family: var(--font-mono); color: var(--g-text-primary); }
+
+    /* Code Block Display */
+    .code-block-container {
+      position: relative;
+      background: #1e1e1e;
+      border-radius: var(--g-radius-md);
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: #2d2d2d;
+      color: #cccccc;
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+    pre.code-content {
+      padding: 16px;
+      color: #d4d4d4;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: auto;
+      max-height: 380px;
+    }
+
+    /* Social Preview Cards */
+    .serp-card {
+      background: #ffffff;
+      border: 1px solid var(--g-outline);
+      border-radius: var(--g-radius-md);
+      padding: 16px;
+      max-width: 600px;
+    }
+    .serp-cite {
+      font-size: 12px;
+      color: #202124;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .serp-title {
+      color: #1a0dab;
+      font-size: 18px;
+      line-height: 1.3;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .serp-desc {
+      color: #4d5156;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .twitter-card-preview {
+      background: #ffffff;
+      border: 1px solid var(--g-outline);
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 500px;
+    }
+    .twitter-img-box {
+      width: 100%;
+      height: 220px;
+      background: #e1e8ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      color: var(--g-text-secondary);
+      font-weight: 500;
+    }
+    .twitter-card-body {
+      padding: 12px 16px;
+    }
+    .twitter-domain {
+      font-size: 12px;
+      color: var(--g-text-tertiary);
+      text-transform: lowercase;
+    }
+    .twitter-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--g-text-primary);
+      margin: 2px 0;
+    }
+    .twitter-card-desc {
+      font-size: 12px;
+      color: var(--g-text-secondary);
+      line-height: 1.3;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #202124;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: var(--g-radius-md);
+      box-shadow: var(--g-shadow-lg);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Google Header -->
+  <header class="google-header">
+    <a href="/" class="brand-container">
+      <div class="google-dots">
+        <div class="dot dot-blue"></div>
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+      </div>
+      <div class="brand-title">
+        Google Speed Studio
+        <span class="brand-badge">Core Web Vitals</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <div class="server-status-chip">
+        <div class="status-pulse"></div>
+        <span>Engine Active (Port 8448)</span>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="triggerQuickAudit()">⚡ Audit Demo</button>
+    </div>
+  </header>
+
+  <!-- Hero Score & Metrics Summary -->
+  <section class="hero-summary">
+    <div class="gauge-wrapper">
+      <div class="gauge-svg-container">
+        <svg class="gauge-svg" viewBox="0 0 140 140">
+          <circle class="gauge-bg-circle" cx="70" cy="70" r="60"></circle>
+          <circle class="gauge-value-circle" id="gaugeCircle" cx="70" cy="70" r="60"></circle>
+        </svg>
+        <div class="gauge-text">
+          <div class="gauge-number" id="scoreValue">98</div>
+          <div class="gauge-label">Speed Score</div>
+        </div>
+      </div>
+      <div class="gauge-badge" id="scoreRatingBadge">✓ Good Rating</div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card" id="cardLCP">
+        <div class="metric-header">
+          <span class="metric-title">LCP</span>
+          <div class="metric-rating-dot" id="dotLCP"></div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value" id="valLCP">1.2</span>
+          <span class="metric-unit">s</span>
+        </div>
+        <span class="metric-target">Target &lt; 2.5s</span>
+      </div>
+
+      <div class="metric-card" id="cardCLS">
+        <div class="metric-header">
+          <span class="metric-title">CLS</span>
+          <div class="metric-rating-dot" id="dotCLS"></div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value" id="valCLS">0.012</span>
+          <span class="metric-unit"></span>
+        </div>
+        <span class="metric-target">Target &lt; 0.10</span>
+      </div>
+
+      <div class="metric-card" id="cardINP">
+        <div class="metric-header">
+          <span class="metric-title">INP</span>
+          <div class="metric-rating-dot" id="dotINP"></div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value" id="valINP">65</span>
+          <span class="metric-unit">ms</span>
+        </div>
+        <span class="metric-target">Target &lt; 200ms</span>
+      </div>
+
+      <div class="metric-card" id="cardFCP">
+        <div class="metric-header">
+          <span class="metric-title">FCP</span>
+          <div class="metric-rating-dot" id="dotFCP"></div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value" id="valFCP">0.8</span>
+          <span class="metric-unit">s</span>
+        </div>
+        <span class="metric-target">Target &lt; 1.8s</span>
+      </div>
+
+      <div class="metric-card" id="cardTTFB">
+        <div class="metric-header">
+          <span class="metric-title">TTFB</span>
+          <div class="metric-rating-dot" id="dotTTFB"></div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value" id="valTTFB">180</span>
+          <span class="metric-unit">ms</span>
+        </div>
+        <span class="metric-target">Target &lt; 800ms</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Studio Navigation Tab Bar -->
+  <nav class="tab-bar-container">
+    <ul class="tab-bar">
+      <li class="tab-item active" onclick="switchTab('auditor')">⚡ Core Web Vitals Auditor</li>
+      <li class="tab-item" onclick="switchTab('transformer')">🛠️ HTML Speed Transformer</li>
+      <li class="tab-item" onclick="switchTab('pwa')">📱 PWA & Service Worker Studio</li>
+      <li class="tab-item" onclick="switchTab('og')">🖼️ OpenGraph & Social Previewer</li>
+      <li class="tab-item" onclick="switchTab('diff')">⚖️ Performance Diff Comparator</li>
+      <li class="tab-item" onclick="switchTab('cache')">🚀 Cache-Control & Headers Exporter</li>
+      <li class="tab-item" onclick="switchTab('mcp')">🤖 AI Agent & MCP Hub</li>
+      <li class="tab-item" onclick="switchTab('guide')">📖 CWV Best Practices & CLI Guide</li>
+    </ul>
+  </nav>
+
+  <!-- Main Studio Workspace Panels -->
+  <main class="studio-content">
+
+    <!-- 1. TAB: Auditor -->
+    <section class="tab-panel active" id="panel-auditor">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">⚡ Core Web Vitals Auditor</h2>
+            <p class="card-subtitle">Analyze live URLs or raw HTML markup for LCP, CLS, INP, FCP, and TTFB bottlenecks.</p>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="loadSampleHTML()">Load Sample HTML</button>
+          </div>
+        </div>
+
+        <div class="section-grid-2">
+          <div>
+            <div class="form-group">
+              <label class="form-label">Target Live URL</label>
+              <input type="url" id="auditUrlInput" placeholder="https://example.com" value="https://example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Or Paste Raw HTML</label>
+              <textarea id="auditHtmlInput" class="code-editor" placeholder="<!DOCTYPE html><html>..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Simulation Device</label>
+              <select id="auditDeviceSelect">
+                <option value="mobile" selected>📱 Mobile (Pixel 7 / 4G Throttled)</option>
+                <option value="desktop">💻 Desktop (Broadband)</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="runAudit()">Run Speed Audit</button>
+          </div>
+
+          <div>
+            <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Diagnostic Findings & Recommendations</h3>
+            <div id="diagnosticList">
+              <!-- Diagnostics dynamically injected -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TAB: HTML Transformer -->
+    <section class="tab-panel" id="panel-transformer">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">🛠️ HTML Speed Transformer</h2>
+            <p class="card-subtitle">Automated AST speed rewrites: inject missing dimensions, lazy loading, font preconnects, and script deferral.</p>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success btn-sm" onclick="copyOptimizedHtml()">📋 Copy HTML</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadOptimizedHtml()">💾 Download</button>
+          </div>
+        </div>
+
+        <div class="section-grid-2">
+          <div>
+            <div class="form-group">
+              <label class="form-label">Original HTML Code</label>
+              <textarea id="transformInputHtml" class="code-editor" placeholder="Paste unoptimized HTML here..."></textarea>
+            </div>
+
+            <div class="studio-card" style="padding: 16px; background: var(--g-bg); border-color: var(--g-outline-variant);">
+              <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Transformation Options</h3>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Fix Missing Image Dimensions</h4>
+                  <p>Adds width/height and aspect-ratio to prevent layout shifts (CLS)</p>
+                </div>
+                <label class="switch"><input type="checkbox" id="optDims" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Native Lazy Loading & Async Decoding</h4>
+                  <p>Adds loading="lazy" & decoding="async" to offscreen images</p>
+                </div>
+                <label class="switch"><input type="checkbox" id="optLazy" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Font Preconnect & Display Swap</h4>
+                  <p>Eliminates Flash of Invisible Text (FOIT) with &display=swap</p>
+                </div>
+                <label class="switch"><input type="checkbox" id="optFont" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Defer Render-Blocking Scripts</h4>
+                  <p>Adds defer to scripts in head to unblock main thread interactivity</p>
+                </div>
+                <label class="switch"><input type="checkbox" id="optDefer" checked><span class="slider"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <h4>Preload Hero Image (fetchpriority="high")</h4>
+                  <p>Prioritizes LCP hero image fetch in browser preload scanner</p>
+                </div>
+                <label class="switch"><input type="checkbox" id="optHero" checked><span class="slider"></span></label>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="runTransform()">⚡ Transform HTML Now</button>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label class="form-label">Optimized Output HTML</label>
+              <textarea id="transformOutputHtml" class="code-editor" readonly></textarea>
+            </div>
+            <div id="transformStatsBox" class="studio-card" style="padding: 16px; background: var(--g-green-light); border-color: rgba(30,142,62,0.3);">
+              <h4 style="color: var(--g-green); font-weight: 600; margin-bottom: 6px;">Optimization Summary</h4>
+              <ul id="transformChangesList" style="padding-left: 20px; font-size: 12px; color: var(--g-text-primary);">
+                <li>Ready to optimize. Click "Transform HTML Now".</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TAB: PWA Studio -->
+    <section class="tab-panel" id="panel-pwa">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">📱 PWA & Service Worker Studio</h2>
+            <p class="card-subtitle">Generate production Web App Manifest, Service Worker caching strategies, and offline fallback.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="downloadPwaZip()">📦 Download PWA Bundle (.zip)</button>
+        </div>
+
+        <div class="section-grid-2">
+          <div>
+            <div class="form-group">
+              <label class="form-label">Application Name</label>
+              <input type="text" id="pwaName" value="Google Speed App">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Short Name</label>
+              <input type="text" id="pwaShortName" value="SpeedApp">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label">Theme Color</label>
+                <input type="text" id="pwaThemeColor" value="#1a73e8">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Background Color</label>
+                <input type="text" id="pwaBgColor" value="#ffffff">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Service Worker Caching Strategy</label>
+              <select id="pwaStrategy">
+                <option value="stale-while-revalidate" selected>⚡ Stale-While-Revalidate (Instant Cache + Background Refresh)</option>
+                <option value="cache-first">🚀 Cache-First (Optimal for static assets/fonts)</option>
+                <option value="network-first">🌐 Network-First (Dynamic APIs + Offline fallback)</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="generatePwaArtifacts()">Generate PWA Suite</button>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label class="form-label">site.webmanifest</label>
+              <textarea id="pwaManifestPreview" class="code-editor" style="min-height: 140px;" readonly></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">sw.js (Service Worker)</label>
+              <textarea id="pwaSwPreview" class="code-editor" style="min-height: 180px;" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TAB: OpenGraph Previewer -->
+    <section class="tab-panel" id="panel-og">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">🖼️ OpenGraph & Social Previewer</h2>
+            <p class="card-subtitle">Real-time mockups for Google Search SERP, Twitter Cards, and LinkedIn snippets.</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="copyOgTags()">📋 Copy Meta Tags</button>
+        </div>
+
+        <div class="section-grid-2">
+          <div>
+            <div class="form-group">
+              <label class="form-label">Page Title (50-60 chars)</label>
+              <input type="text" id="ogTitleInput" value="Google Speed Studio | Core Web Vitals Optimization Engine" oninput="updateSocialPreviews()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description (120-160 chars)</label>
+              <textarea id="ogDescInput" style="height: 80px;" oninput="updateSocialPreviews()">High-performance Core Web Vitals optimization engine, instant HTML speed transformer, PWA generator, and AI Agent MCP hub.</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Canonical URL</label>
+              <input type="url" id="ogUrlInput" value="https://example.com/speed-studio" oninput="updateSocialPreviews()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">OpenGraph Image URL (1200x630)</label>
+              <input type="url" id="ogImageInput" value="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200" oninput="updateSocialPreviews()">
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 8px;">Google Search Preview</h3>
+            <div class="serp-card" style="margin-bottom: 20px;">
+              <div class="serp-cite">
+                <span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:#4285F4;color:#fff;text-align:center;line-height:16px;font-size:10px;">G</span>
+                <span id="serpCiteUrl">example.com &gt; speed-studio</span>
+              </div>
+              <a class="serp-title" id="serpPreviewTitle">Google Speed Studio | Core Web Vitals Optimization Engine</a>
+              <div class="serp-desc" id="serpPreviewDesc">High-performance Core Web Vitals optimization engine, instant HTML speed transformer, PWA generator...</div>
+            </div>
+
+            <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 8px;">Twitter / X Card Preview</h3>
+            <div class="twitter-card-preview">
+              <div class="twitter-img-box" id="twitterImgPreview">1200 × 630 Preview Image</div>
+              <div class="twitter-card-body">
+                <div class="twitter-domain" id="twitterDomainPreview">example.com</div>
+                <div class="twitter-card-title" id="twitterTitlePreview">Google Speed Studio | Core Web Vitals Engine</div>
+                <div class="twitter-card-desc" id="twitterDescPreview">High-performance Core Web Vitals optimization engine...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TAB: Diff Comparator -->
+    <section class="tab-panel" id="panel-diff">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">⚖️ Performance Diff Comparator</h2>
+            <p class="card-subtitle">Measure before vs after speed gains, metric deltas, and resolved audit findings.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="runDiffComparison()">Run Performance Diff</button>
+        </div>
+
+        <div class="section-grid-2">
+          <div>
+            <div class="form-group">
+              <label class="form-label">Baseline (Before Optimization)</label>
+              <textarea id="diffBaselineInput" class="code-editor" placeholder="Baseline HTML or URL..."></textarea>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label class="form-label">Candidate (After Optimization)</label>
+              <textarea id="diffCandidateInput" class="code-editor" placeholder="Candidate HTML or URL..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div id="diffResultsContainer" class="studio-card" style="margin-top: 16px; background: var(--g-bg); border-color: var(--g-outline-variant);">
+          <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 12px;">Comparative Delta Analysis</h3>
+          <div style="display: flex; gap: 24px; align-items: center; margin-bottom: 16px;">
+            <div style="font-size: 28px; font-weight: 700; color: var(--g-green);" id="diffScoreDelta">+38 pts</div>
+            <div style="font-size: 13px; color: var(--g-text-secondary);" id="diffSummaryText">Score improved from 58 to 96 with 4 diagnostic issues resolved.</div>
+          </div>
+          <div id="diffDeltasGrid" class="metrics-grid">
+            <!-- Metric deltas injected here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TAB: Cache Headers Exporter -->
+    <section class="tab-panel" id="panel-cache">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">🚀 Cache-Control & Headers Exporter</h2>
+            <p class="card-subtitle">Generate production caching rules for Netlify, Vercel, Nginx, Cloudflare, Apache, and Next.js.</p>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="copyCacheHeaderConfig()">📋 Copy Config</button>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-bottom: 16px;">
+          <button class="btn btn-secondary btn-sm active" id="btnPlatNetlify" onclick="loadCacheConfig('netlify')">Netlify</button>
+          <button class="btn btn-secondary btn-sm" id="btnPlatVercel" onclick="loadCacheConfig('vercel')">Vercel</button>
+          <button class="btn btn-secondary btn-sm" id="btnPlatNginx" onclick="loadCacheConfig('nginx')">Nginx</button>
+          <button class="btn btn-secondary btn-sm" id="btnPlatCloudflare" onclick="loadCacheConfig('cloudflare')">Cloudflare</button>
+          <button class="btn btn-secondary btn-sm" id="btnPlatNextjs" onclick="loadCacheConfig('nextjs')">Next.js</button>
+          <button class="btn btn-secondary btn-sm" id="btnPlatApache" onclick="loadCacheConfig('apache')">Apache</button>
+        </div>
+
+        <div class="code-block-container">
+          <div class="code-block-header">
+            <span id="cacheConfigFilename">_headers</span>
+            <span>Production Speed Rules</span>
+          </div>
+          <pre class="code-content" id="cacheConfigContent">Loading configuration...</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TAB: MCP AI Hub -->
+    <section class="tab-panel" id="panel-mcp">
+      <div class="studio-card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">🤖 AI Agent & MCP Hub</h2>
+            <p class="card-subtitle">Integrate Google Speed Studio directly into Claude Desktop, Cursor, Cline, and Zed via Model Context Protocol.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="copyMcpConfig()">📋 Copy MCP Config</button>
+        </div>
+
+        <div class="btn-group" style="margin-bottom: 16px;">
+          <button class="btn btn-secondary btn-sm active" id="btnMcpClaude" onclick="loadMcpClient('claude')">Claude Desktop</button>
+          <button class="btn btn-secondary btn-sm" id="btnMcpCursor" onclick="loadMcpClient('cursor')">Cursor</button>
+          <button class="btn btn-secondary btn-sm" id="btnMcpCline" onclick="loadMcpClient('cline')">Cline (VS Code)</button>
+          <button class="btn btn-secondary btn-sm" id="btnMcpZed" onclick="loadMcpClient('zed')">Zed</button>
+        </div>
+
+        <div class="section-grid-2">
+          <div>
+            <div class="code-block-container">
+              <div class="code-block-header">
+                <span id="mcpConfigLabel">claude_desktop_config.json</span>
+                <span>MCP Stdio Transport</span>
+              </div>
+              <pre class="code-content" id="mcpConfigContent">Loading MCP configuration...</pre>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 10px;">Exposed Agent Tools (6 Tools)</h3>
+            <div class="diagnostic-item">
+              <div class="diag-badge badge-info">Tool</div>
+              <div class="diag-body">
+                <div class="diag-title">audit_url(url, device)</div>
+                <div class="diag-desc">Audits live URL for LCP, CLS, INP, FCP, TTFB and returns full score report.</div>
+              </div>
+            </div>
+            <div class="diagnostic-item">
+              <div class="diag-badge badge-info">Tool</div>
+              <div class="diag-body">
+                <div class="diag-title">transform_html(html, options)</div>
+                <div class="diag-desc">Automated HTML AST optimization: fixes layout shift dimensions, lazy loading, font preconnects.</div>
+              </div>
+            </div>
+            <div class="diagnostic-item">
+              <div class="diag-badge badge-info">Tool</div>
+              <div class="diag-body">
+                <div class="diag-title">generate_pwa(name, theme_color, strategy)</div>
+                <div class="diag-desc">Generates W3C web manifest, service worker caching engine, and offline page.</div>
+              </div>
+            </div>
+            <div class="diagnostic-item">
+              <div class="diag-badge badge-info">Tool</div>
+              <div class="diag-body">
+                <div class="diag-title">generate_cache_headers(platform)</div>
+                <div class="diag-desc">Outputs immutable caching and security header configs for Netlify, Vercel, or Nginx.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. TAB: Guide & CLI -->
+    <section class="tab-panel" id="panel-guide">
+      <div class="studio-card">
+        <h2 class="card-title">📖 Core Web Vitals Best Practices & CLI Cheatsheet</h2>
+        <p class="card-subtitle" style="margin-bottom: 20px;">Google 2024-2026 Core Web Vitals Official Thresholds and Commands.</p>
+
+        <div class="section-grid-2">
+          <div>
+            <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 10px;">CWV Metric Thresholds (Google 2024+)</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <tr style="border-bottom: 1px solid var(--g-outline); text-align: left;">
+                <th style="padding: 8px;">Metric</th>
+                <th style="padding: 8px; color: var(--g-green);">Good (Pass)</th>
+                <th style="padding: 8px; color: var(--g-yellow-dark);">Needs Work</th>
+                <th style="padding: 8px; color: var(--g-red);">Poor</th>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--g-outline-variant);">
+                <td style="padding: 8px; font-weight: 600;">LCP (Largest Contentful Paint)</td>
+                <td style="padding: 8px;">&le; 2.5s</td>
+                <td style="padding: 8px;">2.5s - 4.0s</td>
+                <td style="padding: 8px;">&gt; 4.0s</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--g-outline-variant);">
+                <td style="padding: 8px; font-weight: 600;">CLS (Cumulative Layout Shift)</td>
+                <td style="padding: 8px;">&le; 0.10</td>
+                <td style="padding: 8px;">0.10 - 0.25</td>
+                <td style="padding: 8px;">&gt; 0.25</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--g-outline-variant);">
+                <td style="padding: 8px; font-weight: 600;">INP (Interaction to Next Paint)</td>
+                <td style="padding: 8px;">&le; 200ms</td>
+                <td style="padding: 8px;">200ms - 500ms</td>
+                <td style="padding: 8px;">&gt; 500ms</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--g-outline-variant);">
+                <td style="padding: 8px; font-weight: 600;">FCP (First Contentful Paint)</td>
+                <td style="padding: 8px;">&le; 1.8s</td>
+                <td style="padding: 8px;">1.8s - 3.0s</td>
+                <td style="padding: 8px;">&gt; 3.0s</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; font-weight: 600;">TTFB (Time to First Byte)</td>
+                <td style="padding: 8px;">&le; 800ms</td>
+                <td style="padding: 8px;">800ms - 1800ms</td>
+                <td style="padding: 8px;">&gt; 1800ms</td>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 10px;">CLI Commands Quick Reference</h3>
+            <div class="code-block-container" style="margin-top: 0;">
+              <div class="code-block-header">
+                <span>Terminal Commands</span>
+                <span>cwv-speed</span>
+              </div>
+              <pre class="code-content"># 1. Audit a live URL
+cwv-speed audit https://example.com --device mobile
+
+# 2. Optimize an HTML file
+cwv-speed optimize input.html -o output.html --hero-preload
+
+# 3. Launch Google Material 3 Speed Studio
+cwv-speed ui --port 8448 --open
+
+# 4. Run CI/CD Performance Gate
+cwv-speed ci-gate https://staging.example.com --min-score 90 --max-cls 0.05
+
+# 5. Start MCP Server for Claude / Cursor
+cwv-speed mcp</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Alert -->
+  <div id="toast">Copied to clipboard</div>
+
+  <!-- Client-side Interactive Application Logic -->
+  <script>
+    // State management
+    let currentScore = 98;
+    let currentMcpClient = 'claude';
+    let currentCachePlatform = 'netlify';
+
+    // Sample Unoptimized HTML
+    const SAMPLE_RAW_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unoptimized Sample Store</title>
+  <!-- Render-blocking synchronous font without swap -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700">
+  <!-- Render-blocking scripts in head -->
+  <script src="https://cdn.example.com/heavy-analytics.js"><\/script>
+  <script src="https://cdn.example.com/widget.js"><\/script>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Speed Store</h1>
+  </header>
+  <main>
+    <!-- Hero image missing explicit dimensions and fetchpriority -->
+    <img src="/hero-banner.jpg" alt="Summer Promo">
+
+    <section class="products">
+      <!-- Below fold images without lazy loading or dimensions -->
+      <img src="/product-1.jpg" alt="Item 1">
+      <img src="/product-2.jpg" alt="Item 2">
+      <img src="/product-3.jpg" alt="Item 3">
+    </section>
+  </main>
+</body>
+</html>`;
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('auditHtmlInput').value = SAMPLE_RAW_HTML;
+      document.getElementById('transformInputHtml').value = SAMPLE_RAW_HTML;
+      document.getElementById('diffBaselineInput').value = SAMPLE_RAW_HTML;
+
+      loadCacheConfig('netlify');
+      loadMcpClient('claude');
+      generatePwaArtifacts();
+      updateSocialPreviews();
+      triggerQuickAudit();
+    });
+
+    // Toast Notification helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+
+      const targetItem = Array.from(document.querySelectorAll('.tab-item')).find(el => el.getAttribute('onclick').includes(tabId));
+      if (targetItem) targetItem.classList.add('active');
+
+      const targetPanel = document.getElementById(`panel-${tabId}`);
+      if (targetPanel) targetPanel.classList.add('active');
+    }
+
+    // Update Speed Gauge and Cards UI
+    function updateGauge(score, metrics) {
+      currentScore = Math.max(0, Math.min(100, Math.round(score)));
+      document.getElementById('scoreValue').textContent = currentScore;
+
+      const circle = document.getElementById('gaugeCircle');
+      const circumference = 377;
+      const offset = circumference - (currentScore / 100) * circumference;
+      circle.style.strokeDashoffset = offset;
+
+      const badge = document.getElementById('scoreRatingBadge');
+      if (currentScore >= 90) {
+        circle.style.stroke = 'var(--g-green)';
+        badge.style.background = 'var(--g-green-light)';
+        badge.style.color = 'var(--g-green)';
+        badge.textContent = '✓ Good Rating';
+      } else if (currentScore >= 50) {
+        circle.style.stroke = 'var(--g-yellow)';
+        badge.style.background = 'var(--g-yellow-light)';
+        badge.style.color = 'var(--g-yellow-dark)';
+        badge.textContent = '⚠ Needs Improvement';
+      } else {
+        circle.style.stroke = 'var(--g-red)';
+        badge.style.background = 'var(--g-red-light)';
+        badge.style.color = 'var(--g-red)';
+        badge.textContent = '✕ Poor Rating';
+      }
+
+      if (metrics) {
+        if (metrics.lcp) document.getElementById('valLCP').textContent = metrics.lcp.value;
+        if (metrics.cls) document.getElementById('valCLS').textContent = metrics.cls.value;
+        if (metrics.inp) document.getElementById('valINP').textContent = metrics.inp.value;
+        if (metrics.fcp) document.getElementById('valFCP').textContent = metrics.fcp.value;
+        if (metrics.ttfb) document.getElementById('valTTFB').textContent = metrics.ttfb.value;
+      }
+    }
+
+    // Run Auditor
+    async function runAudit() {
+      const url = document.getElementById('auditUrlInput').value.trim();
+      const rawHtml = document.getElementById('auditHtmlInput').value.trim();
+      const device = document.getElementById('auditDeviceSelect').value;
+
+      try {
+        const payload = rawHtml ? { html: rawHtml, device } : { url, device };
+        const res = await fetch('/api/audit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        renderAuditResults(data);
+      } catch (err) {
+        console.warn('Backend API offline, running client-side simulation', err);
+        renderClientAuditSimulation(rawHtml || SAMPLE_RAW_HTML);
+      }
+    }
+
+    function renderAuditResults(data) {
+      updateGauge(data.score, data.metrics);
+      const list = document.getElementById('diagnosticList');
+      list.innerHTML = '';
+
+      if (data.diagnostics && data.diagnostics.length > 0) {
+        data.diagnostics.forEach(d => {
+          const badgeClass = d.passed ? 'badge-pass' : (d.severity === 'CRITICAL' ? 'badge-critical' : (d.severity === 'WARNING' ? 'badge-warning' : 'badge-info'));
+          const item = document.createElement('div');
+          item.className = 'diagnostic-item';
+          item.innerHTML = `
+            <div class="diag-badge ${badgeClass}">${d.severity}</div>
+            <div class="diag-body">
+              <div class="diag-title">${d.title}</div>
+              <div class="diag-desc">${d.description} (${d.impact})</div>
+              <div class="diag-rec">Fix: ${d.recommendation}</div>
+            </div>
+          `;
+          list.appendChild(item);
+        });
+      }
+      showToast(`Audit Complete! Score: ${data.score}/100`);
+    }
+
+    function renderClientAuditSimulation(html) {
+      const missingDims = (html.match(/<img\b(?![^>]*\bwidth=)[^>]*>/gi) || []).length;
+      const score = Math.max(30, 95 - missingDims * 12);
+      updateGauge(score, {
+        lcp: { value: (1.2 + missingDims * 0.4).toFixed(1) },
+        cls: { value: (0.01 + missingDims * 0.08).toFixed(3) },
+        inp: { value: 75 },
+        fcp: { value: 0.9 },
+        ttfb: { value: 190 }
+      });
+      showToast(`Audit simulation finished! Score: ${score}/100`);
+    }
+
+    function triggerQuickAudit() {
+      switchTab('auditor');
+      runAudit();
+    }
+
+    function loadSampleHTML() {
+      document.getElementById('auditHtmlInput').value = SAMPLE_RAW_HTML;
+      showToast('Loaded unoptimized sample HTML');
+      runAudit();
+    }
+
+    // HTML Transformer
+    async function runTransform() {
+      const html = document.getElementById('transformInputHtml').value;
+      const options = {
+        dimensions: document.getElementById('optDims').checked,
+        lazy_loading: document.getElementById('optLazy').checked,
+        font_preconnect: document.getElementById('optFont').checked,
+        defer_scripts: document.getElementById('optDefer').checked,
+        preload_hero: document.getElementById('optHero').checked,
+        critical_css: true
+      };
+
+      try {
+        const res = await fetch('/api/optimize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ html, options })
+        });
+        const data = await res.json();
+        document.getElementById('transformOutputHtml').value = data.optimized_html;
+
+        const list = document.getElementById('transformChangesList');
+        list.innerHTML = '';
+        data.changes.forEach(c => {
+          const li = document.createElement('li');
+          li.textContent = c;
+          list.appendChild(li);
+        });
+
+        document.getElementById('diffCandidateInput').value = data.optimized_html;
+        showToast('HTML Speed Optimization Complete!');
+      } catch (e) {
+        console.warn('Transformer API call fallback', e);
+      }
+    }
+
+    function copyOptimizedHtml() {
+      const text = document.getElementById('transformOutputHtml').value;
+      navigator.clipboard.writeText(text);
+      showToast('Optimized HTML copied to clipboard!');
+    }
+
+    function downloadOptimizedHtml() {
+      const text = document.getElementById('transformOutputHtml').value || SAMPLE_RAW_HTML;
+      const blob = new Blob([text], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.optimized.html';
+      a.click();
+    }
+
+    // PWA Studio
+    async function generatePwaArtifacts() {
+      const payload = {
+        name: document.getElementById('pwaName').value,
+        short_name: document.getElementById('pwaShortName').value,
+        theme_color: document.getElementById('pwaThemeColor').value,
+        background_color: document.getElementById('pwaBgColor').value,
+        strategy: document.getElementById('pwaStrategy').value,
+      };
+
+      try {
+        const res = await fetch('/api/pwa/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        document.getElementById('pwaManifestPreview').value = data.manifest_json;
+        document.getElementById('pwaSwPreview').value = data.service_worker;
+      } catch (e) {
+        console.warn('PWA API fallback', e);
+      }
+    }
+
+    async function downloadPwaZip() {
+      const payload = {
+        name: document.getElementById('pwaName').value,
+        short_name: document.getElementById('pwaShortName').value,
+        theme_color: document.getElementById('pwaThemeColor').value,
+        strategy: document.getElementById('pwaStrategy').value,
+      };
+
+      try {
+        const res = await fetch('/api/export-zip', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ bundle_type: 'pwa', data: payload })
+        });
+        const blob = await res.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'cwv-speed-pwa-bundle.zip';
+        a.click();
+        showToast('Downloaded PWA bundle .zip');
+      } catch (e) {
+        showToast('Error downloading zip');
+      }
+    }
+
+    // OpenGraph Previews
+    function updateSocialPreviews() {
+      const title = document.getElementById('ogTitleInput').value;
+      const desc = document.getElementById('ogDescInput').value;
+      const url = document.getElementById('ogUrlInput').value;
+      const img = document.getElementById('ogImageInput').value;
+
+      document.getElementById('serpPreviewTitle').textContent = title;
+      document.getElementById('serpPreviewDesc').textContent = desc;
+      try {
+        const parsed = new URL(url);
+        document.getElementById('serpCiteUrl').textContent = `${parsed.hostname} > ${parsed.pathname.replace(/^\//, '')}`;
+        document.getElementById('twitterDomainPreview').textContent = parsed.hostname;
+      } catch (e) {}
+
+      document.getElementById('twitterTitlePreview').textContent = title;
+      document.getElementById('twitterDescPreview').textContent = desc;
+      const box = document.getElementById('twitterImgPreview');
+      if (img) {
+        box.style.backgroundImage = `url('${img}')`;
+        box.textContent = '';
+      }
+    }
+
+    async function copyOgTags() {
+      const payload = {
+        title: document.getElementById('ogTitleInput').value,
+        description: document.getElementById('ogDescInput').value,
+        url: document.getElementById('ogUrlInput').value,
+        image: document.getElementById('ogImageInput').value,
+      };
+      try {
+        const res = await fetch('/api/og/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        navigator.clipboard.writeText(data.html_snippet);
+        showToast('Copied OpenGraph meta tags!');
+      } catch (e) {
+        showToast('Error copying tags');
+      }
+    }
+
+    // Performance Diff
+    async function runDiffComparison() {
+      const baseline = document.getElementById('diffBaselineInput').value;
+      const candidate = document.getElementById('diffCandidateInput').value;
+
+      try {
+        const res = await fetch('/api/diff', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ baseline, candidate, device: 'mobile' })
+        });
+        const data = await res.json();
+        document.getElementById('diffScoreDelta').textContent = `+${data.score_delta} pts`;
+        document.getElementById('diffSummaryText').textContent = data.summary;
+
+        const grid = document.getElementById('diffDeltasGrid');
+        grid.innerHTML = `
+          <div class="metric-card">
+            <span class="metric-title">LCP Delta</span>
+            <div class="metric-value" style="color:var(--g-green);">${data.metric_deltas.lcp.delta}s</div>
+            <span class="metric-target">${data.metric_deltas.lcp.baseline}s &rarr; ${data.metric_deltas.lcp.candidate}s</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-title">CLS Delta</span>
+            <div class="metric-value" style="color:var(--g-green);">${data.metric_deltas.cls.delta}</div>
+            <span class="metric-target">${data.metric_deltas.cls.baseline} &rarr; ${data.metric_deltas.cls.candidate}</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-title">INP Delta</span>
+            <div class="metric-value" style="color:var(--g-green);">${data.metric_deltas.inp.delta}ms</div>
+            <span class="metric-target">${data.metric_deltas.inp.baseline}ms &rarr; ${data.metric_deltas.inp.candidate}ms</span>
+          </div>
+        `;
+        showToast('Performance diff computed!');
+      } catch (e) {
+        console.warn('Diff fallback', e);
+      }
+    }
+
+    // Cache Config Exporter
+    async function loadCacheConfig(platform) {
+      currentCachePlatform = platform;
+      document.querySelectorAll('#panel-cache .btn-secondary').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`btnPlat${platform.charAt(0).toUpperCase() + platform.slice(1)}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      try {
+        const res = await fetch(`/api/cache/export?platform=${platform}`);
+        const data = await res.json();
+        document.getElementById('cacheConfigFilename').textContent = data.filename;
+        document.getElementById('cacheConfigContent').textContent = data.content;
+      } catch (e) {
+        console.warn('Cache export fallback', e);
+      }
+    }
+
+    function copyCacheHeaderConfig() {
+      const code = document.getElementById('cacheConfigContent').textContent;
+      navigator.clipboard.writeText(code);
+      showToast(`Copied ${currentCachePlatform} cache configuration!`);
+    }
+
+    // MCP Client Hub
+    async function loadMcpClient(client) {
+      currentMcpClient = client;
+      document.querySelectorAll('#panel-mcp .btn-secondary').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`btnMcp${client.charAt(0).toUpperCase() + client.slice(1)}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      try {
+        const res = await fetch(`/api/mcp/config?client=${client}`);
+        const data = await res.json();
+        document.getElementById('mcpConfigContent').textContent = data.json_str;
+      } catch (e) {
+        console.warn('MCP config fallback', e);
+      }
+    }
+
+    function copyMcpConfig() {
+      const code = document.getElementById('mcpConfigContent').textContent;
+      navigator.clipboard.writeText(code);
+      showToast(`Copied ${currentMcpClient} MCP configuration!`);
+    }
+  </script>
+</body>
+</html>
