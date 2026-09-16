@@ -1091,28 +1091,16 @@ class SpeedStudioHTTPHandler(http.server.BaseHTTPRequestHandler):
 
 def cmd_serve(args: argparse.Namespace) -> int:
     """Start Google Material 3 Speed Studio Web UI."""
-    port = int(getattr(args, "port", 8095) or 8095)
+    port = int(getattr(args, "port", 8448) or 8448)
     host = getattr(args, "host", "0.0.0.0") or "0.0.0.0"
+    open_browser = getattr(args, "open", False) or False
 
-    class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
-        daemon_threads = True
-
+    from cwv_speed_engine.ui_server import start_ui_server
     try:
-        server = ThreadedHTTPServer((host, port), SpeedStudioHTTPHandler)
+        start_ui_server(host=host, port=port, open_browser=open_browser, blocking=True)
     except Exception as e:
         print(colorize(f"Error starting Speed Studio on {host}:{port}: {e}", TermColor.RED), file=sys.stderr)
         return 1
-
-    local_url = f"http://localhost:{port}" if host in ("0.0.0.0", "127.0.0.1") else f"http://{host}:{port}"
-    print(colorize("\n⚡ CWV Speed Studio — Google Material 3 Web UI", TermColor.BOLD + TermColor.CYAN))
-    print(f"  Server listening at: {colorize(local_url, TermColor.BOLD + TermColor.GREEN)}")
-    print(f"  Press Ctrl+C to terminate.\n")
-
-    try:
-        server.serve_forever()
-    except (KeyboardInterrupt, SystemExit):
-        print(colorize("\nShutting down Speed Studio server...", TermColor.YELLOW))
-        server.server_close()
     return 0
 
 
