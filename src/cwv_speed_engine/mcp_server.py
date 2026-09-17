@@ -1792,6 +1792,34 @@ class MCPServer:
             ),
         )
 
+        # Tool 7: cwv_generate_speculation_rules
+        self.register_tool(
+            name="cwv_generate_speculation_rules",
+            description="Generate W3C Speculation Rules (<script type='speculationrules'>) for instant zero-latency prerendering and 103 Early Hints.",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "html_or_urls": {
+                        "type": "string",
+                        "description": "HTML content string or comma-separated list of URLs.",
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "description": "Base URL for resolving internal links (default: https://example.com).",
+                        "default": "https://example.com",
+                    },
+                    "aggressiveness": {
+                        "type": "string",
+                        "enum": ["conservative", "balanced", "aggressive"],
+                        "description": "Prerender/prefetch eagerness aggressiveness (default: balanced).",
+                        "default": "balanced",
+                    },
+                },
+                "required": ["html_or_urls"],
+            },
+            handler=self._handle_generate_speculation_rules,
+        )
+
     def _handle_optimize_html(
         self,
         html: Optional[str] = None,
@@ -1815,6 +1843,19 @@ class MCPServer:
             lazy_load_images=lazy_load_images,
             defer_scripts=defer_scripts,
         )
+
+    def _handle_generate_speculation_rules(
+        self,
+        html_or_urls: str,
+        base_url: str = "https://example.com",
+        aggressiveness: str = "balanced",
+    ) -> Dict[str, Any]:
+        from .speculation_engine import generate_speculation_plan
+        return generate_speculation_plan(
+            html_or_urls=html_or_urls,
+            base_url=base_url,
+            aggressiveness=aggressiveness,
+        ).to_dict()
 
     def handle_request(self, request_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Process a single JSON-RPC 2.0 request."""

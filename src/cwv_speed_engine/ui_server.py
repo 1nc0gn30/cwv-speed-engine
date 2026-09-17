@@ -1577,6 +1577,16 @@ class SpeedStudioRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(zip_bytes)
             return
 
+        # 9. Speculation Rules endpoint
+        if path == "/api/speculation":
+            from .speculation_engine import generate_speculation_plan
+            content = body.get("content") or body.get("html") or body.get("target") or ""
+            base_url = body.get("base_url", "https://example.com")
+            aggressiveness = body.get("aggressiveness", "balanced")
+            plan = generate_speculation_plan(content, base_url=base_url, aggressiveness=aggressiveness)
+            self._send_json(200, plan.to_dict())
+            return
+
         # Unknown POST endpoint
         self._send_json(404, {"error": f"Endpoint {path} not found", "status": 404})
 

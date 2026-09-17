@@ -37,6 +37,19 @@ from cwv_speed_engine.loaf_analyzer import (
     analyze_loaf_entries,
     audit_html_for_loaf_risks,
 )
+from cwv_speed_engine.speculation_engine import (
+    SpeculationEagerness,
+    SpeculationAction,
+    EarlyHintItem,
+    SpeculationPlanReport,
+    is_safe_for_speculation,
+    extract_links_from_html,
+    synthesize_early_hints,
+    build_server_configs,
+    generate_speculation_rules,
+    inject_speculation_rules_into_html,
+    generate_speculation_plan,
+)
 
 __version__ = "1.0.0"
 __author__ = "CWV Speed Engine Team"
@@ -81,4 +94,15 @@ __all__ = [
     "LoAFAttributionReport",
     "analyze_loaf_entries",
     "audit_html_for_loaf_risks",
+    "SpeculationEagerness",
+    "SpeculationAction",
+    "EarlyHintItem",
+    "SpeculationPlanReport",
+    "is_safe_for_speculation",
+    "extract_links_from_html",
+    "synthesize_early_hints",
+    "build_server_configs",
+    "generate_speculation_rules",
+    "inject_speculation_rules_into_html",
+    "generate_speculation_plan",
 ]
