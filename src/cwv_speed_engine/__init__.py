@@ -30,6 +30,13 @@ from cwv_speed_engine.pwa_builder import PWABuilder, generate_pwa_bundle, PWABun
 from cwv_speed_engine.og_builder import OpenGraphBuilder, generate_og_meta_tags
 from cwv_speed_engine.diff_engine import PerformanceDiffEngine, compare_cwv_audits, rate_metric
 from cwv_speed_engine.ci_gate import run_cwv_check, main as ci_gate_main
+from cwv_speed_engine.loaf_analyzer import (
+    LongAnimationFrameEntry,
+    LongAnimationFrameScript,
+    LoAFAttributionReport,
+    analyze_loaf_entries,
+    audit_html_for_loaf_risks,
+)
 
 __version__ = "1.0.0"
 __author__ = "CWV Speed Engine Team"
@@ -69,4 +76,9 @@ __all__ = [
     "rate_metric",
     "run_cwv_check",
     "ci_gate_main",
+    "LongAnimationFrameEntry",
+    "LongAnimationFrameScript",
+    "LoAFAttributionReport",
+    "analyze_loaf_entries",
+    "audit_html_for_loaf_risks",
 ]
