@@ -52,9 +52,9 @@ speed-engine = "cwv_speed_engine.cli:main"
 cwv-mcp = "cwv_speed_engine.mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/cwv-speed-engine/cwv-speed-engine"
-Repository = "https://github.com/cwv-speed-engine/cwv-speed-engine"
-Issues = "https://github.com/cwv-speed-engine/cwv-speed-engine/issues"
+Homepage = "https://github.com/1nc0gn30/cwv-speed-engine"
+Repository = "https://github.com/1nc0gn30/cwv-speed-engine"
+Issues = "https://github.com/1nc0gn30/cwv-speed-engine/issues"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

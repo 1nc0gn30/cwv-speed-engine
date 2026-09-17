@@ -1,5 +1,5 @@
 """
-Comprehensive test suite for Google Material 3 Speed Studio UI Server and REST APIs.
+Comprehensive test suite for CWV Speed Studio UI Server and REST APIs.
 Tests auditing algorithms, HTML transformation, PWA generation, diff comparator,
 caching exporter, MCP configs, zip bundling, and live HTTP request handling.
 """
@@ -303,7 +303,7 @@ class TestLiveHttpServer:
         assert status == 200
         assert "text/html" in headers.get("Content-Type", "")
         html_str = body.decode("utf-8")
-        assert "Google Speed Studio" in html_str
+        assert "CWV Speed Studio" in html_str
 
     def test_api_health(self):
         status, headers, body = self._get("/api/health")

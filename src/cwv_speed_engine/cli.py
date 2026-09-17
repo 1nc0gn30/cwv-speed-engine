@@ -11,7 +11,7 @@ Subcommands:
   diff      - Compare before/after performance audits.
   check     - CI/CD quality gate check.
   mcp       - Run stdio MCP server or export client configurations.
-  serve     - Start Google Material 3 Speed Studio Web UI.
+  serve     - Start CWV Speed Studio Web UI.
   platform  - Inspect multi-OS runtime diagnostics.
   test      - Run internal engine verification test suite.
 """
@@ -511,7 +511,7 @@ def cmd_platform(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Google Material 3 Speed Studio Web UI
+# CWV Speed Studio Web UI (Design influenced by Material 3)
 # ---------------------------------------------------------------------------
 
 SPEED_STUDIO_HTML = """<!DOCTYPE html>
@@ -519,7 +519,7 @@ SPEED_STUDIO_HTML = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CWV Speed Studio — Google Material 3 Core Web Vitals Engine</title>
+  <title>CWV Speed Studio — Core Web Vitals Optimization Engine</title>
   <style>
     :root {
       --md-sys-color-primary: #a8c7fa;
@@ -691,7 +691,7 @@ SPEED_STUDIO_HTML = """<!DOCTYPE html>
       <div class="brand-icon">⚡</div>
       <div>
         <h1>CWV Speed Studio</h1>
-        <div style="font-size: 11px; color: var(--md-sys-color-on-surface-variant)">Google Material 3 Performance Optimization Engine</div>
+        <div style="font-size: 11px; color: var(--md-sys-color-on-surface-variant)">Core Web Vitals Optimization Engine (design influenced by Material 3)</div>
       </div>
     </div>
     <div>
@@ -1090,7 +1090,7 @@ class SpeedStudioHTTPHandler(http.server.BaseHTTPRequestHandler):
 
 
 def cmd_serve(args: argparse.Namespace) -> int:
-    """Start Google Material 3 Speed Studio Web UI."""
+    """Start CWV Speed Studio Web UI (design influenced by Material 3)."""
     port = int(getattr(args, "port", 8448) or 8448)
     host = getattr(args, "host", "0.0.0.0") or "0.0.0.0"
     open_browser = getattr(args, "open", False) or False
@@ -1277,7 +1277,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     p_mcp.add_argument("--output", "-o", help="File to write client configuration")
 
     # 9. serve
-    p_serve = subparsers.add_parser("serve", parents=[common_parent], help="Start Google Material 3 Speed Studio Web UI")
+    p_serve = subparsers.add_parser("serve", parents=[common_parent], help="Start CWV Speed Studio Web UI (design influenced by Material 3)")
     p_serve.add_argument("--port", "-p", type=int, default=8095, help="Server port (default: 8095)")
     p_serve.add_argument("--host", default="0.0.0.0", help="Server host address (default: 0.0.0.0)")
 

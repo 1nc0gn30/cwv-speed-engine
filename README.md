@@ -1,18 +1,18 @@
-# ⚡ Google Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
+# ⚡ CWV Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
 
-[![CI Matrix](https://github.com/google/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/google/cwv-speed-engine/actions/workflows/ci.yml)
+[![CI Matrix](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml)
 [![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://pypi.org/project/cwv-speed-engine/)
-[![UI](https://img.shields.io/badge/UI-Google%20Material%203-4285F4)](https://github.com/google/cwv-speed-engine)
+[![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/1nc0gn30/cwv-speed-engine)
 [![MCP Ready](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-9334e6)](https://modelcontextprotocol.io)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
 
-**Google Speed Studio** (`cwv-speed-engine`) is an enterprise-grade Core Web Vitals auditing, automated speed transformation, PWA generation, and AI Agent MCP hub designed to help modern web applications achieve and maintain a perfect **100/100 Core Web Vitals score** (LCP < 1.2s, CLS 0, INP < 50ms).
+**CWV Speed Studio** (`cwv-speed-engine`) is an enterprise-grade Core Web Vitals auditing, automated speed transformation, PWA generation, and AI Agent MCP hub designed to help modern web applications achieve and maintain a perfect **100/100 Core Web Vitals score** (LCP < 1.2s, CLS 0, INP < 50ms).
 
 ---
 
 ## 🌟 Key Capabilities
 
-- 🎨 **Google Material 3 Speed Studio Web UI**: Full-featured, offline-ready web UI with animated Speed Gauge Dial, metric cards, and 8 interactive studios.
+- 🎨 **CWV Speed Studio Web UI**: Full-featured, offline-ready web UI (design influenced by Material 3) with animated Speed Gauge Dial, metric cards, and 8 interactive studios.
 - ⚡ **Deterministic Core Web Vitals Auditor**: In-depth standards-based analysis for LCP, CLS, INP, FCP, and TTFB with actionable remediation advice.
 - 🛠️ **Automated HTML Speed Transformer**: Automated AST rewrites that inject explicit image dimensions, native lazy loading, font preconnects, script deferrals, and hero preload priority tags.
 - 📱 **PWA & Service Worker Studio**: Interactive builder for W3C web manifests and tiered Service Worker caching strategies (`stale-while-revalidate`, `cache-first`, `network-first`).
@@ -31,14 +31,14 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/google/cwv-speed-engine.git
+git clone https://github.com/1nc0gn30/cwv-speed-engine.git
 cd cwv-speed-engine
 
 # Install in editable mode
 pip install -e .
 ```
 
-### Launch Google Speed Studio Web UI
+### Launch CWV Speed Studio Web UI
 
 ```bash
 python -m cwv_speed_engine.ui_server --port 8448 --open
