@@ -19,6 +19,7 @@
 - 🖼️ **OpenGraph & Social Previewer**: Live mockups for Google Search SERP, Twitter Cards, and LinkedIn snippets with 1-click meta tag copying.
 - ⚖️ **Performance Diff Comparator**: Measure before vs after speed gains, metric deltas, and resolved audit findings.
 - 🚀 **Cache-Control & Headers Exporter**: Instant production configs for Netlify, Vercel, Nginx, Cloudflare, Apache, and Next.js.
+- 📊 **Performance Budget & Network Latency Simulator**: Enforce strict asset weight ceilings (Scripts, Styles, Fonts, Images), simulate real-world mobile 3G/4G/5G latency, calculate INP main-thread execution risks, and export standard Lighthouse `budget.json` for CI pipelines.
 - 🤖 **AI Agent & MCP Hub**: Zero-dependency Model Context Protocol (MCP) server supporting Claude Desktop, Cursor, Cline, and Zed.
 - 🚦 **CI/CD Quality Gate**: Reusable GitHub Actions workflow to block PRs regressing speed scores.
 - 📦 **Zero Mandatory Dependencies**: Core engine and web server run purely on the Python standard library.
@@ -66,7 +67,13 @@ cwv-speed pwa --name "My Speed App" --strategy stale-while-revalidate
 # 5. Export Production Cache Headers
 cwv-speed cache --platform netlify -o _headers
 
-# 6. Run CI Gate on Pull Requests
+# 6. Audit Performance Budget & Multi-Network Latency
+cwv-speed budget index.html --script-budget 150 --total-budget 500
+
+# 7. Export Standard Lighthouse budget.json
+cwv-speed budget index.html --lighthouse > budget.json
+
+# 8. Run CI Gate on Pull Requests
 cwv-speed ci-gate https://staging.example.com --min-score 90 --max-cls 0.05
 ```
 

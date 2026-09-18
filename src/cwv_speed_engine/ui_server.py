@@ -1449,6 +1449,16 @@ class SpeedStudioRequestHandler(http.server.SimpleHTTPRequestHandler):
             self._send_json(200, export_cache_headers(platform))
             return
 
+        # Performance Budget endpoint (GET)
+        if path == "/api/budget":
+            from .budget_simulator import audit_performance_budget
+            params = urllib.parse.parse_qs(parsed_url.query)
+            target_name = params.get("name", ["Web Studio Audit"])[0]
+            sample_html = "<html><head><script src='/app.js'></script><link rel='stylesheet' href='/style.css'></head><body><img src='/hero.jpg'></body></html>"
+            report = audit_performance_budget(sample_html, target_name=target_name)
+            self._send_json(200, report.to_dict())
+            return
+
         # Serve UI index.html
         if path in ("/", "/index.html"):
             index_path = pathlib.Path(self.directory) / "index.html"
@@ -1585,6 +1595,20 @@ class SpeedStudioRequestHandler(http.server.SimpleHTTPRequestHandler):
             aggressiveness = body.get("aggressiveness", "balanced")
             plan = generate_speculation_plan(content, base_url=base_url, aggressiveness=aggressiveness)
             self._send_json(200, plan.to_dict())
+            return
+
+        # 10. Performance Budget endpoint
+        if path == "/api/budget":
+            from .budget_simulator import audit_performance_budget
+            content = body.get("content") or body.get("html") or body.get("target") or ""
+            target_name = body.get("target_name", "Web Studio Audit")
+            custom_budgets = body.get("custom_budgets")
+            report = audit_performance_budget(
+                html_or_resources=content,
+                custom_budgets=custom_budgets,
+                target_name=target_name,
+            )
+            self._send_json(200, report.to_dict())
             return
 
         # Unknown POST endpoint

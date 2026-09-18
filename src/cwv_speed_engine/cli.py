@@ -28,6 +28,7 @@ import threading
 import time
 import unittest
 import urllib.parse
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from cwv_speed_engine.mcp_server import (
@@ -573,6 +574,61 @@ def cmd_speculation(args: argparse.Namespace) -> int:
     print(f"  • Estimated TTFB: 650.0ms -> {colorize(str(plan.projected_new_ttfb_ms) + 'ms', TermColor.GREEN + TermColor.BOLD)} (-{plan.estimated_ttfb_saving_ms}ms)")
     print(f"  • Estimated LCP:  2200.0ms -> {colorize(str(plan.projected_new_lcp_ms) + 'ms', TermColor.GREEN + TermColor.BOLD)} (-{plan.estimated_lcp_saving_ms}ms)")
     print("\n" + "=" * 72 + "\n")
+    return 0
+
+
+def cmd_budget(args: argparse.Namespace) -> int:
+    """Execute performance budget audit and multi-network simulation."""
+    from .budget_simulator import (
+        audit_performance_budget,
+        render_ascii_budget_report,
+    )
+    target = args.target
+    if "\n" not in target and len(target) < 4096:
+        try:
+            target_path = Path(target)
+            if target_path.is_file():
+                content = target_path.read_text(encoding="utf-8")
+                target_name = target_path.name
+            else:
+                content = target
+                target_name = target[:50]
+        except OSError:
+            content = target
+            target_name = target[:50]
+    else:
+        content = target
+        target_name = "Inline Markup"
+
+    custom_budgets: Dict[str, float] = {}
+    if getattr(args, "script_budget", None) is not None:
+        custom_budgets["script"] = float(args.script_budget)
+    if getattr(args, "css_budget", None) is not None:
+        custom_budgets["stylesheet"] = float(args.css_budget)
+    if getattr(args, "total_budget", None) is not None:
+        custom_budgets["total"] = float(args.total_budget)
+
+    report = audit_performance_budget(
+        html_or_resources=content,
+        custom_budgets=custom_budgets if custom_budgets else None,
+        target_name=target_name,
+    )
+
+    if getattr(args, "json", False):
+        print(json.dumps(report.to_dict(), indent=2))
+        return 1 if (getattr(args, "fail_on_error", False) and not report.is_passing) else 0
+
+    if getattr(args, "lighthouse", False):
+        print(json.dumps(report.lighthouse_budget_json, indent=2))
+        return 0
+
+    print(render_ascii_budget_report(report))
+    print()
+
+    if getattr(args, "fail_on_error", False) and not report.is_passing:
+        print(colorize("❌ CI Gate Failure: Resource weights exceed performance budget threshold.", TermColor.RED + TermColor.BOLD))
+        return 1
+
     return 0
 
 
@@ -1359,7 +1415,17 @@ def build_cli_parser() -> argparse.ArgumentParser:
     p_spec.add_argument("--format", choices=["summary", "json", "script", "headers"], default="summary", help="Output format (default: summary)")
     p_spec.add_argument("--inject", type=str, help="Optional HTML file to inject <script type='speculationrules'> into")
 
-    # 12. test
+    # 12. budget
+    p_bud = subparsers.add_parser("budget", parents=[common_parent], help="Audit page assets against Core Web Vitals performance budgets and simulate network throttling")
+    p_bud.add_argument("target", type=str, help="HTML file path or raw HTML string or URL")
+    p_bud.add_argument("--script-budget", type=float, default=None, help="Custom script budget in KB (default: 170 KB)")
+    p_bud.add_argument("--css-budget", type=float, default=None, help="Custom stylesheet budget in KB (default: 50 KB)")
+    p_bud.add_argument("--total-budget", type=float, default=None, help="Custom total payload budget in KB (default: 500 KB)")
+    p_bud.add_argument("--json", action="store_true", help="Output JSON audit report")
+    p_bud.add_argument("--lighthouse", action="store_true", help="Output Lighthouse budget.json configuration")
+    p_bud.add_argument("--fail-on-error", action="store_true", help="Exit with non-zero code if budget is exceeded (CI gate)")
+
+    # 13. test
     subparsers.add_parser("test", parents=[common_parent], help="Run internal engine verification test suite")
 
     return parser
@@ -1392,6 +1458,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "serve": cmd_serve,
         "platform": cmd_platform,
         "speculation": cmd_speculation,
+        "budget": cmd_budget,
     }
 
     handler = dispatch_map.get(args.subcommand)

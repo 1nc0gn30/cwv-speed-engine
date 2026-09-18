@@ -50,6 +50,20 @@ from cwv_speed_engine.speculation_engine import (
     inject_speculation_rules_into_html,
     generate_speculation_plan,
 )
+from cwv_speed_engine.budget_simulator import (
+    ResourceType,
+    NetworkCondition,
+    ResourceEntry,
+    BudgetThreshold,
+    NetworkSimulation,
+    INPBudgetBreakdown,
+    PerformanceBudgetReport,
+    parse_html_resource_weights,
+    simulate_network_transfer,
+    audit_performance_budget,
+    generate_lighthouse_budget_json_config,
+    render_ascii_budget_report,
+)
 
 __version__ = "1.0.0"
 __author__ = "CWV Speed Engine Team"
@@ -105,4 +119,17 @@ __all__ = [
     "generate_speculation_rules",
     "inject_speculation_rules_into_html",
     "generate_speculation_plan",
+    # Budget Simulator
+    "ResourceType",
+    "NetworkCondition",
+    "ResourceEntry",
+    "BudgetThreshold",
+    "NetworkSimulation",
+    "INPBudgetBreakdown",
+    "PerformanceBudgetReport",
+    "parse_html_resource_weights",
+    "simulate_network_transfer",
+    "audit_performance_budget",
+    "generate_lighthouse_budget_json_config",
+    "render_ascii_budget_report",
 ]

@@ -1820,6 +1820,32 @@ class MCPServer:
             handler=self._handle_generate_speculation_rules,
         )
 
+        # Tool 8: cwv_audit_performance_budget
+        self.register_tool(
+            name="cwv_audit_performance_budget",
+            description="Audit web page assets against Core Web Vitals performance budgets (Scripts, Styles, Fonts, Images), simulate multi-network latency (3G/4G/5G), and generate standard Lighthouse budget.json.",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "html_or_path": {
+                        "type": "string",
+                        "description": "HTML markup content or path to local HTML file to evaluate.",
+                    },
+                    "custom_budgets": {
+                        "type": "object",
+                        "description": "Optional custom budget limits in KB (e.g. {'script': 150, 'total': 450}).",
+                    },
+                    "target_name": {
+                        "type": "string",
+                        "description": "Identifier or page name for the audit report.",
+                        "default": "Page Budget Audit",
+                    },
+                },
+                "required": ["html_or_path"],
+            },
+            handler=self._handle_audit_performance_budget,
+        )
+
     def _handle_optimize_html(
         self,
         html: Optional[str] = None,
@@ -1856,6 +1882,28 @@ class MCPServer:
             base_url=base_url,
             aggressiveness=aggressiveness,
         ).to_dict()
+
+    def _handle_audit_performance_budget(
+        self,
+        html_or_path: str,
+        custom_budgets: Optional[Dict[str, float]] = None,
+        target_name: str = "Page Budget Audit",
+    ) -> Dict[str, Any]:
+        from .budget_simulator import audit_performance_budget
+        content = html_or_path
+        if len(content) < 4096 and "\n" not in content and os.path.exists(content):
+            try:
+                with open(content, "r", encoding="utf-8", errors="replace") as f:
+                    content = f.read()
+            except Exception:
+                pass
+
+        report = audit_performance_budget(
+            html_or_resources=content,
+            custom_budgets=custom_budgets,
+            target_name=target_name,
+        )
+        return report.to_dict()
 
     def handle_request(self, request_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Process a single JSON-RPC 2.0 request."""

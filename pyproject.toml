@@ -27,8 +27,13 @@ keywords = [
     "speed",
     "optimizer",
     "seo",
-    "pwa"
+    "pwa",
+    "performance-budget",
+    "network-throttling",
+    "latency-simulator",
+    "lighthouse-budget",
 ]
+dependencies = []
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
