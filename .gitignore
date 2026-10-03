@@ -10,3 +10,9 @@ build/
 .DS_Store
 *.swp
 *.log
+
+.env
+node_modules/
+
+# Local Netlify folder
+.netlify

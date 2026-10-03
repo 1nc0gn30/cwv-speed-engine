@@ -1,8 +1,8 @@
 # ⚡ CWV Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
 
-[![CI Matrix](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml)
+[![CI Matrix](https://github.com/NullAITech/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/NullAITech/cwv-speed-engine/actions/workflows/ci.yml)
 [![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://pypi.org/project/cwv-speed-engine/)
-[![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/1nc0gn30/cwv-speed-engine)
+[![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/NullAITech/cwv-speed-engine)
 [![MCP Ready](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-9334e6)](https://modelcontextprotocol.io)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
 
@@ -32,7 +32,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/1nc0gn30/cwv-speed-engine.git
+git clone https://github.com/NullAITech/cwv-speed-engine.git
 cd cwv-speed-engine
 
 # Install in editable mode

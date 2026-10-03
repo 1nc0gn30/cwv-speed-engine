@@ -1,0 +1,37 @@
+{
+  "name": "cwv-speed-engine",
+  "version": "2.0.0",
+  "description": "Zero-Dependency Core Web Vitals Speed Engine, Speculation Rules, PWA & LoAF Profiler — Desktop Workstation",
+  "main": "electron/main.cjs",
+  "bin": {
+    "cwv": "./bin/cwv-speed.js",
+    "cwv-speed": "./bin/cwv-speed.js"
+  },
+  "scripts": {
+    "start": "python3 -m cwv_speed_engine.cli serve --port 8448",
+    "electron": "electron .",
+    "app": "electron .",
+    "test": "pytest tests/"
+  },
+  "keywords": [
+    "cwv",
+    "core-web-vitals",
+    "speed",
+    "performance",
+    "lcp",
+    "inp",
+    "cls",
+    "loaf",
+    "speculation-rules",
+    "pwa",
+    "zero-egress",
+    "sovereign",
+    "electron",
+    "zoth"
+  ],
+  "author": "NullAI Tech / Zoth Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.5.8"
+  }
+}
