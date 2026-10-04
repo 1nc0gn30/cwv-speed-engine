@@ -898,14 +898,14 @@
   <!-- Interactive Studio Navigation Tab Bar -->
   <nav class="tab-bar-container">
     <ul class="tab-bar">
-      <li class="tab-item active" onclick="switchTab('auditor')">⚡ Core Web Vitals Auditor</li>
-      <li class="tab-item" onclick="switchTab('transformer')">🛠️ HTML Speed Transformer</li>
-      <li class="tab-item" onclick="switchTab('pwa')">📱 PWA & Service Worker Studio</li>
-      <li class="tab-item" onclick="switchTab('og')">🖼️ OpenGraph & Social Previewer</li>
-      <li class="tab-item" onclick="switchTab('diff')">⚖️ Performance Diff Comparator</li>
-      <li class="tab-item" onclick="switchTab('cache')">🚀 Cache-Control & Headers Exporter</li>
-      <li class="tab-item" onclick="switchTab('mcp')">🤖 AI Agent & MCP Hub</li>
-      <li class="tab-item" onclick="switchTab('guide')">📖 CWV Best Practices & CLI Guide</li>
+      <li class="tab-item active" data-tab="auditor" onclick="switchTab('auditor')">⚡ Core Web Vitals Auditor</li>
+      <li class="tab-item" data-tab="transformer" onclick="switchTab('transformer')">🛠️ HTML Speed Transformer</li>
+      <li class="tab-item" data-tab="pwa" onclick="switchTab('pwa')">📱 PWA & Service Worker Studio</li>
+      <li class="tab-item" data-tab="og" onclick="switchTab('og')">🖼️ OpenGraph & Social Previewer</li>
+      <li class="tab-item" data-tab="diff" onclick="switchTab('diff')">⚖️ Performance Diff Comparator</li>
+      <li class="tab-item" data-tab="cache" onclick="switchTab('cache')">🚀 Cache-Control & Headers Exporter</li>
+      <li class="tab-item" data-tab="mcp" onclick="switchTab('mcp')">🤖 AI Agent & MCP Hub</li>
+      <li class="tab-item" data-tab="guide" onclick="switchTab('guide')">📖 CWV Best Practices & CLI Guide</li>
     </ul>
   </nav>
 
@@ -1437,10 +1437,10 @@ cwv-speed mcp</pre>
 
     // Tab Switching
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-item.active').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-panel.active').forEach(el => el.classList.remove('active'));
 
-      const targetItem = Array.from(document.querySelectorAll('.tab-item')).find(el => el.getAttribute('onclick').includes(tabId));
+      const targetItem = document.querySelector(`.tab-item[data-tab="${tabId}"]`);
       if (targetItem) targetItem.classList.add('active');
 
       const targetPanel = document.getElementById(`panel-${tabId}`);
