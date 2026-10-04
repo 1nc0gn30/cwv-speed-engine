@@ -1314,6 +1314,7 @@
           <button class="btn btn-secondary btn-sm active" id="btnMcpClaude" onclick="loadMcpClient('claude')">Claude Desktop</button>
           <button class="btn btn-secondary btn-sm" id="btnMcpCursor" onclick="loadMcpClient('cursor')">Cursor</button>
           <button class="btn btn-secondary btn-sm" id="btnMcpCline" onclick="loadMcpClient('cline')">Cline (VS Code)</button>
+          <button class="btn btn-secondary btn-sm" id="btnMcpWindsurf" onclick="loadMcpClient('windsurf')">Windsurf</button>
           <button class="btn btn-secondary btn-sm" id="btnMcpZed" onclick="loadMcpClient('zed')">Zed</button>
         </div>
 
@@ -1356,6 +1357,20 @@
               <div class="diag-body">
                 <div class="diag-title">generate_cache_headers(platform)</div>
                 <div class="diag-desc">Outputs immutable caching and security header configs for Netlify, Vercel, or Nginx.</div>
+              </div>
+            </div>
+            <div class="diagnostic-item">
+              <div class="diag-badge badge-info">Tool</div>
+              <div class="diag-body">
+                <div class="diag-title">generate_og_card(title, description, image_url)</div>
+                <div class="diag-desc">Builds complete OpenGraph & Twitter Card tags with preview verification.</div>
+              </div>
+            </div>
+            <div class="diagnostic-item">
+              <div class="diag-badge badge-info">Tool</div>
+              <div class="diag-body">
+                <div class="diag-title">diff_performance(baseline, current)</div>
+                <div class="diag-desc">Compares performance audits with delta scores, regression flags, and metric shifts.</div>
               </div>
             </div>
           </div>
@@ -1970,13 +1985,24 @@ cwv-speed mcp</pre>
       const activeBtn = document.getElementById(`btnMcp${client.charAt(0).toUpperCase() + client.slice(1)}`);
       if (activeBtn) activeBtn.classList.add('active');
 
+      const labels = {
+        claude: "claude_desktop_config.json",
+        cursor: "cursor-mcp-settings.json",
+        cline: "cline_mcp_settings.json",
+        windsurf: "mcp_config.json",
+        zed: "settings.json"
+      };
+
       const configs = {
         claude: JSON.stringify({ mcpServers: { cwv_engine: { command: "npx", args: ["-y", "cwv-speed-engine@latest", "audit"] } } }, null, 2),
         cursor: JSON.stringify({ mcpServers: { cwv_speed: { url: "http://localhost:8080/sse" } } }, null, 2),
+        cline: JSON.stringify({ mcpServers: { cwv_speed: { command: "npx", args: ["-y", "cwv-speed-engine", "mcp"] } } }, null, 2),
         windsurf: JSON.stringify({ mcp: { servers: [{ name: "cwv-speed", command: "cwv" }] } }, null, 2),
         zed: JSON.stringify({ context_servers: ["cwv-speed-engine"] }, null, 2)
       };
 
+      const labelEl = document.getElementById('mcpConfigLabel');
+      if (labelEl) labelEl.textContent = labels[client] || 'mcp-config.json';
       document.getElementById('mcpConfigContent').textContent = configs[client] || configs.claude;
     }
 
