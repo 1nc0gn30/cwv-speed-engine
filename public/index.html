@@ -1424,8 +1424,11 @@ cwv-speed mcp</pre>
       }
       toast.textContent = message;
       toast.classList.remove('show');
-      void toast.offsetWidth; // Force reflow so rapid re-triggers restart CSS transition cleanly
-      toast.classList.add('show');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          toast.classList.add('show');
+        });
+      });
       toastTimer = setTimeout(() => {
         toast.classList.remove('show');
         toastTimer = null;
