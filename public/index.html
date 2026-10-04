@@ -50,8 +50,7 @@
     ]
   </script>
 
-  <!-- DePay Web3 Solana CDN -->
-  <script defer src="https://integrate.depay.com/widgets/v13.js"></script>
+  <!-- DePay Web3 Solana CDN dynamically requested on interaction -->
   <meta name="theme-color" content="#1a73e8">
   <style>
     /* Material 3 Influenced Theme Variables */
@@ -752,7 +751,7 @@
       <a href="https://buy.stripe.com/00w14mdQxgWA3Ha5Sgfw40H" target="_blank" rel="noopener" style="padding: 6px 14px; background: #635BFF; color: #fff; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
         💳 Buy License ($39)
       </a>
-      <button onclick="if(window.DePayWidgets){DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'})}else{alert('DePay SDK connecting...')}" style="padding: 6px 14px; background: #14F195; color: #000; border-radius: 6px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+      <button onclick="if(window.DePayWidgets){DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'})}else{const s=document.createElement('script');s.src='https://integrate.depay.com/widgets/v13.js';s.onload=()=>DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'});document.head.appendChild(s);}" style="padding: 6px 14px; background: #14F195; color: #000; border-radius: 6px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
         ⚡ Pay with SOL
       </button>
       <div class="server-status-chip">
