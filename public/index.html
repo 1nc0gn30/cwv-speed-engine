@@ -1628,38 +1628,74 @@ cwv-speed mcp</pre>
         critical_css: true
       };
 
-      // Pure in-browser transformation: zero network delay, instant execution
-      let transformed = html;
+      // Pure in-browser DOM transformation: microsecond execution, zero layout lag
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
       const changes = [];
-      if (options.preload_hero) {
-        const heroMatch = transformed.match(/<img\b[^>]*src=["']([^"']+)["'][^>]*>/i);
-        if (heroMatch && !transformed.includes('rel="preload"')) {
-          transformed = transformed.replace(/<head>/i, `<head>\n  <link rel="preload" as="image" href="${heroMatch[1]}" fetchpriority="high">`);
-          changes.push('Preloaded hero LCP candidate image with fetchpriority="high"');
+
+      const images = Array.from(doc.querySelectorAll('img'));
+      if (images.length > 0) {
+        if (options.preload_hero) {
+          const heroImg = images[0];
+          const heroSrc = heroImg.getAttribute('src');
+          if (heroSrc && !doc.querySelector(`link[rel="preload"][href="${heroSrc}"]`)) {
+            const preloadLink = doc.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'image';
+            preloadLink.href = heroSrc;
+            preloadLink.setAttribute('fetchpriority', 'high');
+            if (doc.head) {
+              doc.head.prepend(preloadLink);
+              changes.push('Preloaded hero LCP candidate image with fetchpriority="high"');
+            }
+          }
+          if (!heroImg.hasAttribute('fetchpriority')) {
+            heroImg.setAttribute('fetchpriority', 'high');
+          }
         }
-      }
-      if (options.dimensions) {
-        transformed = transformed.replace(/<img\b(?![^>]*\b(?:width|height)=)([^>]*?)>/gi, (m, g) => {
-          changes.push('Added missing width/height attributes to prevent CLS');
-          return `<img width="800" height="600"${g}>`;
+
+        images.forEach((img, idx) => {
+          if (options.dimensions && (!img.hasAttribute('width') || !img.hasAttribute('height'))) {
+            if (!img.hasAttribute('width')) img.setAttribute('width', '800');
+            if (!img.hasAttribute('height')) img.setAttribute('height', '600');
+            changes.push('Added explicit dimensions to img to prevent layout shifts (CLS)');
+          }
+          if (options.lazy_loading) {
+            if (idx === 0 && options.preload_hero) {
+              img.removeAttribute('loading');
+            } else if (!img.hasAttribute('loading')) {
+              img.setAttribute('loading', 'lazy');
+              img.setAttribute('decoding', 'async');
+              changes.push('Added loading="lazy" and decoding="async" to non-hero image');
+            }
+          }
         });
       }
-      if (options.lazy_loading) {
-        transformed = transformed.replace(/<img\b(?![^>]*\bloading=)([^>]*?)>/gi, (m, g) => {
-          changes.push('Added loading="lazy" and decoding="async" to images');
-          return `<img loading="lazy" decoding="async"${g}>`;
-        });
-      }
+
       if (options.defer_scripts) {
-        transformed = transformed.replace(/<\x73cript\b(?![^>]*\b(?:defer|async)\b)([^>]*?)src=/gi, () => {
-          changes.push('Added defer attribute to render-blocking script tag');
-          return '<' + 'script defer src=';
+        const headScripts = Array.from(doc.querySelectorAll('head script[src]'));
+        headScripts.forEach(script => {
+          if (!script.hasAttribute('defer') && !script.hasAttribute('async') && script.getAttribute('type') !== 'module') {
+            script.setAttribute('defer', '');
+            changes.push(`Deferred render-blocking head script: ${script.getAttribute('src') || 'inline'}`);
+          }
         });
       }
-      if (options.font_preconnect && !transformed.includes('rel="preconnect"')) {
-        transformed = transformed.replace(/<head>/i, '<head>\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-        changes.push('Injected font domain preconnect hints');
+
+      if (options.font_preconnect && doc.head && !doc.querySelector('link[rel="preconnect"][href*="fonts.googleapis.com"]')) {
+        const pc1 = doc.createElement('link');
+        pc1.rel = 'preconnect';
+        pc1.href = 'https://fonts.googleapis.com';
+        const pc2 = doc.createElement('link');
+        pc2.rel = 'preconnect';
+        pc2.href = 'https://fonts.gstatic.com';
+        pc2.setAttribute('crossorigin', '');
+        doc.head.prepend(pc2);
+        doc.head.prepend(pc1);
+        changes.push('Injected font domain preconnect hints for Google Fonts');
       }
+
+      const transformed = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
       document.getElementById('transformOutputHtml').value = transformed;
       const list = document.getElementById('transformChangesList');
       list.innerHTML = '';
