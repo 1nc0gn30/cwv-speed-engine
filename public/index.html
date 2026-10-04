@@ -174,12 +174,38 @@
     }
 
     .crayfish-primeval-waters {
-      transition: transform 0.2s ease, filter 0.2s ease;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
+      will-change: transform, filter;
     }
     .crayfish-primeval-waters:hover {
       transform: translateY(-1px) scale(1.08);
-      filter: drop-shadow(0 0 8px rgba(224, 64, 251, 0.95)) !important;
+      filter: drop-shadow(0 0 10px rgba(224, 64, 251, 0.95)) !important;
+    }
+    .crayfish-primeval-waters:hover .primeval-ripple {
+      animation: waterRipple 1.6s ease-in-out infinite alternate;
+    }
+    @keyframes waterRipple {
+      0% { transform: translateY(0) scaleX(1); opacity: 0.85; }
+      100% { transform: translateY(-0.8px) scaleX(1.06); opacity: 1; stroke: #e040fb; }
+    }
+
+    .joyful-horse-radiance {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      will-change: transform, filter;
+    }
+    .joyful-horse-radiance:hover {
+      transform: translateY(-1px) scale(1.08);
+      filter: drop-shadow(0 0 12px rgba(255, 122, 0, 0.95)) !important;
+    }
+    .joyful-horse-radiance:hover .sun-banner-wave {
+      animation: bannerWave 1.4s ease-in-out infinite alternate;
+      transform-origin: 19px 7px;
+    }
+    @keyframes bannerWave {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(7deg) scale(1.05); }
     }
 
     .brand-badge {
@@ -834,8 +860,8 @@
         <svg class="crayfish-primeval-waters" width="22" height="22" viewBox="0 0 24 24" fill="none" style="filter: drop-shadow(0 0 5px rgba(199, 21, 133, 0.75)); flex-shrink: 0;" aria-label="Crayfish crawling from Primeval Waters in red-violet">
           <title>Crayfish crawling from Primeval Waters in red-violet</title>
           <!-- Primeval Waters wavy ripple base -->
-          <path d="M2 20c2-1 4-1 6 0s4 1 6 0 4-1 6 0" stroke="#7b1fa2" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M4 22c2-.8 4-.8 6 0s4 .8 6 0 3-.8 4 0" stroke="#4a148c" stroke-width="1.2" stroke-linecap="round"/>
+          <path class="primeval-ripple" d="M2 20c2-1 4-1 6 0s4 1 6 0 4-1 6 0" stroke="#7b1fa2" stroke-width="1.6" stroke-linecap="round"/>
+          <path class="primeval-ripple" d="M4 22c2-.8 4-.8 6 0s4 .8 6 0 3-.8 4 0" stroke="#4a148c" stroke-width="1.2" stroke-linecap="round"/>
           <!-- Crayfish Carapace & Segmented Tail in Red-Violet -->
           <ellipse cx="12" cy="11" rx="3.5" ry="5" fill="rgba(199, 21, 133, 0.28)" stroke="#c71585" stroke-width="1.6"/>
           <path d="M12 16v3M10 18l2 2 2-2" stroke="#c71585" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -848,6 +874,34 @@
           <path d="M11 6C10 3 7 2 6 2M13 6c1-3 4-4 5-4" stroke="#e040fb" stroke-width="1.2" stroke-linecap="round"/>
           <circle cx="10.5" cy="8.5" r="0.75" fill="#ffffff"/>
           <circle cx="13.5" cy="8.5" r="0.75" fill="#ffffff"/>
+        </svg>
+        <!-- The Sun: Joyful Naked Child on Gentle White Horse in Orange Radiance -->
+        <svg class="joyful-horse-radiance" width="24" height="24" viewBox="0 0 24 24" fill="none" style="filter: drop-shadow(0 0 6px rgba(255, 122, 0, 0.8)); flex-shrink: 0;" aria-label="Joyful Naked Child on Gentle White Horse in orange radiance">
+          <title>Joyful Naked Child on Gentle White Horse in orange</title>
+          <!-- Radiant Solar Corona Aura -->
+          <circle cx="12" cy="12" r="10.5" stroke="#ff9100" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.85"/>
+          <circle cx="12" cy="12" r="9" fill="rgba(255, 109, 0, 0.14)"/>
+          <!-- Gentle White Horse (pure, calm silhouette) -->
+          <!-- Body, Flank & Powerful arched chest -->
+          <ellipse cx="10" cy="15" rx="5" ry="3.2" fill="#ffffff" stroke="#ffab40" stroke-width="1.1"/>
+          <!-- Gentle Head & Muzzle looking forward -->
+          <path d="M14.5 12.5c1-.6 2.2-.2 2.5.8.2.7-.4 1.4-1.2 1.4h-1.5" fill="#ffffff" stroke="#ffab40" stroke-width="1"/>
+          <!-- Strong, elegant horse neck -->
+          <path d="M12.5 14.5l2.2-3.2c.4-.6 1.2-.6 1.6 0" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+          <!-- Gentle White Horse Legs planted & stepping lightly -->
+          <path d="M7 17.5v3M9.5 17.5v2.8M12.5 17v3M14.5 16.5v2.5" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Flowing horse tail -->
+          <path d="M5.2 14.5c-.8 1.2-1 2.8-.4 3.8" stroke="#ffe082" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Joyful Naked Child (free, innocent, upright with open arms) -->
+          <!-- Child Torso seated gracefully bareback -->
+          <path d="M10 12.2c0-1.8.8-3.2 1.8-3.2s1.5 1 1.5 2.5" fill="#ffe0b2" stroke="#ff9100" stroke-width="0.9"/>
+          <!-- Joyful Child Head with crown of gold rays -->
+          <circle cx="11.2" cy="7" r="1.8" fill="#ffe0b2" stroke="#ff6d00" stroke-width="0.9"/>
+          <path d="M11.2 4.6v.9M9.6 5.2l.6.6M12.8 5.2l-.6.6" stroke="#ffd54f" stroke-width="0.9" stroke-linecap="round"/>
+          <!-- Free Open Arms welcoming the Sun -->
+          <path d="M8.8 9.2l1.6 1.5M12.4 10.5l2-1.8" stroke="#ffe0b2" stroke-width="1" stroke-linecap="round"/>
+          <!-- Vibrant Flowing Scarlet/Orange Sun Banner held high -->
+          <path class="sun-banner-wave" d="M14.5 8.7V3.5m0 0c2 .5 4-.6 5.5.8-1 1.2-2.5 1-4.2.8" stroke="#ff3d00" stroke-width="1.2" fill="rgba(255, 61, 0, 0.45)" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         CWV Speed Studio
         <span class="brand-badge">Core Web Vitals</span>
