@@ -1,0 +1,11 @@
+# Autonomous AI Agent Discovery & Crawling Policy (ai.txt)
+software-name: CWV Speed Optimization Studio
+publisher: Neal Frazier Tech (@1nc0gn30)
+platform: NullAI Platform
+ai-crawling: allowed
+ai-grounding: allowed
+ai-search-index: allowed
+sitemap: https://cwv-speed-engine.netlify.app/sitemap.xml
+robots-txt: https://cwv-speed-engine.netlify.app/robots.txt
+netlify-ax-api: https://cwv-speed-engine.netlify.app/api/netlify-ax.json
+netlify-mcp-api: https://cwv-speed-engine.netlify.app/api/netlify-ax-mcp.json

@@ -1,0 +1,8 @@
+# CWV Speed Optimization Studio — Context & Model Discovery (llms.txt)
+> Sovereign in-browser developer utility engineered by Neal Frazier Tech.
+- [Application]: https://cwv-speed-engine.netlify.app/
+- [Terms of Service]: https://cwv-speed-engine.netlify.app/terms.html
+- [Privacy Policy]: https://cwv-speed-engine.netlify.app/privacy.html
+- [Support & FAQ]: https://cwv-speed-engine.netlify.app/support.html
+- [Netlify AX API]: https://cwv-speed-engine.netlify.app/api/netlify-ax.json
+- [Netlify MCP API]: https://cwv-speed-engine.netlify.app/api/netlify-ax-mcp.json
