@@ -1273,6 +1273,7 @@
           </div>
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="copyCacheHeaderConfig()">📋 Copy Config</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadCacheConfig()">💾 Download</button>
           </div>
         </div>
 
@@ -1303,7 +1304,10 @@
             <h2 class="card-title">🤖 AI Agent & MCP Hub</h2>
             <p class="card-subtitle">Integrate CWV Speed Studio directly into Claude Desktop, Cursor, Cline, and Zed via Model Context Protocol.</p>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="copyMcpConfig()">📋 Copy MCP Config</button>
+          <div class="btn-group">
+            <button class="btn btn-primary btn-sm" onclick="copyMcpConfig()">📋 Copy Config</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadMcpConfig()">💾 Download</button>
+          </div>
         </div>
 
         <div class="btn-group" style="margin-bottom: 16px;">
@@ -1946,6 +1950,19 @@ cwv-speed mcp</pre>
       showToast(`Copied ${currentCachePlatform} cache configuration!`);
     }
 
+    function downloadCacheConfig() {
+      const filename = document.getElementById('cacheConfigFilename').textContent || 'cache-headers.txt';
+      const code = document.getElementById('cacheConfigContent').textContent;
+      const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(`Downloaded ${filename}!`);
+    }
+
     // MCP Client Hub (100% Client-Side)
     function loadMcpClient(client) {
       currentMcpClient = client;
@@ -1967,6 +1984,19 @@ cwv-speed mcp</pre>
       const code = document.getElementById('mcpConfigContent').textContent;
       navigator.clipboard.writeText(code);
       showToast(`Copied ${currentMcpClient} MCP configuration!`);
+    }
+
+    function downloadMcpConfig() {
+      const filename = document.getElementById('mcpConfigLabel').textContent || 'mcp-config.json';
+      const code = document.getElementById('mcpConfigContent').textContent;
+      const blob = new Blob([code], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(`Downloaded ${filename}!`);
     }
   </script>
   <footer style="text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(--g-gray-600); border-top: 1px solid var(--g-border); margin-top: 2rem; background: var(--g-gray-50);">
