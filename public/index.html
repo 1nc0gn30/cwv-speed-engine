@@ -1418,9 +1418,14 @@ cwv-speed mcp</pre>
     function showToast(message) {
       const toast = document.getElementById('toast');
       if (!toast) return;
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
       toast.textContent = message;
+      toast.classList.remove('show');
+      void toast.offsetWidth; // Force reflow so rapid re-triggers restart CSS transition cleanly
       toast.classList.add('show');
-      if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         toast.classList.remove('show');
         toastTimer = null;
