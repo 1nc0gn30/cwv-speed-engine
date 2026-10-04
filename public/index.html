@@ -1924,6 +1924,14 @@ cwv-speed mcp</pre>
         vercel: {
           filename: "vercel.json",
           content: `{\n  "headers": [\n    {\n      "source": "/(.*).(css|js|woff2|png|webp)",\n      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]\n    }\n  ]\n}`
+        },
+        nextjs: {
+          filename: "next.config.js",
+          content: `// Next.js High-Velocity Headers (CWV Optimized)\nmodule.exports = {\n  async headers() {\n    return [\n      {\n        source: '/:all*(svg|jpg|png|webp|woff2)',\n        headers: [\n          {\n            key: 'Cache-Control',\n            value: 'public, max-age=31536000, immutable',\n          },\n        ],\n      },\n    ];\n  },\n};`
+        },
+        apache: {
+          filename: ".htaccess",
+          content: `# Apache Speed Headers (One Foot on Earth, One Foot in Living Water)\n<IfModule mod_expires.c>\n  ExpiresActive On\n  ExpiresByType text/css "access plus 1 year"\n  ExpiresByType application/javascript "access plus 1 year"\n  ExpiresByType font/woff2 "access plus 1 year"\n  ExpiresByType image/webp "access plus 1 year"\n  ExpiresDefault "access plus 0 seconds"\n</IfModule>`
         }
       };
 
