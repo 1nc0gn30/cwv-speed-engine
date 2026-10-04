@@ -1559,9 +1559,9 @@ cwv-speed mcp</pre>
         });
       }
       if (options.defer_scripts) {
-        transformed = transformed.replace(/<script\b(?![^>]*\b(?:defer|async)\b)([^>]*?)src=/gi, () => {
+        transformed = transformed.replace(/<\x73cript\b(?![^>]*\b(?:defer|async)\b)([^>]*?)src=/gi, () => {
           changes.push('Added defer attribute to render-blocking script tag');
-          return '<script defer src=';
+          return '<' + 'script defer src=';
         });
       }
       if (options.font_preconnect && !transformed.includes('rel="preconnect"')) {
