@@ -208,6 +208,27 @@
       100% { transform: rotate(7deg) scale(1.05); }
     }
 
+    .elements-cross-banner {
+      box-shadow: 0 0 12px rgba(255, 42, 42, 0.7), inset 0 0 8px rgba(234, 67, 53, 0.3) !important;
+      border: 1px solid #ff2a2a !important;
+      animation: crossBannerRedGlow 2.5s ease-in-out infinite alternate;
+      will-change: box-shadow, transform;
+    }
+    .elements-cross-banner:hover {
+      box-shadow: 0 0 20px rgba(255, 42, 42, 0.95), inset 0 0 12px rgba(255, 42, 42, 0.5) !important;
+      transform: scale(1.02);
+    }
+    @keyframes crossBannerRedGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(255, 42, 42, 0.55), inset 0 0 6px rgba(234, 67, 53, 0.25);
+        border-color: #ea4335;
+      }
+      100% {
+        box-shadow: 0 0 18px rgba(255, 42, 42, 0.9), inset 0 0 10px rgba(255, 42, 42, 0.45);
+        border-color: #ff3838;
+      }
+    }
+
     .brand-badge {
       background: var(--g-blue-light);
       color: var(--g-blue);
