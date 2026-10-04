@@ -1414,11 +1414,17 @@ cwv-speed mcp</pre>
     });
 
     // Toast Notification helper
+    let toastTimer = null;
     function showToast(message) {
       const toast = document.getElementById('toast');
+      if (!toast) return;
       toast.textContent = message;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2600);
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+        toastTimer = null;
+      }, 2600);
     }
 
     // Tab Switching
