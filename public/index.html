@@ -1515,16 +1515,94 @@ cwv-speed mcp</pre>
     }
 
     function renderClientAuditSimulation(html) {
-      const missingDims = (html.match(/<img\b(?![^>]*\bwidth=)[^>]*>/gi) || []).length;
-      const score = Math.max(30, 95 - missingDims * 12);
-      updateGauge(score, {
-        lcp: { value: (1.2 + missingDims * 0.4).toFixed(1) },
-        cls: { value: (0.01 + missingDims * 0.08).toFixed(3) },
-        inp: { value: 75 },
-        fcp: { value: 0.9 },
-        ttfb: { value: 190 }
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const diagnostics = [];
+      let penalty = 0;
+
+      // 1. Missing explicit image dimensions (CLS hazard)
+      const images = Array.from(doc.querySelectorAll('img'));
+      const missingDims = images.filter(img => !img.hasAttribute('width') || !img.hasAttribute('height'));
+      if (missingDims.length > 0) {
+        penalty += missingDims.length * 10;
+        diagnostics.push({
+          severity: 'CRITICAL',
+          passed: false,
+          title: `Images Missing Explicit Dimensions (${missingDims.length})`,
+          description: 'Images without explicit width and height attributes trigger cumulative layout shifts during paint.',
+          impact: '+0.15s CLS',
+          recommendation: 'Add static width and height attributes or CSS aspect-ratio properties.'
+        });
+      }
+
+      // 2. Render-blocking script detection (INP / LCP delay)
+      const scripts = Array.from(doc.querySelectorAll('head script[src]'));
+      const blockingScripts = scripts.filter(s => !s.hasAttribute('defer') && !s.hasAttribute('async') && s.type !== 'module');
+      if (blockingScripts.length > 0) {
+        penalty += blockingScripts.length * 12;
+        diagnostics.push({
+          severity: 'CRITICAL',
+          passed: false,
+          title: `Render-Blocking Head Scripts (${blockingScripts.length})`,
+          description: 'Synchronous scripts in <head> block the HTML parser and defer First Contentful Paint.',
+          impact: '+0.4s FCP / LCP',
+          recommendation: 'Add defer or async attribute to non-critical external scripts.'
+        });
+      }
+
+      // 3. Unoptimized Hero LCP candidate
+      const firstImg = images[0];
+      if (firstImg && (!firstImg.hasAttribute('fetchpriority') || firstImg.getAttribute('fetchpriority') !== 'high')) {
+        penalty += 8;
+        diagnostics.push({
+          severity: 'WARNING',
+          passed: false,
+          title: 'Hero LCP Image Lacks fetchpriority="high"',
+          description: 'First image element is not prioritized for eager fetch scheduling in the browser waterfall.',
+          impact: '+0.3s LCP',
+          recommendation: 'Set fetchpriority="high" and avoid loading="lazy" on fold hero images.'
+        });
+      }
+
+      // 4. Missing Resource Hints
+      const preconnects = Array.from(doc.querySelectorAll('link[rel="preconnect"]'));
+      if (preconnects.length === 0) {
+        penalty += 5;
+        diagnostics.push({
+          severity: 'INFO',
+          passed: false,
+          title: 'No Resource Preconnect Hints Found',
+          description: 'External font and CDN origins must perform DNS/TLS handshakes on discovery without pre-warming.',
+          impact: '+80ms TTFB/FCP',
+          recommendation: 'Add <link rel="preconnect"> for key font origins and static CDNs.'
+        });
+      }
+
+      if (diagnostics.length === 0) {
+        diagnostics.push({
+          severity: 'PASS',
+          passed: true,
+          title: 'Baseline CWV Hygiene Satisfied',
+          description: 'Dimensions, script scheduling, and critical asset priorities meet high performance baselines.',
+          impact: 'Optimal Core Web Vitals',
+          recommendation: 'Keep assets streamlined and monitor real-user field data.'
+        });
+      }
+
+      const score = Math.max(25, Math.min(100, 100 - penalty));
+      const computedMetrics = {
+        lcp: { value: (0.9 + (penalty * 0.03)).toFixed(1) + 's' },
+        cls: { value: (missingDims.length * 0.045).toFixed(3) },
+        inp: { value: Math.min(240, 50 + blockingScripts.length * 35) + 'ms' },
+        fcp: { value: (0.7 + blockingScripts.length * 0.25).toFixed(1) + 's' },
+        ttfb: { value: (140 + (preconnects.length === 0 ? 40 : 0)) + 'ms' }
+      };
+
+      renderAuditResults({
+        score: score,
+        metrics: computedMetrics,
+        diagnostics: diagnostics
       });
-      showToast(`Audit simulation finished! Score: ${score}/100`);
     }
 
     function triggerQuickAudit() {
