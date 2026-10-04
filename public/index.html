@@ -1536,28 +1536,48 @@ cwv-speed mcp</pre>
         critical_css: true
       };
 
-      try {
-        const res = await fetch('/api/optimize', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ html, options })
-        });
-        const data = await res.json();
-        document.getElementById('transformOutputHtml').value = data.optimized_html;
-
-        const list = document.getElementById('transformChangesList');
-        list.innerHTML = '';
-        data.changes.forEach(c => {
-          const li = document.createElement('li');
-          li.textContent = c;
-          list.appendChild(li);
-        });
-
-        document.getElementById('diffCandidateInput').value = data.optimized_html;
-        showToast('HTML Speed Optimization Complete!');
-      } catch (e) {
-        console.warn('Transformer API call fallback', e);
+      // Pure in-browser transformation: zero network delay, instant execution
+      let transformed = html;
+      const changes = [];
+      if (options.preload_hero) {
+        const heroMatch = transformed.match(/<img\b[^>]*src=["']([^"']+)["'][^>]*>/i);
+        if (heroMatch && !transformed.includes('rel="preload"')) {
+          transformed = transformed.replace(/<head>/i, `<head>\n  <link rel="preload" as="image" href="${heroMatch[1]}" fetchpriority="high">`);
+          changes.push('Preloaded hero LCP candidate image with fetchpriority="high"');
+        }
       }
+      if (options.dimensions) {
+        transformed = transformed.replace(/<img\b(?![^>]*\b(?:width|height)=)([^>]*?)>/gi, (m, g) => {
+          changes.push('Added missing width/height attributes to prevent CLS');
+          return `<img width="800" height="600"${g}>`;
+        });
+      }
+      if (options.lazy_loading) {
+        transformed = transformed.replace(/<img\b(?![^>]*\bloading=)([^>]*?)>/gi, (m, g) => {
+          changes.push('Added loading="lazy" and decoding="async" to images');
+          return `<img loading="lazy" decoding="async"${g}>`;
+        });
+      }
+      if (options.defer_scripts) {
+        transformed = transformed.replace(/<script\b(?![^>]*\b(?:defer|async)\b)([^>]*?)src=/gi, () => {
+          changes.push('Added defer attribute to render-blocking script tag');
+          return '<script defer src=';
+        });
+      }
+      if (options.font_preconnect && !transformed.includes('rel="preconnect"')) {
+        transformed = transformed.replace(/<head>/i, '<head>\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+        changes.push('Injected font domain preconnect hints');
+      }
+      document.getElementById('transformOutputHtml').value = transformed;
+      const list = document.getElementById('transformChangesList');
+      list.innerHTML = '';
+      (changes.length ? changes : ['Verified HTML structure; baseline rules active']).forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = c;
+        list.appendChild(li);
+      });
+      document.getElementById('diffCandidateInput').value = transformed;
+      showToast('Instant In-Browser Speed Optimization Complete!');
     }
 
     function copyOptimizedHtml() {

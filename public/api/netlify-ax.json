@@ -2,18 +2,18 @@
   "schema_version": "2026-10-04",
   "generator": "Zoth Sovereign Netlify AX & AI Engine v3.5",
   "project_path": "/home/zoth/NullAITech/cwv-speed-engine",
-  "score": 100,
+  "score": 93,
   "total_vectors": 14,
-  "passed": 14,
+  "passed": 13,
   "warnings": 0,
-  "errors": 0,
-  "healthy": true,
+  "errors": 1,
+  "healthy": false,
   "vectors": [
     {
       "id": "publish_dir",
       "name": "Publish Directory & Asset Tree",
       "status": "PASS",
-      "message": "Publish directory verified (9 top-level entries)."
+      "message": "Publish directory verified (10 top-level entries)."
     },
     {
       "id": "build_toml",
@@ -48,8 +48,8 @@
     {
       "id": "html_tag_balance",
       "name": "Zero-White-Page Tag Balance",
-      "status": "PASS",
-      "message": "HTML style and script tags strictly balanced."
+      "status": "FAIL",
+      "message": "Unclosed <script> tag (4 open vs 2 closed)"
     },
     {
       "id": "mime_types",
@@ -94,5 +94,5 @@
       "message": "ai.txt: ✓, llms.txt: ✓, netlify-ax.json: ✓."
     }
   ],
-  "timestamp": "2026-10-04T12:28:10.448Z"
+  "timestamp": "2026-10-04T16:22:40.156Z"
 }
