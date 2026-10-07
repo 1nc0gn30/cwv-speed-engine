@@ -15,6 +15,9 @@
   <meta property="og:url" content="https://cwv-speed-studio.netlify.app/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="CWV Speed Optimization Studio logo mark">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -117,7 +120,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    body {
+    html, body {
       font-family: var(--font-family);
       background: var(--g-bg);
       color: var(--g-text-primary);
@@ -126,6 +129,9 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
     }
 
     /* Top Navigation Header */
@@ -2292,6 +2298,12 @@ cwv-speed mcp</pre>
   </script>
   <footer style="text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(--g-gray-600); border-top: 1px solid var(--g-border); margin-top: 2rem; background: var(--g-gray-50);">
     <div>Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30/cwv-speed-engine" target="_blank" rel="noopener" style="color: var(--g-blue); text-decoration: none;">@1nc0gn30</a>) &middot; <a href="https://nullai.tech" target="_blank" rel="noopener" style="color: var(--g-blue); text-decoration: none;">NullAI Platform</a></div>
+    <div style="margin-top: 8px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+      <a href="/norfolk-web-performance.html" style="color: var(--g-blue); text-decoration: none;">Norfolk Studio</a>
+      <a href="/terms.html" style="color: var(--g-blue); text-decoration: none;">Terms</a>
+      <a href="/privacy.html" style="color: var(--g-blue); text-decoration: none;">Privacy</a>
+      <a href="/support.html" style="color: var(--g-blue); text-decoration: none;">Support</a>
+    </div>
   </footer>
 
   <!-- Pro Paywall Modal -->

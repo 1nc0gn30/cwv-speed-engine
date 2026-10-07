@@ -36,6 +36,16 @@
   to = "/api/netlify-ax.json"
   status = 200
 
+[[redirects]]
+  from = "/norfolk"
+  to = "/norfolk-web-performance.html"
+  status = 200
+
+[[redirects]]
+  from = "/norfolk-web-performance"
+  to = "/norfolk-web-performance.html"
+  status = 200
+
 
 
 [[headers]]
@@ -73,6 +83,11 @@
   for = "/media/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[redirects]]
   from = "/*"
