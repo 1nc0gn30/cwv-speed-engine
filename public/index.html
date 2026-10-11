@@ -500,6 +500,27 @@
       .hero-summary { grid-template-columns: 1fr; }
       .section-grid-2 { grid-template-columns: 1fr; }
       main.studio-content { padding: 16px; }
+      header.google-header {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      .brand-container {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .brand-title {
+        flex-wrap: wrap;
+        font-size: 16px;
+      }
+      .header-actions {
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .sales-funnel-banner {
+        padding: 12px 16px;
+      }
     }
 
     .studio-card {
@@ -946,6 +967,7 @@
       </div>
     </a>
     <div class="header-actions">
+      <span class="badge" id="cwvLicenseBadge" style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid var(--g-outline); color: var(--g-text-secondary); cursor: pointer;" onclick="openLicenseModal()">Free Tier</span>
       <a href="https://buy.stripe.com/00w14mdQxgWA3Ha5Sgfw40H" target="_blank" rel="noopener" style="padding: 6px 14px; background: #635BFF; color: #fff; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
         💳 Buy License ($19)
       </a>
@@ -1339,7 +1361,7 @@
                 <span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:#4285F4;color:#fff;text-align:center;line-height:16px;font-size:10px;">G</span>
                 <span id="serpCiteUrl">example.com &gt; speed-studio</span>
               </div>
-              <a class="serp-title" id="serpPreviewTitle">CWV Speed Studio | Core Web Vitals Optimization Engine</a>
+              <a href="#" class="serp-title" id="serpPreviewTitle" onclick="return false;">CWV Speed Studio | Core Web Vitals Optimization Engine</a>
               <div class="serp-desc" id="serpPreviewDesc">High-performance Core Web Vitals optimization engine, instant HTML speed transformer, PWA generator...</div>
             </div>
 
@@ -1680,6 +1702,7 @@ cwv-speed mcp</pre>
       generatePwaArtifacts();
       updateSocialPreviews();
       triggerQuickAudit();
+      runTransform(true);
     });
 
     // Toast Notification helper
@@ -1860,11 +1883,11 @@ cwv-speed mcp</pre>
 
       const score = Math.max(25, Math.min(100, 100 - penalty));
       const computedMetrics = {
-        lcp: { value: (0.9 + (penalty * 0.03)).toFixed(1) + 's' },
-        cls: { value: (missingDims.length * 0.045).toFixed(3) },
-        inp: { value: Math.min(240, 50 + blockingScripts.length * 35) + 'ms' },
-        fcp: { value: (0.7 + blockingScripts.length * 0.25).toFixed(1) + 's' },
-        ttfb: { value: (140 + (preconnects.length === 0 ? 40 : 0)) + 'ms' }
+        lcp: { value: (0.9 + (penalty * 0.03)).toFixed(1), unit: 's' },
+        cls: { value: (missingDims.length * 0.045).toFixed(3), unit: '' },
+        inp: { value: Math.min(240, 50 + blockingScripts.length * 35), unit: 'ms' },
+        fcp: { value: (0.7 + blockingScripts.length * 0.25).toFixed(1), unit: 's' },
+        ttfb: { value: (140 + (preconnects.length === 0 ? 40 : 0)), unit: 'ms' }
       };
 
       renderAuditResults({
@@ -1886,7 +1909,7 @@ cwv-speed mcp</pre>
     }
 
     // HTML Transformer
-    async function runTransform() {
+    async function runTransform(silent = false) {
       const html = document.getElementById('transformInputHtml').value;
       const options = {
         dimensions: document.getElementById('optDims').checked,
@@ -1974,7 +1997,9 @@ cwv-speed mcp</pre>
         list.appendChild(li);
       });
       document.getElementById('diffCandidateInput').value = transformed;
-      showToast('Instant In-Browser Speed Optimization Complete!');
+      if (!silent) {
+        showToast('Instant In-Browser Speed Optimization Complete!');
+      }
     }
 
     function copyOptimizedHtml() {
@@ -1993,11 +2018,14 @@ cwv-speed mcp</pre>
         return;
       }
       const text = document.getElementById('transformOutputHtml').value || SAMPLE_RAW_HTML;
-      const blob = new Blob([text], { type: 'text/html' });
+      const blob = new Blob([text], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
+      a.href = url;
       a.download = 'index.optimized.html';
       a.click();
+      URL.revokeObjectURL(url);
+      showToast('Downloaded index.optimized.html!');
     }
 
     // PWA Studio (100% Client-Side)
@@ -2035,11 +2063,13 @@ cwv-speed mcp</pre>
       const manifest = document.getElementById('pwaManifestPreview').value;
       const sw = document.getElementById('pwaSwPreview').value;
       const content = `=== manifest.json ===\n${manifest}\n\n=== sw.js ===\n${sw}`;
-      const blob = new Blob([content], { type: 'text/plain' });
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
+      a.href = url;
       a.download = 'pwa-artifacts.txt';
       a.click();
+      URL.revokeObjectURL(url);
       showToast('Downloaded PWA artifacts!');
     }
 
@@ -2203,7 +2233,7 @@ cwv-speed mcp</pre>
         activateProLicense("STRIPE-CHECKOUT");
         return;
       }
-      if (localStorage.getItem("cwv_pro_licensed") === "true") {
+      if (localStorage.getItem("cwv_pro_licensed") === "true" || localStorage.getItem("cwv-speed-engine_pro_licensed") === "true") {
         isProLicensed = true;
         updateProUI();
       }
@@ -2214,7 +2244,7 @@ cwv-speed mcp</pre>
       if (banner && isProLicensed) banner.style.display = "none";
       const overlay = document.getElementById("cwvPaywallOverlay");
       if (overlay) overlay.style.display = isProLicensed ? "none" : "flex";
-      const badge = document.querySelector(".header-right .badge");
+      const badge = document.getElementById("cwvLicenseBadge") || document.querySelector(".header-actions .badge");
       if (badge && isProLicensed) {
         badge.innerHTML = '<span style="color: #10B981; font-weight: 700; font-size: 11px;">⭐ PRO ACTIVE</span>';
       }
@@ -2223,6 +2253,7 @@ cwv-speed mcp</pre>
     function activateProLicense(key) {
       isProLicensed = true;
       localStorage.setItem("cwv_pro_licensed", "true");
+      localStorage.setItem("cwv-speed-engine_pro_licensed", "true");
       updateProUI();
       closeLicenseModal();
       closePaywallModal();

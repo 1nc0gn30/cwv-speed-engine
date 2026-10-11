@@ -5,7 +5,7 @@ platform: NullAI Platform
 ai-crawling: allowed
 ai-grounding: allowed
 ai-search-index: allowed
-sitemap: https://cwv-speed-engine.netlify.app/sitemap.xml
-robots-txt: https://cwv-speed-engine.netlify.app/robots.txt
-netlify-ax-api: https://cwv-speed-engine.netlify.app/api/netlify-ax.json
-netlify-mcp-api: https://cwv-speed-engine.netlify.app/api/netlify-ax-mcp.json
+sitemap: https://cwv-speed-studio.netlify.app/sitemap.xml
+robots-txt: https://cwv-speed-studio.netlify.app/robots.txt
+netlify-ax-api: https://cwv-speed-studio.netlify.app/api/netlify-ax.json
+netlify-mcp-api: https://cwv-speed-studio.netlify.app/api/netlify-ax-mcp.json

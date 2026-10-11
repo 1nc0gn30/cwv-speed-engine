@@ -40,6 +40,7 @@
         "description": "Specialized Core Web Vitals and front-end speed optimization engineering for businesses and dev teams in Norfolk, Virginia.",
         "image": "https://cwv-speed-studio.netlify.app/assets/og-preview.png",
         "priceRange": "$19.00",
+        "telephone": "+1-757-276-1895",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Norfolk",
@@ -230,9 +231,10 @@
     }
     .price-tag {
       font-family: var(--font-mono); font-size: 2.25rem; font-weight: 700; color: var(--primary);
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-top: 0.5rem;
     }
     .price-tag span {
-      font-size: 0.95rem; color: var(--on-surface-variant); font-weight: normal;
+      font-size: 0.9rem; color: var(--on-surface-variant); font-weight: normal;
     }
     .cta-group {
       display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
@@ -245,6 +247,15 @@
     }
     .btn-buy:hover {
       background: #059669; color: #fff; transform: translateY(-1px);
+    }
+    .btn-solana {
+      background: #14F195; color: #042111; font-weight: 700; font-size: 0.95rem;
+      padding: 0.85rem 1.6rem; border-radius: var(--radius-sm); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+    }
+    .btn-solana:hover {
+      background: #10c87b; color: #000; transform: translateY(-1px);
     }
     .btn-secondary {
       background: rgba(255, 255, 255, 0.06); color: #fff; font-size: 0.9rem; font-weight: 600;
@@ -319,10 +330,68 @@
     .footer-links a:hover {
       color: #fff;
     }
+    .tester-panel {
+      background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius-lg);
+      padding: 1.75rem; margin-bottom: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .tester-head {
+      display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;
+    }
+    .tester-title {
+      font-family: var(--font-tech); font-size: 1.15rem; font-weight: 700; color: #fff;
+    }
+    .tester-meta {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--primary);
+    }
+    .tester-input {
+      width: 100%; min-height: 120px; background: var(--surface-dim); border: 1px solid var(--outline);
+      border-radius: var(--radius-sm); padding: 0.85rem; font-family: var(--font-mono); font-size: 0.85rem;
+      color: #E2E8F0; resize: vertical; margin-bottom: 1rem;
+    }
+    .tester-input:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .tester-actions {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.25rem;
+    }
+    .btn-run {
+      background: var(--primary); color: #042111; font-weight: 700; font-size: 0.88rem;
+      padding: 0.65rem 1.25rem; border-radius: var(--radius-sm); border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; transition: var(--transition);
+    }
+    .btn-run:hover { background: #059669; color: #fff; }
+    .btn-sample {
+      background: rgba(255, 255, 255, 0.05); color: #CBD5E1; font-size: 0.85rem;
+      padding: 0.65rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--outline);
+      cursor: pointer; transition: var(--transition);
+    }
+    .btn-sample:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    .results-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem;
+    }
+    .metric-card {
+      background: var(--surface-dim); border: 1px solid var(--outline); border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+    }
+    .metric-name {
+      font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; color: var(--on-surface-variant);
+      margin-bottom: 4px;
+    }
+    .metric-val {
+      font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; color: #fff;
+    }
+    .metric-status {
+      font-size: 0.75rem; margin-top: 4px; color: var(--primary);
+    }
+    .output-box {
+      background: var(--surface-dim); border: 1px solid var(--outline); border-radius: var(--radius-sm);
+      padding: 0.85rem; font-family: var(--font-mono); font-size: 0.82rem; color: #94A3B8; max-height: 180px;
+      overflow-y: auto; white-space: pre-wrap; word-break: break-all;
+    }
     @media (max-width: 768px) {
       .price-box { flex-direction: column; align-items: flex-start; }
       .cta-group { width: 100%; flex-direction: column; }
-      .btn-buy, .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+      .btn-buy, .btn-solana, .btn-secondary { width: 100%; text-align: center; justify-content: center; }
     }
   </style>
 </head>
@@ -346,7 +415,20 @@
   </header>
 
   <main>
-    <div class="city-badge">One Studio • One Trade • Norfolk, VA</div>
+    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem;">
+      <div class="elements-cross-banner" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; border: 1px solid #ea4335; box-shadow: 0 0 12px rgba(234, 67, 53, 0.65); background: rgba(234, 67, 53, 0.12); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: #ea4335; text-transform: uppercase; letter-spacing: 0.5px;">
+        <span class="aries-rams-scarlet" title="Four Ram Heads of Aries in scarlet" style="display: inline-flex; align-items: center; gap: 2px; color: #ff2a2a; text-shadow: 0 0 6px rgba(255, 42, 42, 0.85);">♈♈♈♈</span>
+        <span style="opacity: 0.4;">✦</span>
+        <span title="Fire / LCP Speed">🔥 FIRE</span>
+        <span style="opacity: 0.4;">✦</span>
+        <span title="Air / INP Latency">💨 AIR</span>
+        <span style="opacity: 0.4;">✦</span>
+        <span title="Water / CLS Fluidity">💧 WATER</span>
+        <span style="opacity: 0.4;">✦</span>
+        <span title="Earth / Solid Foundation">🌍 EARTH</span>
+      </div>
+      <div class="city-badge" style="margin-bottom: 0;">One Studio • One Trade • Norfolk, VA</div>
+    </div>
     <h1 class="hero-h1">Norfolk Web Performance Studio</h1>
     <p class="hero-sub">Direct Core Web Vitals remediation, LCP/INP script scheduling, and browser-first asset transforms for businesses in Norfolk, Virginia.</p>
 
@@ -358,12 +440,54 @@
       </div>
       <div class="cta-group">
         <a href="https://buy.stripe.com/00w14mdQxgWA3Ha5Sgfw40H" class="btn-buy" target="_blank" rel="noopener">
-          Get Lifetime Access ($19)
+          Credit Card / Stripe ($19)
         </a>
+        <button onclick="if(window.DePayWidgets){DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'})}else{const s=document.createElement('script');s.src='https://integrate.depay.com/widgets/v13.js';s.onload=()=>DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'});document.head.appendChild(s);}" class="btn-solana" type="button">
+          Pay with SOL
+        </button>
         <a href="/" class="btn-secondary">
           Launch Browser Studio
         </a>
       </div>
+    </div>
+
+    <!-- Live In-Browser CWV Diagnostics Utility -->
+    <div class="tester-panel" id="cwv-tester">
+      <div class="tester-head">
+        <span class="tester-title">Live In-Browser CWV Speed Diagnostics</span>
+        <span class="tester-meta">Client-Side Parser &bull; Zero Server Latency</span>
+      </div>
+      <p style="font-size: 0.88rem; color: #94A3B8; margin-bottom: 0.85rem;">
+        Paste your page markup or test sample code to immediately calculate LCP, INP, and CLS risk factors in this tab.
+      </p>
+      <textarea id="testerMarkup" class="tester-input" spellcheck="false" placeholder="Paste HTML markup here to run real-time CWV diagnostics..."></textarea>
+      <div class="tester-actions">
+        <button id="runDiagnosticsBtn" class="btn-run" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Run Diagnostic Scan
+        </button>
+        <button id="loadSampleBtn" class="btn-sample" type="button">Load Sample Snippet</button>
+      </div>
+
+      <div class="results-grid" id="resultsGrid" style="display: none;">
+        <div class="metric-card">
+          <div class="metric-name">LCP Risk (Images)</div>
+          <div class="metric-val" id="resLcp">--</div>
+          <div class="metric-status" id="resLcpNote">Ready</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-name">CLS Risk (Dimensions)</div>
+          <div class="metric-val" id="resCls">--</div>
+          <div class="metric-status" id="resClsNote">Ready</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-name">INP Risk (Scripts)</div>
+          <div class="metric-val" id="resInp">--</div>
+          <div class="metric-status" id="resInpNote">Ready</div>
+        </div>
+      </div>
+
+      <div class="output-box" id="resLog" style="display: none;"></div>
     </div>
 
     <div class="grid-cards">
@@ -401,22 +525,29 @@
     <div class="owner-spec">
       <h2>Studio Dispatch &amp; Operator Registry</h2>
       <p style="font-size: 0.9rem; color: #94A3B8;">Configured for independent deployment. The regional operator binds direct contact credentials and site photo assets below.</p>
-      <div class="owner-meta-list">
-        <div class="owner-item">
-          <div class="owner-label">Lead Operator</div>
-          <div class="owner-value">Neal Frazier</div>
-        </div>
-        <div class="owner-item">
-          <div class="owner-label">Studio Direct Line</div>
-          <div class="owner-value">Available upon client request</div>
-        </div>
-        <div class="owner-item">
-          <div class="owner-label">Service Territory</div>
-          <div class="owner-value">Norfolk, VA &amp; Coastal Virginia</div>
-        </div>
-        <div class="owner-item">
-          <div class="owner-label">Commercial Model</div>
-          <div class="owner-value">$19.00 USD Flat • Lifetime Access</div>
+      <div style="display: flex; gap: 1.5rem; align-items: center; margin-top: 1.25rem; flex-wrap: wrap;">
+        <img src="/assets/og-preview.png" alt="Norfolk Web Performance Studio Mark" width="88" height="88" style="border-radius: var(--radius-sm); border: 1px solid var(--outline); background: #000; flex-shrink: 0;">
+        <div class="owner-meta-list" style="flex: 1; min-width: 240px; margin-top: 0;">
+          <div class="owner-item">
+            <div class="owner-label">Lead Operator</div>
+            <div class="owner-value">Neal Frazier</div>
+          </div>
+          <div class="owner-item">
+            <div class="owner-label">Studio Direct Line</div>
+            <div class="owner-value"><a href="tel:+17572761895" style="color: var(--primary); text-decoration: none;">(757) 276-1895</a></div>
+          </div>
+          <div class="owner-item">
+            <div class="owner-label">Inquiries &amp; Dispatch</div>
+            <div class="owner-value"><a href="mailto:neal@nealfrazier.tech" style="color: var(--primary); text-decoration: none;">neal@nealfrazier.tech</a></div>
+          </div>
+          <div class="owner-item">
+            <div class="owner-label">Service Territory</div>
+            <div class="owner-value">Norfolk, VA &amp; Coastal Virginia</div>
+          </div>
+          <div class="owner-item">
+            <div class="owner-label">Commercial Model</div>
+            <div class="owner-value">$19.00 USD Flat • Lifetime Access</div>
+          </div>
         </div>
       </div>
     </div>
@@ -451,5 +582,96 @@
       </div>
     </div>
   </footer>
+  <script>
+    (function() {
+      const sample = `<!DOCTYPE html>\n<html>\n<head>\n  <link rel="stylesheet" href="/styles.css">\n  <script src="/analytics.js"><\/script>\n</head>\n<body>\n  <img src="/hero.jpg" alt="Primary banner showcase">\n  <img src="/card1.jpg" width="400" height="300" loading="lazy" alt="Product thumbnail display">\n  <script src="/heavy-bundle.js"><\/script>\n</body>\n</html>`;
+
+      const markupInput = document.getElementById('testerMarkup');
+      const loadBtn = document.getElementById('loadSampleBtn');
+      const runBtn = document.getElementById('runDiagnosticsBtn');
+      const resultsGrid = document.getElementById('resultsGrid');
+      const resLcp = document.getElementById('resLcp');
+      const resLcpNote = document.getElementById('resLcpNote');
+      const resCls = document.getElementById('resCls');
+      const resClsNote = document.getElementById('resClsNote');
+      const resInp = document.getElementById('resInp');
+      const resInpNote = document.getElementById('resInpNote');
+      const resLog = document.getElementById('resLog');
+
+      if (loadBtn && markupInput) {
+        loadBtn.addEventListener('click', function() {
+          markupInput.value = sample;
+          runScan();
+        });
+      }
+
+      if (runBtn) {
+        runBtn.addEventListener('click', runScan);
+      }
+
+      function runScan() {
+        const raw = markupInput.value.trim();
+        if (!raw) return;
+
+        try {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(raw, 'text/html');
+
+          const images = Array.from(doc.querySelectorAll('img'));
+          const scripts = Array.from(doc.querySelectorAll('script[src]'));
+
+          // Check CLS: missing width/height
+          const unmeasuredImages = images.filter(img => !img.hasAttribute('width') || !img.hasAttribute('height'));
+          // Check LCP: first image without priority/dimensions
+          const lcpRisk = images.length > 0 && (!images[0].hasAttribute('fetchpriority') || images[0].getAttribute('loading') === 'lazy');
+          // Check INP: blocking head scripts
+          const blockingScripts = scripts.filter(s => !s.hasAttribute('defer') && !s.hasAttribute('async') && s.getAttribute('type') !== 'module');
+
+          if (resultsGrid) resultsGrid.style.display = 'grid';
+          if (resLog) resLog.style.display = 'block';
+
+          if (resLcp) {
+            resLcp.textContent = lcpRisk ? 'High' : (images.length === 0 ? 'None' : 'Optimized');
+            resLcp.style.color = lcpRisk ? '#F59E0B' : '#10B981';
+          }
+          if (resLcpNote) {
+            resLcpNote.textContent = lcpRisk ? 'Above-fold image missing fetchpriority="high"' : 'Hero image priority configured';
+          }
+
+          if (resCls) {
+            resCls.textContent = unmeasuredImages.length > 0 ? `${unmeasuredImages.length} Alert` : '0 Shift';
+            resCls.style.color = unmeasuredImages.length > 0 ? '#EF4444' : '#10B981';
+          }
+          if (resClsNote) {
+            resClsNote.textContent = unmeasuredImages.length > 0 ? 'Missing explicit width/height dimensions' : 'All elements aspect-ratio locked';
+          }
+
+          if (resInp) {
+            resInp.textContent = blockingScripts.length > 0 ? `${blockingScripts.length} Sync` : '0 Blocks';
+            resInp.style.color = blockingScripts.length > 0 ? '#EF4444' : '#10B981';
+          }
+          if (resInpNote) {
+            resInpNote.textContent = blockingScripts.length > 0 ? 'Synchronous scripts found in critical path' : 'All external scripts async/deferred';
+          }
+
+          const findings = [];
+          findings.push(`[AST PARSE OK] Parsed ${images.length} images and ${scripts.length} external scripts.`);
+          if (lcpRisk) findings.push(`[LCP WARNING] The first image should not be lazy-loaded and needs fetchpriority="high".`);
+          if (unmeasuredImages.length > 0) findings.push(`[CLS WARNING] Found ${unmeasuredImages.length} image(s) missing width or height attributes.`);
+          if (blockingScripts.length > 0) findings.push(`[INP WARNING] Found ${blockingScripts.length} synchronous blocking script(s) that delay user interactions.`);
+          if (!lcpRisk && unmeasuredImages.length === 0 && blockingScripts.length === 0) {
+            findings.push(`[ALL CLEAR] Zero critical Core Web Vitals issues detected in provided markup.`);
+          }
+
+          if (resLog) resLog.textContent = findings.join('\n');
+        } catch (err) {
+          if (resLog) {
+            resLog.style.display = 'block';
+            resLog.textContent = `Parse error: ${err.message}`;
+          }
+        }
+      }
+    })();
+  </script>
 </body>
 </html>

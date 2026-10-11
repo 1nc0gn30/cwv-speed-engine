@@ -258,64 +258,6 @@
       .support-grid { grid-template-columns: 1fr; }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://cwv-speed-studio.netlify.app/support.html#webpage",
-        "url": "https://cwv-speed-studio.netlify.app/support.html",
-        "name": "Support & FAQ — cwv-speed-engine",
-        "description": "Direct customer support desk, 30-day refund assistance, and comprehensive FAQ for cwv-speed-engine.",
-        "isPartOf": {
-          "@type": "WebApplication",
-          "@id": "https://cwv-speed-studio.netlify.app/#app",
-          "name": "CWV Speed Studio",
-          "url": "https://cwv-speed-studio.netlify.app/"
-        },
-        "publisher": {
-          "@type": "Person",
-          "name": "Neal Frazier",
-          "url": "https://nealfrazier.tech"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://cwv-speed-studio.netlify.app/support.html#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How does the $19 founding member lifetime license work?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Founding members receive lifetime access to all Pro features with no recurring subscriptions. 1-click activation unlocks all export rails and features permanently in your browser."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do I request a refund?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Email neal@nealfrazier.tech with your receipt or checkout email for an unconditional 100% refund within 30 days of purchase."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is my data stored or sent to remote servers?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Zero data is sent to cloud servers. All transformations, calculations, and AST processing execute 100% locally in your web browser."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-  <meta property="og:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
-  <meta name="twitter:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
 </head>
 <body>
   <div class="aurora-container">
@@ -414,6 +356,7 @@
       <div>Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" style="color: var(--primary); text-decoration: none;">@1nc0gn30</a>) • NullAI Platform</div>
       <div class="footer-links">
         <a href="/">Workspace</a>
+        <a href="/norfolk-web-performance.html">Norfolk Studio</a>
         <a href="/terms.html">Terms</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/support.html">Support</a>
@@ -431,6 +374,7 @@
       const email = document.getElementById('restoreEmail').value.trim();
       const msg = document.getElementById('restoreMsg');
       if (email) {
+        localStorage.setItem('cwv_pro_licensed', 'true');
         localStorage.setItem('cwv-speed-engine_pro_licensed', 'true');
         localStorage.setItem('cwv-speed-engine_license_email', email);
         msg.style.display = 'block';

@@ -50,6 +50,28 @@
           "name": "Neal Frazier",
           "url": "https://nealfrazier.tech"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://cwv-speed-studio.netlify.app/privacy.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does cwv-speed-engine track user activity or collect source code?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zero telemetry. 100% of HTML parsing, speed transformations, and cache header generations occur directly in your browser's local sandbox with no remote storage."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What data is stored locally in the browser?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only your Pro activation state and workspace preferences are persisted in your local browser localStorage."
+            }
+          }
+        ]
       }
     ]
   }
@@ -181,27 +203,6 @@
       .footer-links a { margin: 0 0.5rem; }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "name": "Privacy Policy — cwv-speed-engine",
-        "url": "https://cwv-speed-studio.netlify.app/privacy.html",
-        "description": "100% Client-Side Local Execution Guarantee. Zero telemetry, zero cloud data storage by Neal Frazier Tech.",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Neal Frazier Tech",
-          "url": "https://nealfrazier.tech"
-        }
-      }
-    ]
-  }
-  </script>
-  <meta property="og:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
-  <meta name="twitter:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
 </head>
 <body>
   <div class="aurora-container">
@@ -265,6 +266,7 @@
       <div>Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" style="color: var(--primary); text-decoration: none;">@1nc0gn30</a>) • NullAI Platform</div>
       <div class="footer-links">
         <a href="/">Workspace</a>
+        <a href="/norfolk-web-performance.html">Norfolk Studio</a>
         <a href="/terms.html">Terms</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/support.html">Support</a>

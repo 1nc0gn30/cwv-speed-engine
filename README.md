@@ -1,12 +1,17 @@
 # ⚡ CWV Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
 
-[![CI Matrix](https://github.com/NullAITech/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/NullAITech/cwv-speed-engine/actions/workflows/ci.yml)
-[![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://pypi.org/project/cwv-speed-engine/)
-[![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/NullAITech/cwv-speed-engine)
+[![Live Demo](https://img.shields.io/badge/Live%20App-cwv--speed--studio.netlify.app-00DC82?style=flat&logo=netlify)](https://cwv-speed-studio.netlify.app/)
+[![License: Pro](https://img.shields.io/badge/Pro%20Lifetime-$19%20USD-635BFF?style=flat&logo=stripe)](https://buy.stripe.com/00w14mdQxgWA3Ha5Sgfw40H)
+[![Solana Pay](https://img.shields.io/badge/Solana-DePay%20Accepted-14F195?style=flat&logo=solana)](https://cwv-speed-studio.netlify.app/)
+[![CI Matrix](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml)
+[![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/1nc0gn30/cwv-speed-engine)
 [![MCP Ready](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-9334e6)](https://modelcontextprotocol.io)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
 
-**CWV Speed Studio** (`cwv-speed-engine`) is an enterprise-grade Core Web Vitals auditing, automated speed transformation, PWA generation, and AI Agent MCP hub designed to help modern web applications achieve and maintain a perfect **100/100 Core Web Vitals score** (LCP < 1.2s, CLS 0, INP < 50ms).
+**CWV Speed Studio** (`cwv-speed-engine`) is an enterprise-grade Core Web Vitals auditing, automated speed transformation, PWA generation, and AI Agent MCP hub designed to help modern web applications achieve and maintain a perfect **100/100 Core Web Vitals score** (LCP < 1.2s, CLS 0, INP < 50ms). Runs 100% in-browser on client silicon with zero backend dependencies.
+
+- 🌐 **Live Web App**: [https://cwv-speed-studio.netlify.app/](https://cwv-speed-studio.netlify.app/)
+- 💳 **Founding Member License**: $19 Lifetime (Regular $79) via Stripe or Solana DePay.
+- ⚡ **Attribution**: Engineered by Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform.
 
 ---
 
@@ -151,3 +156,7 @@ PYTHONPATH=src pytest tests/ -v
 ## 📄 License
 
 Apache License 2.0. See [LICENSE](./LICENSE) for details.
+
+---
+
+*Engineered with precision by Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform ([nullai.tech](https://nullai.tech))*
