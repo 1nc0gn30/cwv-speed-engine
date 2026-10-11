@@ -7,17 +7,20 @@
   <meta name="description" content="Production Core Web Vitals speed engine, HTML AST transformer, PWA generator, and AI Agent MCP Hub. Instant performance audits and asset optimization.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://cwv-speed-studio.netlify.app/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(30,142,62,0.18)' stroke='%231e8e3e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3Cpath d='M12 8v5M9.5 10.5h5' stroke='%231e8e3e' stroke-width='1.8'/%3E%3C/svg%3E">
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon.png">
+  <link rel="apple-touch-icon" href="/assets/icon.png">
 
   <!-- OpenGraph -->
   <meta property="og:title" content="CWV Speed Studio — Core Web Vitals Optimization Engine">
   <meta property="og:description" content="Optimize LCP, INP, and CLS scores automatically with the sovereign CWV Speed Studio.">
   <meta property="og:url" content="https://cwv-speed-studio.netlify.app/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta property="og:image:alt" content="CWV Speed Optimization Studio logo mark">
+  <meta property="og:image" content="https://cwv-speed-studio.netlify.app/assets/banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CWV Speed Optimization Studio banner">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +28,7 @@
   <meta name="twitter:creator" content="@1nc0gn30">
   <meta name="twitter:title" content="CWV Speed Studio — Core Web Vitals Optimization Engine">
   <meta name="twitter:description" content="Instant Core Web Vitals speed engine, HTML AST transformer, and performance diagnostics.">
-  <meta name="twitter:image" content="https://cwv-speed-studio.netlify.app/assets/og-preview.png">
+  <meta name="twitter:image" content="https://cwv-speed-studio.netlify.app/assets/banner.png">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -962,12 +965,13 @@
           <!-- Vibrant Flowing Scarlet/Orange Sun Banner held high -->
           <path class="sun-banner-wave" d="M14.5 8.7V3.5m0 0c2 .5 4-.6 5.5.8-1 1.2-2.5 1-4.2.8" stroke="#ff3d00" stroke-width="1.2" fill="rgba(255, 61, 0, 0.45)" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+        <img src="/assets/icon.png" alt="CWV Speed Studio Logo" class="brand-icon" style="width:28px;height:28px;border-radius:6px;object-fit:cover;box-shadow:0 0 10px rgba(16,185,129,0.4);margin-left:6px;margin-right:4px;">
         CWV Speed Studio
         <span class="brand-badge">Core Web Vitals</span>
       </div>
     </a>
     <div class="header-actions">
-      <span class="badge" id="cwvLicenseBadge" style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid var(--g-outline); color: var(--g-text-secondary); cursor: pointer;" onclick="openLicenseModal()">Free Tier</span>
+      <span class="badge" id="licenseBadge" style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid var(--g-outline); color: var(--g-text-secondary); cursor: pointer;" onclick="openLicenseModal()">⚡ FREE TIER</span>
       <a href="https://buy.stripe.com/00w14mdQxgWA3Ha5Sgfw40H" target="_blank" rel="noopener" style="padding: 6px 14px; background: #635BFF; color: #fff; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
         💳 Buy License ($19)
       </a>
@@ -2235,19 +2239,25 @@ cwv-speed mcp</pre>
       }
       if (localStorage.getItem("cwv_pro_licensed") === "true" || localStorage.getItem("cwv-speed-engine_pro_licensed") === "true") {
         isProLicensed = true;
-        updateProUI();
       }
+      updateProUI();
     }
 
     function updateProUI() {
       const banner = document.querySelector(".sales-funnel-banner");
-      if (banner && isProLicensed) banner.style.display = "none";
+      if (banner) banner.style.display = isProLicensed ? "none" : "flex";
       const overlay = document.getElementById("cwvPaywallOverlay");
       if (overlay) overlay.style.display = isProLicensed ? "none" : "flex";
-      const badge = document.getElementById("cwvLicenseBadge") || document.querySelector(".header-actions .badge");
-      if (badge && isProLicensed) {
-        badge.innerHTML = '<span style="color: #10B981; font-weight: 700; font-size: 11px;">⭐ PRO ACTIVE</span>';
+      const badge = document.getElementById("licenseBadge") || document.getElementById("cwvLicenseBadge") || document.querySelector(".header-actions .badge");
+      if (badge) {
+        badge.innerHTML = isProLicensed
+          ? '<span style="color: #10B981; font-weight: 700; font-size: 11px;">⭐ PRO ACTIVE</span>'
+          : '<span style="color: #ea4335; font-weight: 700; font-size: 11px;">⚡ FREE TIER</span>';
       }
+    }
+
+    function openLicenseModal() {
+      openPaywallModal();
     }
 
     function activateProLicense(key) {
