@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="assets/hero-banner.svg" alt="CWV Speed Engine — Sovereign Architecture Banner" width="100%" />
+</div>
+
+<br />
+
 # ⚡ CWV Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
 
 [![Live Demo](https://img.shields.io/badge/Live%20App-cwv--speed--studio.netlify.app-00DC82?style=flat&logo=netlify)](https://cwv-speed-studio.netlify.app/)
