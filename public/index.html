@@ -50,9 +50,9 @@
         },
         "offers": {
           "@type": "Offer",
-          "price": "19.00",
+          "price": "0",
           "priceCurrency": "USD",
-          "url": "https://buy.stripe.com/bJe00i13LbCg6Tm2G4fw40Q"
+          "url": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"
         }
       },
       {
@@ -71,7 +71,7 @@
             "name": "What payment options and licensing tiers are supported?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Lifetime access is available for $19 USD via Stripe credit card checkout or Solana DePay crypto payments, unlocking unlimited audits and transforms directly in the browser."
+              "text": "Lifetime access is available for Free (100% Open Access) via Stripe credit card checkout or Solana Tip crypto payments, unlocking unlimited audits and transforms directly in the browser."
             }
           }
         ]
@@ -859,8 +859,49 @@
       .sales-funnel-banner { padding: 12px 16px !important; }
     }
   </style>
+  <link rel="stylesheet" href="/wave.css">
+  <link rel="stylesheet" href="/wave-states.css">
+
+  <!-- Zoth 100% Open-Access & Buy Us a Coffee Invariant -->
+  <script id="zoth-open-access-init">
+    (function() {
+      try {
+        var keys = ['agent_audiocipher_pro', 'agent_cyber_turtle_pro', 'agent_datamosh_pro', 'agent_nexus3d_pro', 'agent_policy_pro', 'audiocipher_license', 'audiocipher_pro_licensed', 'badge3d_pro_licensed', 'certpath_pro_key', 'certpath_pro_licensed', 'cron_rhythm_pro_key', 'cron_rhythm_pro_licensed', 'cwv-speed-engine_pro_licensed', 'cwv_pro_licensed', 'cyber_turtle_pro_licensed', 'datamosh_pro_licensed', 'deepsearch-research-agent_pro_licensed', 'deepsearch_pro_licensed', 'entropy_studio_licensed', 'envguard-secrets-vault_pro_licensed', 'envguard_pro_license', 'etsy_connector_pro', 'jwt_guard_licensed', 'mdg_pro_licensed', 'neuro_pro_licensed', 'nexus3d_pro_licensed', 'omnipost_pro_key', 'omnipost_pro_licensed', 'osint_pro_licensed', 'payload-entropy-studio_pro_licensed', 'polyglot_pro_licensed', 'pro_licensed', 'promptmaster_pro_licensed', 'promptmaster_pro_active', 'robots-txt-auditor_pro_licensed', 'robots_pro_licensed', 'schema_illustrator_pro_licensed', 'sovereign_pro_licensed', 'subsweep-lead-scanner_pro_licensed', 'subsweep_licensed', 'turtle_pro_licensed', 'ufo_sacred_licensed', 'vector-search-engine_pro_licensed', 'vector_studio_pro_licensed', 'web-security-guard_pro_licensed', 'web_security_guard_licensed', 'yourdigitalspace_pro', 'zela_guide_pro_licensed', 'zoth_ascii_magic_pro', 'zoth_audiocipher_licensed', 'zoth_badge3d_licensed', 'zoth_cyber_turtle_licensed', 'zoth_datamosh_licensed', 'zoth_etsy_licensed', 'zoth_nexus3d_licensed', 'zoth_osint_licensed', 'zoth_policy_licensed', 'zoth_sacred_licensed', 'zoth_ufo_licensed'];
+        for (var i = 0; i < keys.length; i++) {
+          localStorage.setItem(keys[i], 'true');
+        }
+        localStorage.setItem('pm_license_v2', JSON.stringify({ method: 'open_access', ref: 'free_forever', at: '2026-01-01T00:00:00Z' }));
+        window.isPro = true;
+        window.isProLicensed = true;
+      } catch (e) {}
+    })();
+  </script>
+  <style id="zoth-open-access-override">
+    .paywall-overlay, .output-paywall-overlay, #outputPaywallOverlay, #schemaPaywallOverlay,
+    #transformerPaywallOverlay, #proPaywallModal, #licenseModal, #salesBanner, #founding-offer-banner,
+    #funnelHeroBanner, [data-alias="paywallOverlay"], [data-alias="founding-offer-banner"] {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .paywall-wrap #outputPreview, .paywall-wrap #reportContentArea, .paywall-content,
+    .paywall-content.locked, .paywall-wrap.is-locked #outputPreview, .paywall-wrap.locked #outputPreview {
+      filter: none !important;
+      -webkit-filter: none !important;
+      user-select: auto !important;
+      pointer-events: auto !important;
+    }
+  </style>
+
 </head>
 <body>
+
+<div id="zoth-coffee-support-bar" style="background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(212,175,55,0.14)); border-bottom: 1px solid rgba(212,175,55,0.35); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; z-index: 9999;">
+  <span style="color: #10B981; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
+  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee (Stripe)</a>
+  <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied GG2eQb...dXoK!';}" style="background: rgba(20,241,149,0.15); color: #14F195; border: 1px solid rgba(20,241,149,0.45); padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">◎ Solana Tip (GG2e...dXoK)</a>
+</div>
+
 <!-- Top Google Header -->
   <header class="google-header">
     <a href="/" class="brand-container">
@@ -882,13 +923,7 @@
       </div>
     </a>
     <div class="header-actions">
-      <span class="badge" id="licenseBadge" style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid var(--g-outline); color: var(--g-text-secondary); cursor: pointer;" onclick="openLicenseModal()">⚡ FREE TIER</span>
-      <a href="https://buy.stripe.com/bJe00i13LbCg6Tm2G4fw40Q" target="_blank" rel="noopener" style="padding: 6px 14px; background: #635BFF; color: #fff; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
-        ★ Buy License ($19)
-      </a>
-      <button onclick="if(window.DePayWidgets){DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'})}else{const s=document.createElement('script');s.src='https://integrate.depay.com/widgets/v13.js';s.onload=()=>DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'});document.head.appendChild(s);}" style="padding: 6px 14px; background: #14F195; color: #000; border-radius: 6px; border: none; font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
-        ⚡ Pay with SOL
-      </button>
+      <span class="badge" id="licenseBadge" style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #10B981;">✦ 100% UNLOCKED</span>
       <div class="server-status-chip">
         <div class="status-pulse"></div>
         <span>Engine Active</span>
@@ -896,29 +931,6 @@
       <button class="btn btn-primary btn-sm" onclick="triggerQuickAudit()">⚡ Audit Demo</button>
     </div>
   </header>
-
-  <!-- High-Converting Sales Funnel Banner -->
-  <section class="sales-funnel-banner" style="background: linear-gradient(90deg, rgba(26,115,232,0.12) 0%, rgba(20,241,149,0.12) 100%); border-bottom: 1px solid var(--g-outline); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px 12px; font-size: 13px;">
-      <div class="elements-cross-banner" style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(26,115,232,0.45); background: rgba(26,115,232,0.1); font-size: 11px; font-weight: 700; color: #1a73e8; text-transform: uppercase; letter-spacing: 0.5px;">
-        <span>★ LCP</span>
-        <span style="opacity: 0.4;">·</span>
-        <span>INP</span>
-        <span style="opacity: 0.4;">·</span>
-        <span>CLS</span>
-        <span style="opacity: 0.4;">·</span>
-        <span>TTFB ENGINE</span>
-      </div>
-      <span style="background: #1a73e8; color: #fff; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.5px;">Founding Access</span>
-      <span style="color: var(--g-text-primary); font-weight: 500;">Zero-delay client-side AST transforms, instant PWA synthesis, and zero render blocking.</span>
-      <span style="font-weight: 700; color: var(--g-green);">$19 Lifetime <span style="text-decoration: line-through; color: var(--g-text-tertiary); font-weight: 400; font-size: 12px;">$79</span></span>
-    </div>
-    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
-      <a href="https://buy.stripe.com/bJe00i13LbCg6Tm2G4fw40Q" target="_blank" rel="noopener" style="padding: 6px 14px; background: #635BFF; color: #fff; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600;">Credit Card / Stripe ($19)</a>
-      <button onclick="if(window.DePayWidgets){DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'})}else{const s=document.createElement('script');s.src='https://integrate.depay.com/widgets/v13.js';s.onload=()=>DePayWidgets.Payment({integration:'428790dd-7ad1-407c-8ecf-c048c77a4cb8'});document.head.appendChild(s);}" style="padding: 6px 14px; background: #14F195; color: #000; border-radius: 6px; border: none; font-size: 12px; font-weight: 700; cursor: pointer;">Solana DePay</button>
-      <a href="?licensed=true" style="font-size: 12px; color: var(--g-text-secondary); text-decoration: underline; margin-left: 4px;">Activate Key</a>
-    </div>
-  </section>
 
   <!-- Hero Score & Metrics Summary -->
   <section class="hero-summary">
@@ -1154,13 +1166,13 @@
               <label class="form-label">Optimized Output HTML</label>
               <div style="position: relative; flex: 1;">
                 <textarea id="transformOutputHtml" class="code-editor" readonly></textarea>
-                <div id="cwvPaywallOverlay" style="display: flex; position: absolute; inset: 0; background: rgba(10,12,18,0.7); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 8px; align-items: center; justify-content: center; z-index: 10;">
+                <div id="cwvPaywallOverlay" style="display: flex; position: absolute; inset: 0; background: rgba(10,12,18,0.7); backdrop-filter: none; -webkit-backdrop-filter: none; border-radius: 8px; align-items: center; justify-content: center; z-index: 10;">
                   <div style="text-align: center; max-width: 380px; padding: 1.5rem; background: #0c0d14; border: 1px solid rgba(26,115,232,0.4); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
                     <div style="font-size: 2rem; margin-bottom: 8px;">★</div>
                     <div style="font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 6px;">Optimized Output Locked</div>
                     <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 1rem; line-height: 1.4;">Unlock unlimited AST speed transforms, PWA bundle downloads, and zero render-blocking exports.</p>
                     <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-                      <a href="https://buy.stripe.com/bJe00i13LbCg6Tm2G4fw40Q" target="_blank" rel="noopener" class="btn btn-sm" style="background: #635BFF; color: #FFF; text-decoration: none; font-weight: 700;">★ Buy ($19)</a>
+                      <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" class="btn btn-sm" style="background: #635BFF; color: #FFF; text-decoration: none; font-weight: 700;">☕ Buy Us a Coffee</a>
                       <button onclick="openDePayCheckout()" class="btn btn-sm" style="background: #14F195; color: #000; font-weight: 700; border: none; cursor: pointer;">⚡ Pay SOL</button>
                       <button onclick="openLicenseActivationModal()" class="btn btn-sm btn-secondary" style="cursor: pointer;">✦ Enter Key</button>
                     </div>
@@ -2136,99 +2148,23 @@ cwv-speed mcp</pre>
       document.getElementById('mcpConfigContent').textContent = configs[client] || configs.claude;
     }
 
-    // Pro Licensing & Paywall Logic
-    let isProLicensed = false;
+    // Sovereign 100% Free & Open Access
+    const isProLicensed = true;
 
     function checkProLicense() {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get("licensed") === "true" || urlParams.get("session_id")) {
-        activateProLicense("STRIPE-CHECKOUT");
-        return;
-      }
-      if (localStorage.getItem("cwv_pro_licensed") === "true" || localStorage.getItem("cwv-speed-engine_pro_licensed") === "true") {
-        isProLicensed = true;
-      }
-      updateProUI();
-    }
-
-    function updateProUI() {
-      const banner = document.querySelector(".sales-funnel-banner");
-      if (banner) banner.style.display = isProLicensed ? "none" : "flex";
-      const overlay = document.getElementById("cwvPaywallOverlay");
-      if (overlay) overlay.style.display = isProLicensed ? "none" : "flex";
-      const badge = document.getElementById("licenseBadge") || document.getElementById("cwvLicenseBadge") || document.querySelector(".header-actions .badge");
+      const badge = document.getElementById("licenseBadge") || document.getElementById("cwvLicenseBadge");
       if (badge) {
-        badge.innerHTML = isProLicensed
-          ? '<span style="color: #10B981; font-weight: 700; font-size: 11px;">⭐ PRO ACTIVE</span>'
-          : '<span style="color: #ea4335; font-weight: 700; font-size: 11px;">⚡ FREE TIER</span>';
-      }
-    }
-
-    function openLicenseModal() {
-      openPaywallModal();
-    }
-
-    function activateProLicense(key) {
-      isProLicensed = true;
-      localStorage.setItem("cwv_pro_licensed", "true");
-      localStorage.setItem("cwv-speed-engine_pro_licensed", "true");
-      updateProUI();
-      closeLicenseModal();
-      closePaywallModal();
-      showToast("Pro License Activated! Unlimited speed transforms unlocked.");
-    }
-
-    function openPaywallModal() {
-      const m = document.getElementById("proPaywallModal");
-      if (m) m.style.display = "flex";
-    }
-
-    function closePaywallModal() {
-      const m = document.getElementById("proPaywallModal");
-      if (m) m.style.display = "none";
-    }
-
-    function openLicenseActivationModal() {
-      closePaywallModal();
-      const m = document.getElementById("licenseModal");
-      if (m) m.style.display = "flex";
-    }
-
-    function closeLicenseModal() {
-      const m = document.getElementById("licenseModal");
-      if (m) m.style.display = "none";
-    }
-
-    function activateLicenseSubmit() {
-      const val = document.getElementById("licenseKeyInput").value.trim();
-      if (val) {
-        activateProLicense(val);
-      }
-    }
-
-    function openDePayCheckout() {
-      if (typeof DePayWidgets !== 'undefined' && DePayWidgets.Payment) {
-        DePayWidgets.Payment({ integration: '428790dd-7ad1-407c-8ecf-c048c77a4cb8' });
-      } else {
-        window.open('https://buy.stripe.com/bJe00i13LbCg6Tm2G4fw40Q', '_blank');
+        badge.innerHTML = '<span style="color: #10B981; font-weight: 700; font-size: 11px;">✦ 100% UNLOCKED</span>';
       }
     }
 
     function copyMcpConfig() {
-      if (!isProLicensed) {
-        openPaywallModal();
-        return;
-      }
       const code = document.getElementById('mcpConfigContent').textContent;
       navigator.clipboard.writeText(code);
       showToast(`Copied ${currentMcpClient} MCP configuration!`);
     }
 
     function downloadMcpConfig() {
-      if (!isProLicensed) {
-        openPaywallModal();
-        return;
-      }
       const filename = document.getElementById('mcpConfigLabel').textContent || 'mcp-config.json';
       const code = document.getElementById('mcpConfigContent').textContent;
       const blob = new Blob([code], { type: 'application/json;charset=utf-8' });
@@ -2246,7 +2182,12 @@ cwv-speed mcp</pre>
     });
   </script>
   <footer style="text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(--g-gray-600); border-top: 1px solid var(--g-border); margin-top: 2rem; background: var(--g-gray-50);">
-    <div>Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30/cwv-speed-engine" target="_blank" rel="noopener" style="color: var(--g-blue); text-decoration: none;">@1nc0gn30</a>) &middot; <a href="https://nullai.tech" target="_blank" rel="noopener" style="color: var(--g-blue); text-decoration: none;">NullAI Platform</a></div>
+    <div style="margin-bottom: 0.4rem;">
+      Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30/cwv-speed-engine" target="_blank" rel="noopener" style="color: var(--g-blue); text-decoration: none;">@1nc0gn30</a>) &middot; <a href="https://nullai.tech" target="_blank" rel="noopener" style="color: var(--g-blue); text-decoration: none;">NullAI Platform</a>
+    </div>
+    <div style="font-size: 0.78rem; opacity: 0.85; margin-bottom: 0.4rem;">
+      100% Free & Open Access • <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" style="color: #D4AF37;">☕ Buy Us a Coffee</a> • Solana: <code style="font-size: 0.75rem; color: #14F195;">GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK</code>
+    </div>
     <div style="margin-top: 8px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
       <a href="/norfolk-web-performance.html" style="color: var(--g-blue); text-decoration: none;">Norfolk Studio</a>
       <a href="/terms.html" style="color: var(--g-blue); text-decoration: none;">Terms</a>
@@ -2254,64 +2195,5 @@ cwv-speed mcp</pre>
       <a href="/support.html" style="color: var(--g-blue); text-decoration: none;">Support</a>
     </div>
   </footer>
-
-  <!-- Pro Paywall Modal -->
-  <div id="proPaywallModal" style="display: none; position: fixed; inset: 0; background: rgba(5,7,12,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); z-index: 1200; align-items: center; justify-content: center; padding: 1rem;">
-    <div style="max-width: 520px; width: 100%; border: 1px solid rgba(26,115,232,0.4); background: #0c0d14; border-radius: 16px; padding: 1.75rem; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.5rem;">⚡</span>
-          <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #f4f4f5;">Unlock CWV Speed Studio Pro</h3>
-        </div>
-        <button onclick="closePaywallModal()" style="background: none; border: none; color: #a1a1aa; font-size: 1.25rem; cursor: pointer; padding: 4px;">✕</button>
-      </div>
-      <p style="font-size: 0.88rem; color: #a1a1aa; margin-bottom: 1.25rem; line-height: 1.5;">
-        Instant in-browser AST optimization, zero render-blocking scripts, and automated PWA artifacts to score 95+ on Google PageSpeed Insights.
-      </p>
-      
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 12px 16px; margin-bottom: 1.25rem;">
-        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #1a73e8; margin-bottom: 8px;">What's Included:</div>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #e4e4e7;">
-          <li>✔ Unlimited HTML Speed Transforms with automated CLS image dimension patching</li>
-          <li>✔ Native lazy loading, async script deferral & font preconnect optimization</li>
-          <li>✔ Complete PWA bundle generator (manifest.json + service worker with offline cache)</li>
-          <li>✔ OpenGraph social preview tags and Google SERP snippet previews</li>
-          <li>✔ Full MCP JSON-RPC Server integration for Claude, Cursor, and Windsurf</li>
-        </ul>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="https://buy.stripe.com/bJe00i13LbCg6Tm2G4fw40Q" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: #635BFF; color: #fff; font-weight: 700; font-size: 0.95rem; border-radius: 8px; text-decoration: none; box-sizing: border-box;">
-          ★ Buy Pro Lifetime — $19 (Card / Apple Pay)
-        </a>
-        <button onclick="openDePayCheckout()" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: #14F195; color: #000; font-weight: 700; font-size: 0.95rem; border-radius: 8px; border: none; cursor: pointer; box-sizing: border-box;">
-          ⚡ Pay with Crypto (SOL / USDC)
-        </button>
-      </div>
-
-      <div style="margin-top: 14px; text-align: center;">
-        <button onclick="openLicenseActivationModal()" style="background: none; border: none; color: #94a3b8; font-size: 0.8rem; cursor: pointer; text-decoration: underline;">
-          Already have a receipt or license key? Activate here
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- License Activation Modal -->
-  <div id="licenseModal" style="display: none; position: fixed; inset: 0; background: rgba(5,7,12,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); z-index: 1250; align-items: center; justify-content: center; padding: 1rem;">
-    <div style="max-width: 420px; width: 100%; border: 1px solid rgba(255,255,255,0.15); background: #0c0d14; border-radius: 16px; padding: 1.5rem; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h4 style="margin: 0; font-size: 1.1rem; color: #fff;">Activate Pro License</h4>
-        <button onclick="closeLicenseModal()" style="background: none; border: none; color: #a1a1aa; font-size: 1.25rem; cursor: pointer;">✕</button>
-      </div>
-      <p style="font-size: 0.82rem; color: #a1a1aa; margin-bottom: 1rem;">
-        Enter your Stripe customer email, checkout session ID, or Solana tx signature to unlock:
-      </p>
-      <input type="text" id="licenseKeyInput" placeholder="e.g. cs_live_... or your@email.com" style="width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; font-size: 0.9rem; margin-bottom: 1rem; box-sizing: border-box;">
-      <button onclick="activateLicenseSubmit()" style="width: 100%; padding: 10px; background: #635BFF; color: #fff; font-weight: 700; border-radius: 8px; border: none; cursor: pointer;">
-        Activate License
-      </button>
-    </div>
-  </div>
 </body>
 </html>

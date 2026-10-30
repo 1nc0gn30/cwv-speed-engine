@@ -1,0 +1,313 @@
+/**
+ * CWV Speed Studio — Precision Telemetry Wave States (wave-states.css)
+ * 
+ * Strict scope:
+ * 1. High-contrast visible focus (:focus-visible) compliant with WCAG 2.4.7 / 2.4.11
+ * 2. Tactical hover & active feedback on audit controls
+ * 3. Empty & error presentations using existing DOM selectors
+ * 4. prefers-reduced-motion accessibility block
+ *
+ * Adheres to Design Director & Motion Choreography tokens:
+ * - Hover / press micro-durations: 120ms–160ms (EASE_OUT_EXPO: cubic-bezier(0.16, 1, 0.3, 1))
+ * - Restraint: no unnecessary glows, pure hierarchy & contrast
+ * - Zero modification of existing JS or styles
+ */
+
+/* ==========================================================================
+   1. Visible Focus States (:focus-visible) — WCAG 2.4.7 & 2.4.11
+   ========================================================================== */
+
+/* Remove default focus outline on pointer interaction for a clean finish */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Base high-visibility focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--g-blue) !important;
+  outline-offset: 2px !important;
+}
+
+/* Form group contextual highlight when child input has focus */
+.form-group:focus-within label.form-label {
+  color: var(--g-blue);
+  transition: color 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Audit Controls Focus-Visible Rings */
+input#auditUrlInput:focus-visible,
+textarea#auditHtmlInput:focus-visible,
+select#auditDeviceSelect:focus-visible {
+  border-color: var(--g-blue) !important;
+  box-shadow: 0 0 0 1px var(--g-blue), 0 0 0 4px rgba(26, 115, 232, 0.22) !important;
+  outline: none !important;
+  background-color: var(--g-surface);
+}
+
+/* Primary Action Audit Buttons Focus-Visible */
+#panel-auditor .btn-primary:focus-visible,
+.header-actions button[onclick="triggerQuickAudit()"]:focus-visible,
+button.btn-primary:focus-visible {
+  outline: 2px solid var(--g-blue) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px var(--g-surface), 0 0 0 5px rgba(26, 115, 232, 0.4) !important;
+}
+
+/* Secondary Audit Action Focus-Visible */
+#panel-auditor .btn-secondary:focus-visible,
+button.btn-secondary:focus-visible {
+  outline: 2px solid var(--g-blue) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.25) !important;
+}
+
+/* Tab Bar Navigation Focus-Visible */
+.tab-item:focus-visible {
+  outline: 2px solid var(--g-blue) !important;
+  outline-offset: -2px !important;
+  border-radius: var(--g-radius-sm);
+  background: rgba(26, 115, 232, 0.08);
+}
+
+
+/* ==========================================================================
+   2. Audit Controls: Tactile Hover & Active States
+   ========================================================================== */
+
+/* Target Live URL input hover */
+input#auditUrlInput {
+  transition: border-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.14s ease;
+}
+
+input#auditUrlInput:hover:not(:focus) {
+  border-color: rgba(26, 115, 232, 0.55);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
+}
+
+/* Raw HTML Code Editor hover */
+textarea#auditHtmlInput {
+  transition: border-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+textarea#auditHtmlInput:hover:not(:focus) {
+  border-color: rgba(26, 115, 232, 0.5);
+  box-shadow: 0 1px 4px rgba(60, 64, 67, 0.06);
+}
+
+/* Simulation Device Select dropdown hover */
+select#auditDeviceSelect {
+  cursor: pointer;
+  transition: border-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+select#auditDeviceSelect:hover:not(:focus) {
+  border-color: rgba(26, 115, 232, 0.55);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
+}
+
+/* 'Run Speed Audit' button hover & active micro-interactions */
+#panel-auditor .btn-primary,
+button[onclick="runAudit()"] {
+  transition: background-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#panel-auditor .btn-primary:hover,
+button[onclick="runAudit()"]:hover {
+  background-color: var(--g-blue-hover);
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.35);
+  transform: translateY(-1px);
+}
+
+#panel-auditor .btn-primary:active,
+button[onclick="runAudit()"]:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 1px 2px rgba(26, 115, 232, 0.25);
+}
+
+/* 'Load Sample HTML' button hover & active */
+#panel-auditor .btn-secondary,
+button[onclick="loadSampleHTML()"] {
+  transition: background-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#panel-auditor .btn-secondary:hover,
+button[onclick="loadSampleHTML()"]:hover {
+  border-color: var(--g-blue);
+  color: var(--g-blue);
+  background-color: var(--g-blue-light);
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
+}
+
+#panel-auditor .btn-secondary:active,
+button[onclick="loadSampleHTML()"]:active {
+  transform: translateY(0) scale(0.985);
+}
+
+/* Quick Audit Demo button hover */
+.header-actions button[onclick="triggerQuickAudit()"] {
+  transition: background-color 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-actions button[onclick="triggerQuickAudit()"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.3);
+}
+
+.header-actions button[onclick="triggerQuickAudit()"]:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Tab Bar Navigation Item Hover */
+.tab-item[data-tab="auditor"]:hover {
+  color: var(--g-blue);
+  background-color: var(--g-surface-variant);
+}
+
+/* Diagnostic recommendation tag hover */
+.diag-rec {
+  transition: background-color 0.14s ease, color 0.14s ease;
+  user-select: all;
+  cursor: text;
+}
+
+.diag-rec:hover {
+  background-color: rgba(26, 115, 232, 0.15);
+}
+
+
+/* ==========================================================================
+   3. Empty & Error Presentation (Existing Selectors)
+   ========================================================================== */
+
+/* Placeholder / Empty presentation for audit inputs */
+input#auditUrlInput::placeholder,
+textarea#auditHtmlInput::placeholder {
+  color: var(--g-text-tertiary);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Diagnostic container empty state presentation */
+#diagnosticList:empty {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#diagnosticList:empty::before {
+  content: "⚡ Ready for Telemetry — Enter a target URL or paste raw HTML and click 'Run Speed Audit' to inspect render-blocking resources, layout shifts, and INP bottlenecks.";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  border: 1px dashed var(--g-outline);
+  border-radius: var(--g-radius-md);
+  color: var(--g-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: center;
+  background: var(--g-surface-variant);
+  width: 100%;
+}
+
+/* Invalid / Error Input State */
+input#auditUrlInput:invalid:not(:placeholder-shown) {
+  border-color: var(--g-red) !important;
+  background-color: rgba(217, 48, 37, 0.03);
+}
+
+input#auditUrlInput:invalid:not(:placeholder-shown):focus-visible {
+  border-color: var(--g-red) !important;
+  outline: 2px solid var(--g-red) !important;
+  box-shadow: 0 0 0 1px var(--g-red), 0 0 0 4px rgba(217, 48, 37, 0.22) !important;
+}
+
+/* Error / Diagnostic Severity Presentations */
+
+/* 1. Critical Hazard (Error State) */
+.diagnostic-item:has(.badge-critical) {
+  border-color: rgba(217, 48, 37, 0.35);
+  border-left: 3px solid var(--g-red);
+  background: linear-gradient(90deg, rgba(217, 48, 37, 0.03) 0%, var(--g-surface) 100%);
+}
+
+.diagnostic-item .badge-critical {
+  border: 1px solid rgba(217, 48, 37, 0.35);
+  box-shadow: 0 1px 2px rgba(217, 48, 37, 0.1);
+  letter-spacing: 0.04em;
+}
+
+/* 2. Warning Status */
+.diagnostic-item:has(.badge-warning) {
+  border-color: rgba(249, 171, 0, 0.35);
+  border-left: 3px solid var(--g-yellow-dark);
+  background: linear-gradient(90deg, rgba(249, 171, 0, 0.03) 0%, var(--g-surface) 100%);
+}
+
+.diagnostic-item .badge-warning {
+  border: 1px solid rgba(176, 96, 0, 0.3);
+  box-shadow: 0 1px 2px rgba(176, 96, 0, 0.08);
+  letter-spacing: 0.04em;
+}
+
+/* 3. Optimal / Passed Baseline */
+.diagnostic-item:has(.badge-pass) {
+  border-color: rgba(30, 142, 62, 0.35);
+  border-left: 3px solid var(--g-green);
+  background: linear-gradient(90deg, rgba(30, 142, 62, 0.03) 0%, var(--g-surface) 100%);
+}
+
+.diagnostic-item .badge-pass {
+  border: 1px solid rgba(30, 142, 62, 0.3);
+  box-shadow: 0 1px 2px rgba(30, 142, 62, 0.08);
+  letter-spacing: 0.04em;
+}
+
+/* 4. Informational State */
+.diagnostic-item:has(.badge-info) {
+  border-color: rgba(26, 115, 232, 0.35);
+  border-left: 3px solid var(--g-blue);
+  background: linear-gradient(90deg, rgba(26, 115, 232, 0.03) 0%, var(--g-surface) 100%);
+}
+
+.diagnostic-item .badge-info {
+  border: 1px solid rgba(26, 115, 232, 0.3);
+  letter-spacing: 0.04em;
+}
+
+
+/* ==========================================================================
+   4. Reduced Motion Accessibility Override
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  input#auditUrlInput,
+  textarea#auditHtmlInput,
+  select#auditDeviceSelect,
+  #panel-auditor .btn-primary,
+  #panel-auditor .btn-secondary,
+  button[onclick="runAudit()"],
+  button[onclick="loadSampleHTML()"],
+  .header-actions button[onclick="triggerQuickAudit()"],
+  .tab-item,
+  .diagnostic-item,
+  .diag-rec,
+  .form-group:focus-within label.form-label {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

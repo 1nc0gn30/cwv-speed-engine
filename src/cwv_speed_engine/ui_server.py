@@ -1425,7 +1425,7 @@ class SpeedStudioRequestHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed_url.path
 
         # Health check
-        if path == "/api/health":
+        if path in ("/health", "/api/health"):
             self._send_json(200, {
                 "status": "healthy",
                 "version": "1.0.0",

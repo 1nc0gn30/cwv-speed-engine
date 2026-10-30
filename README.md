@@ -7,8 +7,9 @@
 # ⚡ CWV Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
 
 [![Live Demo](https://img.shields.io/badge/Live%20App-cwv--speed--studio.netlify.app-00DC82?style=flat&logo=netlify)](https://cwv-speed-studio.netlify.app/)
-[![License: Pro](https://img.shields.io/badge/Pro%20Lifetime-$19%20USD-635BFF?style=flat&logo=stripe)](https://buy.stripe.com/00w14mdQxgWA3Ha5Sgfw40H)
-[![Solana Pay](https://img.shields.io/badge/Solana-DePay%20Accepted-14F195?style=flat&logo=solana)](https://cwv-speed-studio.netlify.app/)
+[![Buy Us a Coffee](https://img.shields.io/badge/☕%20Buy%20Us%20a%20Coffee-Stripe-D4AF37?style=flat&logo=stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+[![Solana Tip](https://img.shields.io/badge/Solana%20Tip-GG2e...dXoK-14F195?style=flat&logo=solana)](https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)
+[![100% Free & Open Access](https://img.shields.io/badge/Access-100%25%20Free%20%26%20Unlocked-00FF9D?style=flat)](https://cwv-speed-studio.netlify.app/)
 [![CI Matrix](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml)
 [![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/1nc0gn30/cwv-speed-engine)
 [![MCP Ready](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-9334e6)](https://modelcontextprotocol.io)
@@ -16,7 +17,7 @@
 **CWV Speed Studio** (`cwv-speed-engine`) is an enterprise-grade Core Web Vitals auditing, automated speed transformation, PWA generation, and AI Agent MCP hub designed to help modern web applications achieve and maintain a perfect **100/100 Core Web Vitals score** (LCP < 1.2s, CLS 0, INP < 50ms). Runs 100% in-browser on client silicon with zero backend dependencies.
 
 - 🌐 **Live Web App**: [https://cwv-speed-studio.netlify.app/](https://cwv-speed-studio.netlify.app/)
-- 💳 **Founding Member License**: $19 Lifetime (Regular $79) via Stripe or Solana DePay.
+- ☕ **Support**: 100% Free & Open Access with optional [Buy Us a Coffee via Stripe](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X) and Solana Tip address: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`.
 - ⚡ **Attribution**: Engineered by Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform.
 
 ---
