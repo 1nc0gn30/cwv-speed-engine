@@ -134,7 +134,7 @@ def extract_links_from_html(
 
     for href in raw_hrefs:
         clean_href = href.strip()
-        if not clean_href or clean_href.startswith(("#", "javascript:", "mailto:", "tel:")):
+        if not clean_href or clean_href.startswith(("#", "javascript:", "mailto:", "tel:", "solana:", "bitcoin:", "data:", "blob:")):
             continue
 
         resolved = urllib.parse.urljoin(base_url, clean_href)

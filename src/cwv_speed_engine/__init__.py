@@ -6,7 +6,6 @@ Pure Python standard library with zero external runtime dependencies.
 
 from __future__ import annotations
 
-from cwv_speed_engine.cli import main
 from cwv_speed_engine.mcp_server import (
     MCP_PROTOCOL_VERSION,
     SERVER_NAME,
@@ -76,7 +75,6 @@ __all__ = [
     "SERVER_NAME",
     "SERVER_VERSION",
     "MCP_PROTOCOL_VERSION",
-    "main",
     "MCPServer",
     "run_mcp_server",
     "generate_mcp_client_config",
