@@ -110,11 +110,8 @@ def resolve_path(path_str: Union[str, Path]) -> Path:
     Returns:
         Fully resolved Path object.
     """
-    if isinstance(path_str, Path):
-        expanded = os.path.expanduser(os.path.expandvars(str(path_str)))
-    else:
-        expanded = os.path.expanduser(os.path.expandvars(str(path_str)))
-    return Path(expanded).resolve()
+    expanded = os.path.expanduser(os.path.expandvars(str(path_str)))
+    return Path(os.path.abspath(expanded)).resolve()
 
 
 def to_posix_path(path_or_str: Union[str, Path]) -> str:
