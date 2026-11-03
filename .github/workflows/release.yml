@@ -10,6 +10,10 @@ permissions:
   contents: write
   id-token: write
 
+env:
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
 jobs:
   build-and-publish:
     name: Build Distributions & Publish

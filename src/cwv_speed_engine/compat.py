@@ -233,27 +233,8 @@ def open_browser(url_or_path: str) -> bool:
             except Exception:
                 pass
 
-    # 3. Windows
-    if is_windows():
-        if hasattr(os, "startfile"):
-            try:
-                os.startfile(target)
-                return True
-            except Exception:
-                pass
-        try:
-            subprocess.Popen(
-                ["cmd", "/c", "start", "", target],
-                shell=False,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-            return True
-        except Exception:
-            pass
-
-    # 4. Standard Linux / Unix with xdg-open
-    if shutil.which("xdg-open"):
+    # 3. Standard Linux / Unix with xdg-open
+    if is_linux() and shutil.which("xdg-open"):
         try:
             subprocess.Popen(
                 ["xdg-open", target],
@@ -264,7 +245,7 @@ def open_browser(url_or_path: str) -> bool:
         except Exception:
             pass
 
-    # 5. Standard library fallback
+    # 4. Standard library fallback
     try:
         return webbrowser.open(target)
     except Exception:
