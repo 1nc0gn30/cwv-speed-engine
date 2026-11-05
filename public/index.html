@@ -1600,7 +1600,23 @@ cwv-speed mcp</pre>
     </section>
   </main>
   
-  <script src="/assets/sovereign-upgrade.js" defer></script>
+  
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "cwv-speed-engine",
+          toolName: "CWV Speed Engine",
+          tagline: "Boost website speed to a perfect 100/100 Lighthouse score!",
+          accentColor: "#22C55E",
+          steps: [{"icon": "\u26a1", "title": "Why Website Speed Matters", "desc": "Google ranks fast websites higher! If your site takes more than 2 seconds to load, half your visitors leave."}, {"icon": "\ud83c\udfce\ufe0f", "title": "Diagnose LCP, CLS & INP", "desc": "Find large uncompressed pictures, slow JavaScript, and layout shifts that slow down your pages."}, {"icon": "\ud83d\udee0\ufe0f", "title": "Instant Asset Optimization", "desc": "Compress images and bundle CSS/JS code on-the-fly to unlock blazing-fast load times."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>`;
 
@@ -2184,5 +2200,21 @@ cwv-speed mcp</pre>
       <a href="/support.html" style="color: var(--g-blue); text-decoration: none;">Support</a>
     </div>
   </footer>
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "cwv-speed-engine",
+          toolName: "CWV Speed Engine",
+          tagline: "Boost website speed to a perfect 100/100 Lighthouse score!",
+          accentColor: "#22C55E",
+          steps: [{"icon": "\u26a1", "title": "Why Website Speed Matters", "desc": "Google ranks fast websites higher! If your site takes more than 2 seconds to load, half your visitors leave."}, {"icon": "\ud83c\udfce\ufe0f", "title": "Diagnose LCP, CLS & INP", "desc": "Find large uncompressed pictures, slow JavaScript, and layout shifts that slow down your pages."}, {"icon": "\ud83d\udee0\ufe0f", "title": "Instant Asset Optimization", "desc": "Compress images and bundle CSS/JS code on-the-fly to unlock blazing-fast load times."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
