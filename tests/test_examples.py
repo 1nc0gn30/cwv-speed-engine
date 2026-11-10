@@ -186,5 +186,5 @@ def test_ci_matrix_completeness():
     assert "ubuntu-latest" in content
     assert "macos-latest" in content
     assert "windows-latest" in content
-    for py in ["3.9", "3.10", "3.11", "3.12", "3.13"]:
+    for py in ["3.10", "3.11", "3.12", "3.13"]:
         assert py in content

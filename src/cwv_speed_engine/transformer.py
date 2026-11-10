@@ -254,7 +254,6 @@ class HTMLSpeedTransformer:
         mod_count = 0
 
         def replace_font_face(match_style: re.Match) -> str:
-            nonlocal mod_count
             open_tag = match_style.group(1)
             style_content = match_style.group(2)
             close_tag = match_style.group(3)
