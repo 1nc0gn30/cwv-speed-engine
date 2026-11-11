@@ -1,226 +1,151 @@
-<div align="center">
-  <img src="assets/hero-banner.svg" alt="CWV Speed Engine — Sovereign Architecture Banner" width="100%" />
-</div>
+# CWV Speed Engine
 
-<br />
+![CWV Speed Engine](assets/hero-banner.svg)
 
-# ⚡ CWV Speed Studio & Core Web Vitals Engine (`cwv-speed-engine`)
+Zero-dependency Core Web Vitals (LCP, INP, CLS, FCP, TTFB) diagnostic analyzer, HTML asset transformer, W3C Speculation Rules compiler, Long Animation Frames (LoAF) profiler, immutable cache header generator, performance budget simulator, and Model Context Protocol (MCP) server.
 
-[![Live Demo](https://img.shields.io/badge/Live%20App-cwv--speed--studio.netlify.app-00DC82?style=flat&logo=netlify)](https://cwv-speed-studio.netlify.app/)
-[![Buy Us a Coffee](https://img.shields.io/badge/☕%20Buy%20Us%20a%20Coffee-Stripe-D4AF37?style=flat&logo=stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-[![Solana Tip](https://img.shields.io/badge/Solana%20Tip-GG2e...dXoK-14F195?style=flat&logo=solana)](https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)
-[![100% Free & Open Access](https://img.shields.io/badge/Access-100%25%20Free%20%26%20Unlocked-00FF9D?style=flat)](https://cwv-speed-studio.netlify.app/)
-[![CI Matrix](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/1nc0gn30/cwv-speed-engine/actions/workflows/ci.yml)
-[![UI](https://img.shields.io/badge/UI-Material%203%20Design-4285F4)](https://github.com/1nc0gn30/cwv-speed-engine)
-[![MCP Ready](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-9334e6)](https://modelcontextprotocol.io)
+- **Local Workstation**: `http://127.0.0.1:8128`
+- **Zoth Studio v2 Dossier**: [https://zoth.nullai.tech/tools/cwv-speed-engine](https://zoth.nullai.tech/tools/cwv-speed-engine)
+- **Repository**: [https://github.com/1nc0gn30/cwv-speed-engine](https://github.com/1nc0gn30/cwv-speed-engine)
 
-**CWV Speed Studio** (`cwv-speed-engine`) is an enterprise-grade Core Web Vitals auditing, automated speed transformation, PWA generation, and AI Agent MCP hub designed to help modern web applications achieve and maintain a perfect **100/100 Core Web Vitals score** (LCP < 1.2s, CLS 0, INP < 50ms). Runs 100% in-browser on client silicon with zero backend dependencies.
+## Overview
 
-- 🌐 **Live Web App**: [https://cwv-speed-studio.netlify.app/](https://cwv-speed-studio.netlify.app/)
-- ☕ **Support**: 100% Free & Open Access with optional [Buy Us a Coffee via Stripe](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X) and Solana Tip address: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`.
-- ⚡ **Attribution**: Engineered by 1nc0gn30 • NullAI ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform.
+CWV Speed Engine runs purely on the Python 3.8+ standard library (`html.parser`, `urllib`, `json`, `http.server`) and native browser DOM APIs with zero runtime dependencies. It statically and dynamically evaluates HTML documents and live URLs against Google Core Web Vitals thresholds (`LCP <= 2.5s`, `INP <= 200ms`, `CLS <= 0.1`), rewrites render-blocking markup, and generates edge caching and instant-navigation configurations.
 
----
+Core capabilities:
+- **Core Web Vitals Heuristic & Live Audit**: Detects render-blocking scripts and stylesheets, unoptimized hero images missing `fetchpriority="high"`, offscreen media missing `loading="lazy"`, layout-shift sources missing intrinsic `width`/`height`, and main-thread Long Animation Frames (LoAF) bottlenecks.
+- **Deterministic HTML Speed Transformer**: Rewrites raw HTML to defer non-critical scripts, preload LCP candidates, add `decoding="async"` and `loading="lazy"` to below-the-fold media, and inline critical CSS.
+- **W3C Speculation Rules & 103 Early Hints**: Generates `<script type="speculationrules">` JSON policies (`conservative`, `balanced`, `aggressive`) and HTTP `103 Early Hints` `Link` headers for zero-latency navigation prerendering.
+- **Performance Budget & Throttling Simulator**: Audits script (`170 KB` default), stylesheet (`50 KB` default), and total payload budgets across simulated mobile/broadband RTT profiles and exports Lighthouse `budget.json` files.
+- **Edge Cache, PWA & OpenGraph Compilers**: Synthesizes immutable `Cache-Control` rules for Netlify, Vercel, Nginx, Next.js, Cloudflare, and Apache alongside W3C `manifest.webmanifest`, `sw.js`, and OpenGraph/Twitter Card tags.
 
-## 🌟 Key Capabilities
+## Architecture
 
-- 🎨 **CWV Speed Studio Web UI**: Full-featured, offline-ready web UI (design influenced by Material 3) with animated Speed Gauge Dial, metric cards, and 8 interactive studios.
-- ⚡ **Deterministic Core Web Vitals Auditor**: In-depth standards-based analysis for LCP, CLS, INP, FCP, and TTFB with actionable remediation advice.
-- 🛠️ **Automated HTML Speed Transformer**: Automated AST rewrites that inject explicit image dimensions, native lazy loading, font preconnects, script deferrals, and hero preload priority tags.
-- 📱 **PWA & Service Worker Studio**: Interactive builder for W3C web manifests and tiered Service Worker caching strategies (`stale-while-revalidate`, `cache-first`, `network-first`).
-- 🖼️ **OpenGraph & Social Previewer**: Live mockups for Google Search SERP, Twitter Cards, and LinkedIn snippets with 1-click meta tag copying.
-- ⚖️ **Performance Diff Comparator**: Measure before vs after speed gains, metric deltas, and resolved audit findings.
-- 🚀 **Cache-Control & Headers Exporter**: Instant production configs for Netlify, Vercel, Nginx, Cloudflare, Apache, and Next.js.
-- 📊 **Performance Budget & Network Latency Simulator**: Enforce strict asset weight ceilings (Scripts, Styles, Fonts, Images), simulate real-world mobile 3G/4G/5G latency, calculate INP main-thread execution risks, and export standard Lighthouse `budget.json` for CI pipelines.
-- 🤖 **AI Agent & MCP Hub**: Zero-dependency Model Context Protocol (MCP) server supporting Claude Desktop, Cursor, Cline, and Zed.
-- 🚦 **CI/CD Quality Gate**: Reusable GitHub Actions workflow to block PRs regressing speed scores.
-- 📦 **Zero Mandatory Dependencies**: Core engine and web server run purely on the Python standard library.
+```text
+cwv-speed-engine/
+├── server.py                             # Standalone loopback workstation entrypoint (127.0.0.1:8128)
+├── bin/
+│   ├── cwv-speed.js                      # Unified CLI, Web UI, and Electron desktop launcher
+│   └── cwv-speed-engine-tui              # Terminal dashboard launcher
+├── public/                               # Zero-egress browser Speed Studio workstation
+├── src/cwv_speed_engine/
+│   ├── analyzer.py                       # LCP, INP, CLS, FCP, TTFB & DOM bottleneck analyzer
+│   ├── loaf_analyzer.py                  # Long Animation Frames (LoAF) & INP script attribution
+│   ├── transformer.py                    # AST/HTML loading-strategy optimizer
+│   ├── speculation_engine.py             # W3C Speculation Rules & 103 Early Hints generator
+│   ├── budget_simulator.py               # Payload budget & network latency simulator
+│   ├── cache_rules.py                    # Netlify, Vercel, Nginx, Next.js, Cloudflare, Apache rules
+│   ├── pwa_builder.py & og_builder.py    # Web manifest, ServiceWorker, and OpenGraph generators
+│   ├── diff_engine.py & ci_gate.py       # Before/after score delta and CI/CD exit-code gate
+│   ├── mcp_server.py                     # JSON-RPC 2.0 stdio MCP server (8 tools)
+│   ├── ui_server.py                      # Threading HTTP REST API & Speed Studio server (:8128)
+│   └── cli.py                            # cwv-engine / speed-engine CLI router
+└── tests/                                # 175-test pytest verification suite
+```
 
----
-
-## 🚀 Quick Start
-
-### Installation
+## Quickstart
 
 ```bash
-# Clone the repository
-git clone https://github.com/NullAITech/cwv-speed-engine.git
+git clone https://github.com/1nc0gn30/cwv-speed-engine.git
 cd cwv-speed-engine
-
-# Install in editable mode
 pip install -e .
+
+# Launch the local Speed Studio UI and REST API on 127.0.0.1:8128
+python3 server.py --port 8128
 ```
 
-### Launch CWV Speed Studio Web UI
+Open `http://127.0.0.1:8128` in any browser, or serve the client-side bundle directly:
 
 ```bash
-python -m cwv_speed_engine.ui_server --port 8448 --open
+python3 -m http.server 8128 --directory public
 ```
 
-Open your browser to [http://localhost:8448](http://localhost:8448) to access the interactive studio.
+## CLI & MCP Usage
 
----
-
-## 💻 CLI Commands Cheatsheet
+Installing via `pip install -e .` registers `cwv-engine`, `speed-engine`, and `cwv-mcp` (and ZothOS v3.4.0 exposes `cwv` / `cwv-speed` on `$PATH`).
 
 ```bash
-# 1. Audit a live URL
-cwv-speed audit https://example.com --device mobile
+# Check status and JSON telemetry
+cwv-engine --help
+cwv-engine --status
+cwv-engine --json
 
-# 2. Audit raw HTML markup
-cwv-speed audit --html "<!DOCTYPE html>..."
+# Audit a live URL or local HTML file and run the CI quality gate
+cwv-engine audit https://example.com --device mobile --json
+cwv-engine check ./public/index.html --min-score 85 --json
 
-# 3. Automatically transform HTML for maximum speed
-cwv-speed optimize unoptimized.html -o index.html
+# Transform HTML loading attributes and defer blocking assets
+cwv-engine optimize ./public/index.html --inline --json
 
-# 4. Generate Progressive Web App Suite
-cwv-speed pwa --name "My Speed App" --strategy stale-while-revalidate
+# Generate W3C Speculation Rules and audit performance budgets
+cwv-engine speculation ./public/index.html --aggressiveness balanced --format json
+cwv-engine budget ./public/index.html --script-budget 170 --css-budget 50 --json
 
-# 5. Export Production Cache Headers
-cwv-speed cache --platform netlify -o _headers
+# Export immutable edge cache configs, PWA bundles, OpenGraph tags, and audit diffs
+cwv-engine cache --framework netlify --days 365 --json
+cwv-engine pwa --name "NullAI App" --theme-color "#0f172a" --json
+cwv-engine og --title "NullAI App" --desc "Core Web Vitals workstation" --json
+cwv-engine diff baseline.html optimized.html --json
 
-# 6. Audit Performance Budget & Multi-Network Latency
-cwv-speed budget index.html --script-budget 150 --total-budget 500
-
-# 7. Export Standard Lighthouse budget.json
-cwv-speed budget index.html --lighthouse > budget.json
-
-# 8. Run CI Gate on Pull Requests
-cwv-speed ci-gate https://staging.example.com --min-score 90 --max-cls 0.05
+# Launch the HTTP server on 127.0.0.1:8128
+cwv-engine serve --host 127.0.0.1 --port 8128
 ```
 
----
+### MCP Server Integration
 
-## 🤖 AI Agent MCP Integration (Claude & Cursor)
-
-`cwv-speed-engine` runs natively as an MCP server over stdio.
-
-### Claude Desktop Setup
-Add to `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "cwv-speed-engine": {
-      "command": "python3",
-      "args": ["-m", "cwv_speed_engine.mcp_server"],
-      "env": {
-        "PYTHONPATH": "src"
-      }
-    }
-  }
-}
-```
-
-### Cursor IDE Setup
-Add to `.cursor/mcp.json`:
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "cwv-speed-engine": {
-        "command": "python3",
-        "args": ["-m", "cwv_speed_engine.mcp_server"],
-        "env": {
-          "PYTHONPATH": "src"
-        }
-      }
-    }
-  }
-}
-```
-
----
-
-## 📂 Production Reference Examples
-
-Explore production architecture blueprints in [`examples/`](./examples/):
-- [`examples/nextjs-optimized/`](./examples/nextjs-optimized/): Next.js 14/15 App Router image optimization, font self-hosting, Early Hints edge middleware.
-- [`examples/astro-speed/`](./examples/astro-speed/): Astro zero-JS Island architecture, `<SpeedHead />` component, sharp image processing.
-- [`examples/pwa-manifest/`](./examples/pwa-manifest/): W3C PWA manifest, tiered `sw.js` caching, Material 3 offline page.
-- [`examples/nginx-caching/`](./examples/nginx-caching/): Nginx configuration for sub-50ms TTFB and 1-year immutable caching.
-- [`examples/mcp-clients/`](./examples/mcp-clients/): Ready-to-copy client configs for Claude, Cursor, Cline, and Zed.
-
----
-
-## 📚 Documentation
-
-- [Core Web Vitals Metric Guide (2024-2026 Standards)](./docs/CORE_WEB_VITALS_GUIDE.md)
-- [Model Context Protocol (MCP) Guide](./docs/MCP_GUIDE.md)
-- [High-Performance Caching & HTTP Headers Guide](./docs/CACHING_STRATEGIES.md)
-
----
-
-## 🧪 Running Tests
+Start the JSON-RPC 2.0 `stdio` MCP server or export client configurations for Claude Desktop, Cursor, Cline, or Zed:
 
 ```bash
-PYTHONPATH=src pytest tests/ -v
+cwv-engine mcp
+cwv-engine mcp --tools
+cwv-engine mcp --config claude
 ```
 
----
+Registered MCP tools (8):
+- `cwv_audit_site` — Audit a URL or HTML string for LCP, INP, CLS, FCP, and TTFB bottlenecks.
+- `cwv_optimize_html` — Rewrite HTML with lazy-loading, hero prioritization, and deferred scripts.
+- `cwv_generate_cache_config` — Generate immutable caching configs for Netlify, Vercel, Nginx, Next.js, Cloudflare, or Apache.
+- `cwv_generate_pwa` — Compile W3C `manifest.webmanifest` and offline `sw.js`.
+- `cwv_generate_og_card` — Generate OpenGraph and Twitter Card `<meta>` snippets.
+- `cwv_diff_performance` — Compare baseline vs. candidate HTML/URL performance scores.
+- `cwv_generate_speculation_rules` — Generate W3C Speculation Rules and `103 Early Hints` headers.
+- `cwv_audit_performance_budget` — Evaluate asset payload budgets and export Lighthouse `budget.json`.
 
-## 📄 License
+## REST API Endpoints
 
-Apache License 2.0. See [LICENSE](./LICENSE) for details.
+Bound by default to `http://127.0.0.1:8128`:
 
----
-
-*Engineered with precision by 1nc0gn30 • NullAI ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform ([nullai.tech](https://nullai.tech))*
-
----
-
-## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
-
-```mermaid
-flowchart LR
-    subgraph ZothOS["🐧 ZothOS v3.4 CLI & Braille TUI"]
-        CLI["cwv-speed-engine --help / --json"]
-        TUI["cwv-speed-engine-tui<br/>Unicode U+2800 2x4 Braille"]
-    end
-
-    subgraph Workstation["⚡ Sovereign Workstation"]
-        WEB["https://cwv-speed-engine.nullai.tech<br/>REST API & /health"]
-    end
-
-    subgraph Studio["🌌 Zoth Studio v2 & ZothOS-Lite"]
-        GODMODE["http://127.0.0.1:3000/tools/cwv-speed-engine<br/>God-Mode Workstation"]
-        LITE["http://127.0.0.1:8145<br/>ZothOS-Lite Web Desktop"]
-    end
-
-    subgraph SecondBrain["💎 Obsidian Second Brain & STDP"]
-        TRACKER["http://127.0.0.1:8151<br/>Zoth Obsidian Tracker"]
-        NEURO["http://127.0.0.1:8094<br/>Neuro-Memory STDP Cortex"]
-        NOTE["Studio/Tools/Studio cwv-speed-engine.md"]
-    end
-
-    CLI --> WEB
-    TUI --> WEB
-    WEB <--> GODMODE
-    WEB <--> LITE
-    WEB --> TRACKER
-    TRACKER <--> NOTE
-    NOTE <--> NEURO
-```
-
-### Cross-Surface Integration Matrix
-
-| Surface | Endpoint / Binary | Capabilities |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| **Standalone Workstation** | `https://cwv-speed-engine.nullai.tech` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
-| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/cwv-speed-engine` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
-| **ZothOS v3.4 CLI & TUI** | `cwv-speed-engine` / `cwv-speed-engine-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
-| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
-| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio cwv-speed-engine.md`) |
-| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
+| `GET` | `/health`, `/api/health`, `/api/platform` | Service health and runtime diagnostics |
+| `POST` | `/api/audit` | Run Core Web Vitals diagnostic audit on URL or HTML |
+| `POST` | `/api/optimize`, `/api/transform` | Transform and optimize HTML asset loading strategies |
+| `POST` | `/api/speculation` | Generate W3C Speculation Rules and `103 Early Hints` |
+| `POST` | `/api/budget` | Run performance budget and network throttling simulation |
+| `POST` | `/api/cache`, `/api/cache/export` | Generate edge server `Cache-Control` configurations |
+| `POST` | `/api/pwa`, `/api/pwa/generate` | Generate web manifest and ServiceWorker assets |
+| `POST` | `/api/og`, `/api/og/generate` | Generate OpenGraph and Twitter Card meta tags |
+| `POST` | `/api/diff`, `/api/compare` | Compare two targets and compute score delta |
+| `GET` | `/api/tools`, `/api/mcp/config` | List MCP tools and export client config JSON |
+| `POST` | `/api/export-zip` | Download complete optimization bundle as a ZIP archive |
+
+## Testing & Verification
 
 ```bash
-# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
-cwv-speed-engine --help
-cwv-speed-engine-tui --status
-cwv-speed-engine-tui --json
+# Run the 175-test pytest suite
+PYTHONPATH=src python3 -m pytest -q
 
-# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
-zoth-obsidian-tracker --verify
+# Run built-in CLI verification suite
+PYTHONPATH=src python3 -m cwv_speed_engine.cli --test
+
+# Secret hygiene verification
+gitleaks detect --source . --no-banner --redact
 ```
 
+## Support
+
+CWV Speed Engine is 100% free and open-source software with zero paywalls or feature gates. Optional support: [Buy Us a Coffee (Stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).
+
+## License
+
+MIT License — Copyright (c) 1nc0gn30 ([https://1nc0gn30.si](https://1nc0gn30.si)) & NullAI ([https://nullai.tech](https://nullai.tech)).

@@ -1619,7 +1619,7 @@ class SpeedStudioRequestHandler(http.server.SimpleHTTPRequestHandler):
 # Server Factory & Runner Helpers
 # ==============================================================================
 
-def create_server(host: str = "127.0.0.1", port: int = 8448, directory: Optional[str] = None) -> http.server.ThreadingHTTPServer:
+def create_server(host: str = "127.0.0.1", port: int = 8128, directory: Optional[str] = None) -> http.server.ThreadingHTTPServer:
     """
     Creates and configures a ThreadingHTTPServer instance for CWV Speed Studio.
     """
@@ -1630,7 +1630,7 @@ def create_server(host: str = "127.0.0.1", port: int = 8448, directory: Optional
 
 def start_ui_server(
     host: str = "127.0.0.1",
-    port: int = 8448,
+    port: int = 8128,
     open_browser: bool = False,
     blocking: bool = True,
     directory: Optional[str] = None,
@@ -1678,7 +1678,7 @@ def main() -> None:
         description="CWV Speed Studio UI Server (cwv-speed-engine)"
     )
     parser.add_argument("--host", default="127.0.0.1", help="Host interface (default: 127.0.0.1)")
-    parser.add_argument("--port", type=int, default=8448, help="Port to bind (default: 8448)")
+    parser.add_argument("--port", type=int, default=8128, help="Port to bind (default: 8128)")
     parser.add_argument("--open", action="store_true", help="Automatically open browser")
     parser.add_argument("--dir", default=None, help="Custom directory to serve static assets from")
 

@@ -1212,9 +1212,9 @@ class SpeedStudioHTTPHandler(http.server.BaseHTTPRequestHandler):
 
 
 def cmd_serve(args: argparse.Namespace) -> int:
-    """Start CWV Speed Studio Web UI (design influenced by Material 3)."""
-    port = int(getattr(args, "port", 8448) or 8448)
-    host = getattr(args, "host", "0.0.0.0") or "0.0.0.0"
+    """Start CWV Speed Studio Web UI."""
+    port = int(getattr(args, "port", 8128) or 8128)
+    host = getattr(args, "host", "127.0.0.1") or "127.0.0.1"
     open_browser = getattr(args, "open", False) or False
 
     from cwv_speed_engine.ui_server import start_ui_server
@@ -1330,6 +1330,16 @@ def build_cli_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Run internal engine verification test suite.",
     )
+    parser.add_argument(
+        "--status",
+        action="store_true",
+        help="Check local service status and configuration.",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output status telemetry as JSON.",
+    )
 
     subparsers = parser.add_subparsers(dest="subcommand", help="Subcommand to execute")
 
@@ -1399,9 +1409,9 @@ def build_cli_parser() -> argparse.ArgumentParser:
     p_mcp.add_argument("--output", "-o", help="File to write client configuration")
 
     # 9. serve
-    p_serve = subparsers.add_parser("serve", parents=[common_parent], help="Start CWV Speed Studio Web UI (design influenced by Material 3)")
-    p_serve.add_argument("--port", "-p", type=int, default=8095, help="Server port (default: 8095)")
-    p_serve.add_argument("--host", default="0.0.0.0", help="Server host address (default: 0.0.0.0)")
+    p_serve = subparsers.add_parser("serve", parents=[common_parent], help="Start CWV Speed Studio Web UI")
+    p_serve.add_argument("--port", "-p", type=int, default=8128, help="Server port (default: 8128)")
+    p_serve.add_argument("--host", default="127.0.0.1", help="Server host address (default: 127.0.0.1)")
 
     # 10. platform
     p_plat = subparsers.add_parser("platform", parents=[common_parent], help="Inspect multi-OS runtime diagnostics and health")
@@ -1441,6 +1451,21 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if args.test or args.subcommand == "test":
         return run_internal_self_tests()
+
+    if not args.subcommand and (getattr(args, "status", False) or getattr(args, "json", False)):
+        info = {
+            "service": "cwv-speed-engine",
+            "version": SERVER_VERSION,
+            "port": 8128,
+            "local_url": "http://127.0.0.1:8128",
+            "studio_url": "https://zoth.nullai.tech/tools/cwv-speed-engine",
+            "status": "ready",
+        }
+        if getattr(args, "json", False):
+            print(json.dumps(info, indent=2))
+        else:
+            print(f"cwv-speed-engine {SERVER_VERSION} | http://127.0.0.1:8128 | ready")
+        return 0
 
     if not args.subcommand:
         parser.print_help()

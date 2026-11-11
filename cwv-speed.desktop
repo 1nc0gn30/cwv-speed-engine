@@ -2,19 +2,19 @@
 Version=1.0
 Type=Application
 Name=CWV Speed Studio
-GenericName=Core Web Vitals & Web Performance Engine
+GenericName=Core Web Vitals & Performance Workstation
 Comment=Zero-Dependency Core Web Vitals Speed Engine, Speculation Rules, PWA & LoAF Profiler
-Exec=/usr/local/bin/cwv-speed desktop
-Icon=/media/neo/f2fdda77-178b-4603-ae80-c7aa4cd97908/zoth-micro-repos/cwv-speed-engine/assets/icon.png
+Exec=/usr/local/bin/cwv desktop
+Icon=cwv-speed-engine
 Terminal=false
-Categories=Development;System;Utility;
+Categories=Development;WebDevelopment;Utility;
 StartupNotify=true
 Actions=CLI;Web;
 
 [Desktop Action CLI]
 Name=Open CWV Speed CLI
-Exec=x-terminal-emulator -e "/usr/local/bin/cwv-speed --help"
+Exec=x-terminal-emulator -e "/usr/local/bin/cwv --help"
 
 [Desktop Action Web]
-Name=Open Web UI (Port 8448)
-Exec=/usr/local/bin/cwv-speed web
+Name=Open Web UI (Port 8128)
+Exec=/usr/local/bin/cwv web

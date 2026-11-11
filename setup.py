@@ -9,7 +9,7 @@ setup(
     description="High-performance Core Web Vitals audit engine, optimizer, and MCP server with zero runtime dependencies.",
     long_description=open("README.md", "r", encoding="utf-8").read() if __import__("os").path.exists("README.md") else "",
     long_description_content_type="text/markdown",
-    author="CWV Speed Engine Team",
+    author="1nc0gn30 • NullAI",
     license="MIT",
     python_requires=">=3.8",
     package_dir={"": "src"},

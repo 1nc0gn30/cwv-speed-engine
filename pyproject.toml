@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "High-performance Core Web Vitals audit engine, optimizer, and MCP server with zero runtime dependencies."
 readme = "README.md"
 authors = [
-    { name = "CWV Speed Engine Team" }
+    { name = "1nc0gn30 • NullAI", email = "1nc0gn30@users.noreply.github.com" }
 ]
 license = { text = "MIT" }
 requires-python = ">=3.8"

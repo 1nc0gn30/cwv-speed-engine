@@ -8,7 +8,8 @@
     "cwv-speed": "./bin/cwv-speed.js"
   },
   "scripts": {
-    "start": "python3 -m cwv_speed_engine.cli serve --port 8448",
+    "start": "python3 -m cwv_speed_engine.cli serve --port 8128",
+    "serve": "python3 server.py --port 8128",
     "electron": "electron .",
     "app": "electron .",
     "test": "pytest tests/"
@@ -29,7 +30,7 @@
     "electron",
     "zoth"
   ],
-  "author": "NullAI Tech / Zoth Team",
+  "author": "1nc0gn30 (@1nc0gn30) • NullAI Platform",
   "license": "MIT",
   "devDependencies": {
     "electron": "^34.5.8"
